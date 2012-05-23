@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>mojo-parent</artifactId>
+    <groupId>org.codehaus.mojo</groupId>
+    <version>30</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>vfs</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>VFS</name>
+  
+  <description>
+    Project to create new or manipulate existing files supported by commons-vfs
+  </description>
+  
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/mojo/trunk/mojo/vfs</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/vfs</developerConnection>
+    <url>http://svn.codehaus.org/mojo/trunk/mojo/vfs</url>
+  </scm>
+  
+  
+  <developers>
+    <developer>
+      <name>Dan Tran</name>
+      <email>dantran@gmail.com</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+    </developer>
+    
+  </developers>
+
+  <licenses>
+    <license>
+      <name>Apache License 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  
+  <prerequisites>
+    <maven>2.2.1</maven>
+  </prerequisites>
+  
+  <properties>
+    <commons-vfs.version>2.0</commons-vfs.version>
+    <maven.version>2.2.1</maven.version>
+    <mojo.java.target>1.5</mojo.java.target>
+  </properties>
+  
+  <dependencyManagement>
+  
+  <dependencies>
+  
+    <dependency>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>vfs-utils</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-project</artifactId>
+      <version>${maven.version}</version>
+    </dependency>
+    
+   <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>${maven.version}</version>
+    </dependency>    
+    
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>1.5.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-vfs</artifactId>
+      <version>${commons-vfs.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>file-management</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.9</version>
+      <scope>test</scope>
+    </dependency>
+
+
+  </dependencies>
+
+       
+  </dependencyManagement>
+  
+  
+  <modules>
+    <module>vfs-utils</module>
+  </modules>
+  
+  
+</project>
