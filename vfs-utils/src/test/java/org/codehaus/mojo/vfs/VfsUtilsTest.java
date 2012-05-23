@@ -39,7 +39,7 @@ public class VfsUtilsTest
         FileObject startDirectory = fsManager.resolveFile( url );
         
 
-        VFSUtils vfsUtils = new DefaultVFSUtils();
+        VfsUtils vfsUtils = new DefaultVfsUtils();
 
         String[] includes = { "**/pom.xml" };
 
@@ -73,7 +73,7 @@ public class VfsUtilsTest
         
         FileObject startDirectory = fsManager.resolveFile( url );
         
-        VFSUtils vfsUtils = new DefaultVFSUtils();
+        VfsUtils vfsUtils = new DefaultVfsUtils();
 
         String[] excludes = { "**/target/", "**/src/" };
 

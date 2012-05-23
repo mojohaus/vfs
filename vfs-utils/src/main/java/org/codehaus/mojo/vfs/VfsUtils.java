@@ -20,7 +20,7 @@ import java.util.List;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 
-public interface VFSUtils
+public interface VfsUtils
 {
     List<FileObject> getFileList( FileObject startDirectory, String[] includes, String[] excludes )
         throws FileSystemException;
