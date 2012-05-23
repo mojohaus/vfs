@@ -51,7 +51,7 @@ public class VfsFileSet
     /**
      * Relative of a remote URL when it used to copy files between 2 URLs.
      */
-    private String outputDirectory = "";
+    private FileObject outputDirectory;
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -105,12 +105,12 @@ public class VfsFileSet
         this.useDefaultExcludes = useDefaultExcludes;
     }
 
-    public String getOutputDirectory()
+    public FileObject getOutputDirectory()
     {
         return outputDirectory;
     }
 
-    public void setOutputDirectory( String outputDirectory )
+    public void setOutputDirectory( FileObject outputDirectory )
     {
         this.outputDirectory = outputDirectory;
     }
