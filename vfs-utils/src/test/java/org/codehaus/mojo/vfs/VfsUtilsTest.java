@@ -22,6 +22,7 @@ import junit.framework.Assert;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.VFS;
+import org.codehaus.mojo.vfs.internal.DefaultVfsUtils;
 import org.junit.Test;
 
 public class VfsUtilsTest

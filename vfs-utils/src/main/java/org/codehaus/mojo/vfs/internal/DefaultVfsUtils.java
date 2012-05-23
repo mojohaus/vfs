@@ -1,4 +1,4 @@
-package org.codehaus.mojo.vfs;
+package org.codehaus.mojo.vfs.internal;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
@@ -19,6 +19,8 @@ import java.util.List;
 
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
+import org.codehaus.mojo.vfs.VfsDirectoryScanner;
+import org.codehaus.mojo.vfs.VfsUtils;
 
 public class DefaultVfsUtils
     implements VfsUtils
@@ -28,7 +30,7 @@ public class DefaultVfsUtils
         throws FileSystemException
     {
 
-        VfsDirectoryScanner dirScanner = new VfsDirectoryScanner();
+        VfsDirectoryScanner dirScanner = new DefaultVfsDirectoryScanner();
         dirScanner.setStartingDirectory( startDirectory );
         dirScanner.setIncludes( includes );
         dirScanner.setExcludes( excludes );
