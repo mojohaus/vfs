@@ -21,6 +21,7 @@ import java.util.List;
 import org.apache.commons.vfs2.FileNotFolderException;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
+import org.apache.commons.vfs2.FileType;
 
 public class VfsDirectoryScanner
 {
@@ -261,20 +262,27 @@ public class VfsDirectoryScanner
         }
     }
 
-    private boolean isDirectory( FileObject dir )
+    private boolean isDirectory( FileObject file )
         throws FileSystemException
     {
-
-        try
-        {
-            dir.getChildren();
+        if ( FileType.FOLDER == file.getType() ) {
+            return true;
         }
-        catch ( FileNotFolderException e )
-        {
-            return false;
+        
+        if ( FileType.FILE_OR_FOLDER == file.getType() ) {
+            try
+            {
+                file.getChildren();
+            }
+            catch ( FileNotFolderException e )
+            {
+                return false;
+            }
+            
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /////////////////////////////////////////////////////////////////////////////

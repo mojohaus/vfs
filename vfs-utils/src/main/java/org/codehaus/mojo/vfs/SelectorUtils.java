@@ -74,8 +74,8 @@ public final class SelectorUtils
             return false;
         }
 
-        Vector patDirs = tokenizePath( pattern );
-        Vector strDirs = tokenizePath( str );
+        Vector<String> patDirs = tokenizePath( pattern );
+        Vector<String> strDirs = tokenizePath( str );
 
         int patIdxStart = 0;
         int patIdxEnd = patDirs.size() - 1;
@@ -156,8 +156,8 @@ public final class SelectorUtils
             return false;
         }
 
-        Vector patDirs = tokenizePath( pattern );
-        Vector strDirs = tokenizePath( str );
+        Vector<String> patDirs = tokenizePath( pattern );
+        Vector<String> strDirs = tokenizePath( str );
 
         int patIdxStart = 0;
         int patIdxEnd = patDirs.size() - 1;
@@ -516,9 +516,9 @@ public final class SelectorUtils
      *
      * @return a Vector of path elements from the tokenized path
      */
-    public static Vector tokenizePath( String path )
+    public static Vector<String> tokenizePath( String path )
     {
-        Vector ret = new Vector();
+        Vector<String> ret = new Vector<String>();
         StringTokenizer st = new StringTokenizer( path, "/" );
         while ( st.hasMoreTokens() )
         {

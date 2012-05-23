@@ -1,5 +1,7 @@
 package org.codehaus.mojo.vfs;
 
+import org.apache.commons.vfs2.FileObject;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  * agreements. See the NOTICE file distributed with this work for additional information regarding
@@ -15,7 +17,6 @@ package org.codehaus.mojo.vfs;
  * the License.
  */
 
-
 /**
  * Wagon configuration to scan for a set of remote files.
  */
@@ -24,49 +25,46 @@ public class VfsFileSet
     /**
      * Path after the url, this is where the scan starts
      */
-    
-    private String directory = "";
-    
+
+    private FileObject directory;
+
     /**
      * Ant's excludes path expression
      */
-    private String [] excludes;
-    
+    private String[] excludes;
+
     /**
      * Ant's includes path expression
      */
-    private String [] includes;
-    
+    private String[] includes;
+
     /**
      * 
      */
     private boolean caseSensitive;
-    
 
     /**
      * User default exclude sets
      */
-    private boolean  useDefaultExcludes = true;
-
+    private boolean useDefaultExcludes = true;
 
     /**
      * Relative of a remote URL when it used to copy files between 2 URLs.
      */
     private String outputDirectory = "";
-    
+
     //////////////////////////////////////////////////////////////////////////////////////
-    
-    public String getDirectory()
+
+    public FileObject getDirectory()
     {
         return directory;
     }
 
-    public void setDirectory( String remotePath )
+    public void setDirectory( FileObject remotePath )
     {
         this.directory = remotePath;
     }
 
-    
     public String[] getExcludes()
     {
         return excludes;
@@ -96,7 +94,27 @@ public class VfsFileSet
     {
         this.caseSensitive = caseSensitive;
     }
-    
+
+    public boolean isUseDefaultExcludes()
+    {
+        return useDefaultExcludes;
+    }
+
+    public void setUseDefaultExcludes( boolean useDefaultExcludes )
+    {
+        this.useDefaultExcludes = useDefaultExcludes;
+    }
+
+    public String getOutputDirectory()
+    {
+        return outputDirectory;
+    }
+
+    public void setOutputDirectory( String outputDirectory )
+    {
+        this.outputDirectory = outputDirectory;
+    }
+
     /**
      * Retrieves the included and excluded files from this file-set's directory.
      * Specifically, <code>"file-set: <I>[directory]</I> (included:
@@ -111,25 +129,5 @@ public class VfsFileSet
     {
         return "file-set: " + getDirectory() + " (included: " + getIncludes() + ", excluded: " + getExcludes() + ")";
     }
-    
-    public boolean isUseDefaultExcludes()
-    {
-        return useDefaultExcludes;
-    }
 
-    public void setUseDefaultExcludes( boolean useDefaultExcludes )
-    {
-        this.useDefaultExcludes = useDefaultExcludes;
-    }
-    
-    public String getOutputDirectory()
-    {
-        return outputDirectory;
-    }
-
-    public void setOutputDirectory( String outputDirectory )
-    {
-        this.outputDirectory = outputDirectory;
-    }    
-    
 }
