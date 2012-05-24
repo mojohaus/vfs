@@ -56,11 +56,11 @@ public class VfsFileSetManagerTest
 
         includes[0] = "pom.xml";
         fos = fileSetManager.list( fileSet );
-        Assert.assertTrue( fos.size() == 1 );
+        Assert.assertEquals( 1, fos.size() );
 
-        includes[0] = "**/V*UtilsTest.j*va";
+        includes[0] = "**/V*FileSetManager.j*va";
         fos = fileSetManager.list( fileSet );
-        Assert.assertTrue( fos.size() == 1 );
+        Assert.assertEquals( 1, fos.size() );
 
         includes[0] = "V*UtilsTest.j*va";
         fos = fileSetManager.list( fileSet );
@@ -69,7 +69,7 @@ public class VfsFileSetManagerTest
     }
 
     @Test
-    public void testLocalFileListWithExclude()
+    public void testLocalFileListWithExcludes()
         throws Exception
     {
         String url = "file://" + basedir.getCanonicalPath();
