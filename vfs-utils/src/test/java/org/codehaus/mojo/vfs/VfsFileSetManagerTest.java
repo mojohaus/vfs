@@ -22,10 +22,10 @@ import junit.framework.Assert;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.VFS;
-import org.codehaus.mojo.vfs.internal.DefaultVfsUtils;
+import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 import org.junit.Test;
 
-public class VfsUtilsTest
+public class VfsFileSetManagerTest
     extends AbstractVfsTestCase
 {
 
@@ -36,30 +36,34 @@ public class VfsUtilsTest
         String url = "file://" + basedir.getCanonicalPath();
         
         FileSystemManager fsManager = VFS.getManager();
-        
         FileObject startDirectory = fsManager.resolveFile( url );
         
-
-        VfsUtils vfsUtils = new DefaultVfsUtils();
-
+        VfsFileSet fileSet = new VfsFileSet();
+        fileSet.setDirectory( startDirectory );
+        
         String[] includes = { "**/pom.xml" };
+        fileSet.setIncludes( includes );
 
-        List<FileObject> fos = vfsUtils.getFileList( startDirectory, includes, null );
+        VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
+
+        List<FileObject> fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() == 1 );
 
-        fos = vfsUtils.getFileList( startDirectory, includes, includes );
+        fileSet.setExcludes( includes );
+        fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() == 0 );
+        fileSet.setExcludes( null );
 
         includes[0] = "pom.xml";
-        fos = vfsUtils.getFileList( startDirectory, includes, null );
+        fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() == 1 );
 
         includes[0] = "**/V*UtilsTest.j*va";
-        fos = vfsUtils.getFileList( startDirectory, includes, null );
+        fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() == 1 );
 
         includes[0] = "V*UtilsTest.j*va";
-        fos = vfsUtils.getFileList( startDirectory, includes, null );
+        fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() == 0 );
 
     }
@@ -71,14 +75,16 @@ public class VfsUtilsTest
         String url = "file://" + basedir.getCanonicalPath();
         
         FileSystemManager fsManager = VFS.getManager();
-        
         FileObject startDirectory = fsManager.resolveFile( url );
         
-        VfsUtils vfsUtils = new DefaultVfsUtils();
-
+        VfsFileSet fileSet = new VfsFileSet();
+        fileSet.setDirectory( startDirectory );
         String[] excludes = { "**/target/", "**/src/" };
+        fileSet.setExcludes( excludes );  
 
-        List<FileObject> fos = vfsUtils.getFileList( startDirectory, null, excludes );
+        VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
+        
+        List<FileObject> fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() > 0 );
         for ( FileObject fo: fos ) {
             Assert.assertFalse(  fo.getName().getPath().contains( "/target/" ) );

@@ -18,6 +18,7 @@ package org.codehaus.mojo.vfs;
 import java.util.List;
 
 import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileSystemException;
 
 public interface VfsFileSetManager
 {
@@ -26,24 +27,28 @@ public interface VfsFileSetManager
      * @param fileSet
      * @return List of remote file objects
      */
-    List<FileObject> list( VfsFileSet fileSet );
+    List<FileObject> list( VfsFileSet fileSet )
+        throws FileSystemException;
 
     /**
      * Delete a set of virtual files
      * @param fileSet
      */
-    void delete( VfsFileSet fileSet );
+    void delete( VfsFileSet fileSet )
+        throws FileSystemException;
 
     /**
      * Move a set of files between 2 virtual directories with criteria in fileSet
      * @param fileSet
      */
-    void move( VfsFileSet fileSet );
+    void move( VfsFileSet fileSet )
+        throws FileSystemException;
 
     /**
      * Copy a set of files between 2 virtual directories with criteria in fileSet
      * @param fileSet
      */
-    public void copy( VfsFileSet fileSet );
+    public void copy( VfsFileSet fileSet )
+        throws FileSystemException;
 
 }
