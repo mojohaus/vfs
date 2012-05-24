@@ -20,12 +20,19 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-vfs2</artifactId>
       <version>${commons-vfs.version}</version>
+      <exclusions>
+      	<exclusion>
+      	  <groupId>org.apache.maven.scm</groupId>
+      	  <artifactId>maven-scm-provider-svnexe</artifactId>
+      	</exclusion>
+      	<exclusion>
+      	  <groupId>org.apache.maven.scm</groupId>
+      	  <artifactId>maven-scm-api</artifactId>
+      	</exclusion>
+      </exclusions>
+      
     </dependency>
     
-    <dependency>
-      <groupId>org.apache.maven.shared</groupId>
-      <artifactId>file-management</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>junit</groupId>

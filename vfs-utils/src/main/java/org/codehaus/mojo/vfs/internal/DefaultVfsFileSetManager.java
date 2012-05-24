@@ -15,22 +15,14 @@ public class DefaultVfsFileSetManager
     public List<FileObject> list( VfsFileSet fileSet )
         throws FileSystemException
     {
-        VfsDirectoryScanner scanner = new DefaultVfsDirectoryScanner();
-        scanner.setIncludes( fileSet.getIncludes() );
-        scanner.setExcludes( fileSet.getExcludes() );
-        scanner.setStartingDirectory( fileSet.getDirectory() );
-        scanner.setCaseSensitive( fileSet.isCaseSensitive() );
+        VfsDirectoryScanner scanner = createScanner( fileSet );
         return scanner.scan();
     }
 
     public void delete( VfsFileSet fileSet )
         throws FileSystemException
     {
-        VfsDirectoryScanner scanner = new DefaultVfsDirectoryScanner();
-        scanner.setIncludes( fileSet.getIncludes() );
-        scanner.setExcludes( fileSet.getExcludes() );
-        scanner.setStartingDirectory( fileSet.getDirectory() );
-        scanner.setCaseSensitive( fileSet.isCaseSensitive() );
+        VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
         for ( FileObject fo : fos )
         {
@@ -43,11 +35,7 @@ public class DefaultVfsFileSetManager
     public void move( VfsFileSet fileSet )
         throws FileSystemException
     {
-        VfsDirectoryScanner scanner = new DefaultVfsDirectoryScanner();
-        scanner.setIncludes( fileSet.getIncludes() );
-        scanner.setExcludes( fileSet.getExcludes() );
-        scanner.setStartingDirectory( fileSet.getDirectory() );
-        scanner.setCaseSensitive( fileSet.isCaseSensitive() );
+        VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
         for ( FileObject fo : fos )
         {
@@ -64,11 +52,7 @@ public class DefaultVfsFileSetManager
     public void copy( VfsFileSet fileSet )
         throws FileSystemException
     {
-        VfsDirectoryScanner scanner = new DefaultVfsDirectoryScanner();
-        scanner.setIncludes( fileSet.getIncludes() );
-        scanner.setExcludes( fileSet.getExcludes() );
-        scanner.setStartingDirectory( fileSet.getDirectory() );
-        scanner.setCaseSensitive( fileSet.isCaseSensitive() );
+        VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
         for ( FileObject fo : fos )
         {
@@ -76,6 +60,18 @@ public class DefaultVfsFileSetManager
             // copy from src to dest
         }
 
+    }
+
+    private static VfsDirectoryScanner createScanner( VfsFileSet fileSet )
+    {
+
+        VfsDirectoryScanner scanner = new DefaultVfsDirectoryScanner();
+        scanner.setIncludes( fileSet.getIncludes() );
+        scanner.setExcludes( fileSet.getExcludes() );
+        scanner.setStartingDirectory( fileSet.getDirectory() );
+        scanner.setCaseSensitive( fileSet.isCaseSensitive() );
+
+        return scanner;
     }
 
 }

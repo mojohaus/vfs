@@ -52,7 +52,7 @@ public class DefaultVfsDirectoryScanner
      * 
      * @see #addDefaultExcludes()
      */
-    private String[] DEFAULTEXCLUDES = org.codehaus.plexus.util.DirectoryScanner.DEFAULTEXCLUDES;
+    private String[] DEFAULTEXCLUDES = {};
 
     /* (non-Javadoc)
      * @see org.codehaus.mojo.vfs.DirectoryScanner#addDefaultExcludes()
