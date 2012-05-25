@@ -15,6 +15,7 @@ package org.codehaus.mojo.vfs;
  * the License.
  */
 
+import java.io.File;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -23,12 +24,22 @@ import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.VFS;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
+import org.junit.Before;
 import org.junit.Test;
 
 public class VfsFileSetManagerTest
     extends AbstractVfsTestCase
 {
 
+    private VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
+    
+    @Before
+    public void beforeTest() {
+        File expectedFile = new File( builddir, "pom.xml" );
+        expectedFile.delete();
+        Assert.assertFalse( "Unable to remove expected file", expectedFile.exists() );
+    }
+    
     @Test
     public void testLocalFileListWithIncludes()
         throws Exception
@@ -40,12 +51,10 @@ public class VfsFileSetManagerTest
         
         VfsFileSet fileSet = new VfsFileSet();
         fileSet.setDirectory( startDirectory );
-        
         String[] includes = { "**/pom.xml" };
         fileSet.setIncludes( includes );
 
-        VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
-
+        fileSetManager = new DefaultVfsFileSetManager();
         List<FileObject> fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() == 1 );
 
@@ -82,8 +91,6 @@ public class VfsFileSetManagerTest
         String[] excludes = { "**/target/", "**/src/" };
         fileSet.setExcludes( excludes );  
 
-        VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
-        
         List<FileObject> fos = fileSetManager.list( fileSet );
         Assert.assertTrue( fos.size() > 0 );
         for ( FileObject fo: fos ) {
@@ -91,6 +98,28 @@ public class VfsFileSetManagerTest
             Assert.assertFalse(  fo.getName().getPath().contains( "/src/" ) );
         }
 
+    }
+    
+    @Test
+    public void testCopy()
+        throws Exception
+    {
+        File expectedFile = new File( builddir, "pom.xml" );
+        
+        FileSystemManager fsManager = VFS.getManager();
+        
+        FileObject fromDir= fsManager.resolveFile( "file://" + basedir.getCanonicalPath() );
+        FileObject toDir = fsManager.resolveFile( "file://" + builddir.getCanonicalPath() );
+        
+        VfsFileSet fileSet = new VfsFileSet();
+        fileSet.setDirectory( fromDir );
+        fileSet.setOutputDirectory( toDir );
+        String[] includes = { "pom.xml" };
+        fileSet.setIncludes( includes );
+        
+        fileSetManager.copy( fileSet );
+        
+        Assert.assertTrue( "Expected copied file not found. ", expectedFile.exists() );
     }
 
 }

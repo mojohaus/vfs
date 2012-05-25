@@ -2,6 +2,8 @@ package org.codehaus.mojo.vfs.internal;
 
 import java.util.List;
 
+import org.apache.commons.vfs2.AllFileSelector;
+import org.apache.commons.vfs2.FileName;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.codehaus.mojo.vfs.VfsDirectoryScanner;
@@ -37,10 +39,9 @@ public class DefaultVfsFileSetManager
     {
         VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
-        for ( FileObject fo : fos )
-        {
-            //        
-        }
+        
+        //better to use FileObject.move()??
+        copy( fileSet.getDirectory(), fileSet.getOutputDirectory(), fos );
 
         for ( FileObject fo : fos )
         {
@@ -54,10 +55,20 @@ public class DefaultVfsFileSetManager
     {
         VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
-        for ( FileObject fo : fos )
+
+        copy( fileSet.getDirectory(), fileSet.getOutputDirectory(), fos );
+    }
+
+    private void copy( FileObject fromDir, FileObject toDir, List<FileObject> fromFiles )
+        throws FileSystemException
+    {
+
+        FileName baseName = fromDir.getName();
+        for ( FileObject fromFile : fromFiles )
         {
-            //TODO check for return error
-            // copy from src to dest
+            String relPath = baseName.getRelativeName( fromFile.getName() );
+            FileObject toFile = toDir.resolveFile( relPath );
+            toFile.copyFrom( fromFile, new AllFileSelector() );
         }
 
     }
