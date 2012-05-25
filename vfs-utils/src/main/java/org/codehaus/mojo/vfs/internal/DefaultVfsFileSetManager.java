@@ -41,7 +41,7 @@ public class DefaultVfsFileSetManager
         List<FileObject> fos = scanner.scan();
 
         //better to use FileObject.move()??
-        copy( fileSet.getDirectory(), fileSet.getOutputDirectory(), fos );
+        copy( fileSet.getSource(), fileSet.getDestination(), fos );
 
         for ( FileObject fo : fos )
         {
@@ -56,7 +56,7 @@ public class DefaultVfsFileSetManager
         VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
 
-        copy( fileSet.getDirectory(), fileSet.getOutputDirectory(), fos );
+        copy( fileSet.getSource(), fileSet.getDestination(), fos );
     }
 
     private void copy( FileObject fromDir, FileObject toDir, List<FileObject> fromFiles )
@@ -79,7 +79,7 @@ public class DefaultVfsFileSetManager
         VfsDirectoryScanner scanner = new DefaultVfsDirectoryScanner();
         scanner.setIncludes( fileSet.getIncludes() );
         scanner.setExcludes( fileSet.getExcludes() );
-        scanner.setStartingDirectory( fileSet.getDirectory() );
+        scanner.setStartingDirectory( fileSet.getSource() );
         scanner.setCaseSensitive( fileSet.isCaseSensitive() );
 
         return scanner;

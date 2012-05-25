@@ -25,31 +25,31 @@ public class UrlFileSet
      * Base URL
      */
 
-    private String directory;
+    private String source;
 
     /**
      * remote URL 
      */
-    private String outputDirectory;
+    private String destination;
 
-    public String getOutputDirectory()
+    public String getDestination()
     {
-        return outputDirectory;
+        return destination;
     }
 
-    public void setOutputDirectory( String outputDirectory )
+    public void setDestination( String destination )
     {
-        this.outputDirectory = outputDirectory;
+        this.destination = destination;
     }
 
-    public String getDirectory()
+    public String getSource()
     {
-        return directory;
+        return source;
     }
 
-    public void setDirectory( String remotePath )
+    public void setSource( String source )
     {
-        this.directory = remotePath;
+        this.source = source;
     }
 
     /**
@@ -64,7 +64,7 @@ public class UrlFileSet
      */
     public String toString()
     {
-        return "file-set: " + getDirectory() + " (included: " + getIncludes() + ", excluded: " + getExcludes() + ")";
+        return "file-set: " + getSource() + " (included: " + getIncludes() + ", excluded: " + getExcludes() + ")";
     }
 
 }

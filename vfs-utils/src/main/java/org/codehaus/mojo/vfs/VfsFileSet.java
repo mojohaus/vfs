@@ -27,31 +27,31 @@ public class VfsFileSet
      * Path after the url, this is where the scan starts
      */
 
-    private FileObject directory;
+    private FileObject source;
 
     /**
      * Relative of a remote URL when it used to copy files between 2 URLs.
      */
-    private FileObject outputDirectory;
+    private FileObject destination;
 
-    public FileObject getOutputDirectory()
+    public FileObject getDestination()
     {
-        return outputDirectory;
+        return destination;
     }
 
-    public void setOutputDirectory( FileObject outputDirectory )
+    public void setDestination( FileObject destination )
     {
-        this.outputDirectory = outputDirectory;
+        this.destination = destination;
     }
 
-    public FileObject getDirectory()
+    public FileObject getSource()
     {
-        return directory;
+        return source;
     }
 
-    public void setDirectory( FileObject remotePath )
+    public void setSource( FileObject source )
     {
-        this.directory = remotePath;
+        this.source = source;
     }
 
     /**
@@ -66,7 +66,7 @@ public class VfsFileSet
      */
     public String toString()
     {
-        return "file-set: " + getDirectory() + " (included: " + getIncludes() + ", excluded: " + getExcludes() + ")";
+        return "file-set: " + getSource() + " (included: " + getIncludes() + ", excluded: " + getExcludes() + ")";
     }
 
 }

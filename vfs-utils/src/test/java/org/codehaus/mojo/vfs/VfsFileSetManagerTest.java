@@ -48,7 +48,7 @@ public class VfsFileSetManagerTest
         FileObject startDirectory = fsManager.resolveFile( url );
 
         VfsFileSet fileSet = new VfsFileSet();
-        fileSet.setDirectory( startDirectory );
+        fileSet.setSource( startDirectory );
         String[] includes = { "**/pom.xml" };
         fileSet.setIncludes( includes );
 
@@ -85,7 +85,7 @@ public class VfsFileSetManagerTest
         FileObject startDirectory = fsManager.resolveFile( url );
 
         VfsFileSet fileSet = new VfsFileSet();
-        fileSet.setDirectory( startDirectory );
+        fileSet.setSource( startDirectory );
         String[] excludes = { "**/target/", "**/src/" };
         fileSet.setExcludes( excludes );
 
@@ -113,8 +113,8 @@ public class VfsFileSetManagerTest
         FileObject toDir = fsManager.resolveFile( "file://" + builddir.getCanonicalPath() + "/test-copy-delete" );
 
         VfsFileSet fileSet = new VfsFileSet();
-        fileSet.setDirectory( fromDir );
-        fileSet.setOutputDirectory( toDir );
+        fileSet.setSource( fromDir );
+        fileSet.setDestination( toDir );
         String[] includes = { "pom.xml" };
         fileSet.setIncludes( includes );
 
@@ -122,7 +122,7 @@ public class VfsFileSetManagerTest
 
         Assert.assertTrue( "Expected copied file not found. ", expectedFile.exists() );
 
-        fileSet.setDirectory( toDir );
+        fileSet.setSource( toDir );
         fileSetManager.delete( fileSet );
         Assert.assertFalse( "Expected copied file found after delete. ", expectedFile.exists() );
 

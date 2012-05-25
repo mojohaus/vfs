@@ -1,5 +1,6 @@
 package com.loglogic.mojo.vfs;
 
+import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.VFS;
@@ -57,7 +58,7 @@ public class CopyVfsMojo
      * @parameter
      * @since 1.0
      */
-    private String targetId;
+    private String destinationId;
 
     public void execute()
         throws MojoExecutionException, MojoFailureException
@@ -66,15 +67,17 @@ public class CopyVfsMojo
         VfsFileSet vfsFileSet = new VfsFileSet();
         vfsFileSet.copyBase( fileset );
 
-        FileSystemOptions sourceAuthenticationOptions = this.getAuthenticationOptions( this.sourceId );
-        FileSystemOptions targetAuthenticationOptions = this.getAuthenticationOptions( this.targetId );
+        FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( this.sourceId );
+        FileSystemOptions destAuthOptions = this.getAuthenticationOptions( this.destinationId );
 
         try
         {
-            vfsFileSet
-                .setDirectory( VFS.getManager().resolveFile( fileset.getDirectory(), sourceAuthenticationOptions ) );
-            vfsFileSet.setOutputDirectory( VFS.getManager().resolveFile( fileset.getOutputDirectory(),
-                                                                         targetAuthenticationOptions ) );
+            FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
+            vfsFileSet.setSource( sourceObj );
+
+            FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destAuthOptions );
+            vfsFileSet.setDestination( destObj );
+            
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
             fileSetManager.copy( vfsFileSet );
         }
