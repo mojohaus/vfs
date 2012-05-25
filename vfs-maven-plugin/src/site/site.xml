@@ -19,16 +19,11 @@
 -->
 
 <project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
-  <custom>
-    <fluidoSkin>
-      <profile>release</profile>
-    </fluidoSkin>
-  </custom>
 
    <body>
       <links>
          <item name="Commons VFS" href="http://commons.apache.org/vfs"/>
-         <item name="VFS Utils" href="../vfs/vfs-utils"/>
+         <item name="VFS Utils" href="../vfs-utils"/>
       </links>
       <menu name="Overview">
          <item name="Introduction" href="index.html"/>

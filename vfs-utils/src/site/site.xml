@@ -20,10 +20,11 @@ under the License.
 -->
 
 <project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
-  <body>
   
-    <menu ref="modules"/>
-    <menu ref="reports"/>
-    
+   <body>
+      <links>
+         <item name="Commons VFS" href="http://commons.apache.org/vfs"/>
+         <item name="VFS Maven Plugin" href="../vfs-maven-plugin"/>
+      </links>
   </body>
 </project>
