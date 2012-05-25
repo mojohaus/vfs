@@ -39,7 +39,7 @@ public class DefaultVfsFileSetManager
     {
         VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
-        
+
         //better to use FileObject.move()??
         copy( fileSet.getDirectory(), fileSet.getOutputDirectory(), fos );
 

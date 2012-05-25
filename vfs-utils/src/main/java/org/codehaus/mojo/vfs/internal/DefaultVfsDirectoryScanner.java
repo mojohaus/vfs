@@ -265,11 +265,13 @@ public class DefaultVfsDirectoryScanner
     private boolean isDirectory( FileObject file )
         throws FileSystemException
     {
-        if ( FileType.FOLDER == file.getType() ) {
+        if ( FileType.FOLDER == file.getType() )
+        {
             return true;
         }
-        
-        if ( FileType.FILE_OR_FOLDER == file.getType() ) {
+
+        if ( FileType.FILE_OR_FOLDER == file.getType() )
+        {
             try
             {
                 file.getChildren();
@@ -278,7 +280,7 @@ public class DefaultVfsDirectoryScanner
             {
                 return false;
             }
-            
+
             return true;
         }
 

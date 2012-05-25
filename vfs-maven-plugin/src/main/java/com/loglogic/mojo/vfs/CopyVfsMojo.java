@@ -1,6 +1,14 @@
 package com.loglogic.mojo.vfs;
 
+import org.apache.commons.vfs2.FileSystemException;
+import org.apache.commons.vfs2.FileSystemOptions;
+import org.apache.commons.vfs2.VFS;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.codehaus.mojo.vfs.UrlFileSet;
+import org.codehaus.mojo.vfs.VfsFileSet;
+import org.codehaus.mojo.vfs.VfsFileSetManager;
+import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
@@ -17,51 +25,63 @@ import org.apache.maven.plugin.MojoExecutionException;
  * the License.
  */
 
-
 /**
  * Copy files from one VFS to another VFS
  * 
  * @goal copy
- * @requiresProject false
+ * @requiresProject true
  */
 public class CopyVfsMojo
     extends AbstractVfsMojo
 {
-    /**
-     * Directory path relative to source's Wagon
-     * @parameter expression="${vfs.fromDir}" default-value=""
-     */
-    private String fromDir = "";
 
     /**
-     * Comma separated list of Ant's includes to scan for remote files     
-     * @parameter expression="${vfs.includes}" default-value="**";
+     * A single FileSet to manipulate the archive.
+     *
+     * @parameter
+     * @since 1.0
      */
-    private String includes;
+    private UrlFileSet fileset;
 
     /**
-     * Comma separated list of Ant's excludes to scan for remote files     
-     * @parameter expression="${vfs.excludes}"
-     * 
+     * Maven Settings's server's id for FileSet's source credential
+     *
+     * @parameter
+     * @since 1.0
      */
-    private String excludes;
+    private String sourceId;
 
     /**
-     * Whether to consider remote path case sensitivity during scan
-     * @parameter expression="${vfs.caseSensitive}"
+     * Maven Settings's server's id for FileSet's destination credential
+     *
+     * @parameter
+     * @since 1.0
      */
-    private boolean caseSensitive = true;
-    
-    /**
-     * Remote path relative to target's url to copy files to.
-     * 
-     * @parameter expression="${vfs.toDir}" default-value="";
-     */
-    private String toDir = "";
-    
+    private String targetId;
 
     public void execute()
-        throws MojoExecutionException
+        throws MojoExecutionException, MojoFailureException
     {
-    }    
+
+        VfsFileSet vfsFileSet = new VfsFileSet();
+        vfsFileSet.copyBase( fileset );
+
+        FileSystemOptions sourceAuthenticationOptions = this.getAuthenticationOptions( this.sourceId );
+        FileSystemOptions targetAuthenticationOptions = this.getAuthenticationOptions( this.targetId );
+
+        try
+        {
+            vfsFileSet
+                .setDirectory( VFS.getManager().resolveFile( fileset.getDirectory(), sourceAuthenticationOptions ) );
+            vfsFileSet.setOutputDirectory( VFS.getManager().resolveFile( fileset.getOutputDirectory(),
+                                                                         targetAuthenticationOptions ) );
+            VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
+            fileSetManager.copy( vfsFileSet );
+        }
+        catch ( FileSystemException e )
+        {
+            throw new MojoFailureException( "Unable to perform copy", e );
+        }
+
+    }
 }

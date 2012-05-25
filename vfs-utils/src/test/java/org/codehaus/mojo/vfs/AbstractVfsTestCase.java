@@ -30,8 +30,9 @@ public abstract class AbstractVfsTestCase
      * This allows eclipse and maven to have the same basedir
      */
     @BeforeClass
-    public static void beforeBaseClass() {
+    public static void beforeBaseClass()
+    {
         System.setProperty( "basedir", System.getProperty( "basedir", "." ) );
     }
-    
+
 }

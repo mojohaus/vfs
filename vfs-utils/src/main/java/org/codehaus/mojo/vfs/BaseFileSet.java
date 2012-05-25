@@ -1,6 +1,5 @@
 package org.codehaus.mojo.vfs;
 
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  * agreements. See the NOTICE file distributed with this work for additional information regarding
@@ -81,4 +80,11 @@ public abstract class BaseFileSet
         this.useDefaultExcludes = useDefaultExcludes;
     }
 
+    public void copyBase( BaseFileSet baseFileSet )
+    {
+        this.includes = baseFileSet.includes;
+        this.excludes = baseFileSet.excludes;
+        this.caseSensitive = baseFileSet.caseSensitive;
+        this.useDefaultExcludes = baseFileSet.useDefaultExcludes;
+    }
 }

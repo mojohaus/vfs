@@ -1,6 +1,5 @@
 package org.codehaus.mojo.vfs;
 
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  * agreements. See the NOTICE file distributed with this work for additional information regarding
@@ -32,7 +31,6 @@ public class UrlFileSet
      * remote URL 
      */
     private String outputDirectory;
-    
 
     public String getOutputDirectory()
     {
@@ -53,7 +51,7 @@ public class UrlFileSet
     {
         this.directory = remotePath;
     }
-    
+
     /**
      * Retrieves the included and excluded files from this file-set's directory.
      * Specifically, <code>"file-set: <I>[directory]</I> (included:

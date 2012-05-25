@@ -53,7 +53,7 @@ public class VfsFileSet
     {
         this.directory = remotePath;
     }
-    
+
     /**
      * Retrieves the included and excluded files from this file-set's directory.
      * Specifically, <code>"file-set: <I>[directory]</I> (included:
