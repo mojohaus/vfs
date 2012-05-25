@@ -103,6 +103,7 @@
   
   <modules>
     <module>vfs-utils</module>
+    <module>vfs-maven-plugin</module>
   </modules>
   
   
