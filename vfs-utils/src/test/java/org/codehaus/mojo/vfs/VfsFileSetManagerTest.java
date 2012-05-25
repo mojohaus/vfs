@@ -101,12 +101,12 @@ public class VfsFileSetManagerTest
     public void testCopyDelete()
         throws Exception
     {
-        File expectedFile = new File( builddir, "pom.xml" );
+        File expectedFile = new File( builddir, "test-copy-delete/pom.xml" );
         
         FileSystemManager fsManager = VFS.getManager();
         
         FileObject fromDir= fsManager.resolveFile( "file://" + basedir.getCanonicalPath() );
-        FileObject toDir = fsManager.resolveFile( "file://" + builddir.getCanonicalPath() );
+        FileObject toDir = fsManager.resolveFile( "file://" + builddir.getCanonicalPath() + "/test-copy-delete" );
         
         VfsFileSet fileSet = new VfsFileSet();
         fileSet.setDirectory( fromDir );
