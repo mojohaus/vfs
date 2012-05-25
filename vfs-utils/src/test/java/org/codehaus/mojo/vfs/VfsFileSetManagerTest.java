@@ -102,6 +102,8 @@ public class VfsFileSetManagerTest
         throws Exception
     {
         File expectedFile = new File( builddir, "test-copy-delete/pom.xml" );
+        expectedFile.delete();
+        Assert.assertFalse( "Expected copied file found after delete. ", expectedFile.exists() );
         
         FileSystemManager fsManager = VFS.getManager();
         
