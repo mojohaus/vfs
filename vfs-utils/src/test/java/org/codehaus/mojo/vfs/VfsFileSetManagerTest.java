@@ -35,9 +35,6 @@ public class VfsFileSetManagerTest
     
     @Before
     public void beforeTest() {
-        File expectedFile = new File( builddir, "pom.xml" );
-        expectedFile.delete();
-        Assert.assertFalse( "Unable to remove expected file", expectedFile.exists() );
     }
     
     @Test
@@ -101,7 +98,7 @@ public class VfsFileSetManagerTest
     }
     
     @Test
-    public void testCopy()
+    public void testCopyDelete()
         throws Exception
     {
         File expectedFile = new File( builddir, "pom.xml" );
@@ -120,6 +117,12 @@ public class VfsFileSetManagerTest
         fileSetManager.copy( fileSet );
         
         Assert.assertTrue( "Expected copied file not found. ", expectedFile.exists() );
+        
+        fileSet.setDirectory( toDir );
+        fileSetManager.delete( fileSet );
+        Assert.assertFalse( "Expected copied file found after delete. ", expectedFile.exists() );
+        
+        
     }
 
 }
