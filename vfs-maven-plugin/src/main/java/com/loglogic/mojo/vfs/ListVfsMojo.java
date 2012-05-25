@@ -6,6 +6,7 @@ import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.VFS;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.codehaus.mojo.vfs.UrlFileSet;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
@@ -26,50 +27,64 @@ import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
  */
 
 /**
- * Copy files from one VFS to another VFS
+ * List files on one or more VFS systems
  * 
- * @goal copy
- * @requiresProject true
+ * @goal list
+ * @requiresProject false
  */
-public class CopyVfsMojo
+public class ListVfsMojo
     extends AbstractVfsMojo
 {
 
+    
     /**
      * A single FileSet to manipulate the archive.
      *
      * @parameter
      * @since 1.0
      */
-    private MojoVfsFileSet fileset;
+    private UrlFileSet fileset;
+
+    /**
+     * Maven Settings's server's id for FileSet's source credential
+     *
+     * @parameter
+     * @since 1.0
+     */
+    private String sourceId;
+
+    /**
+     * Maven Settings's server's id for FileSet's destination credential
+     *
+     * @parameter
+     * @since 1.0
+     */
+    private String destinationId;
 
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
 
-        if ( fileset != null )
+        FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( this.sourceId );
+        FileSystemOptions destAuthOptions = this.getAuthenticationOptions( this.destinationId );
+
+        try
         {
-            FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( fileset.getSourceId() );
-            FileSystemOptions destAuthOptions = this.getAuthenticationOptions( fileset.getDestinationId() );
+            VfsFileSet vfsFileSet = new VfsFileSet();
+            vfsFileSet.copyBase( fileset );
 
-            try
-            {
-                VfsFileSet vfsFileSet = new VfsFileSet();
-                vfsFileSet.copyBase( fileset );
+            FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
+            vfsFileSet.setSource( sourceObj );
 
-                FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
-                vfsFileSet.setSource( sourceObj );
-
-                FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destAuthOptions );
-                vfsFileSet.setDestination( destObj );
-
-                VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
-                fileSetManager.copy( vfsFileSet );
-            }
-            catch ( FileSystemException e )
-            {
-                throw new MojoFailureException( "Unable to perform copy", e );
-            }
+            FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destAuthOptions );
+            vfsFileSet.setDestination( destObj );
+            
+            VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
+            fileSetManager.copy( vfsFileSet );
+        }
+        catch ( FileSystemException e )
+        {
+            throw new MojoFailureException( "Unable to perform copy", e );
         }
 
     }
