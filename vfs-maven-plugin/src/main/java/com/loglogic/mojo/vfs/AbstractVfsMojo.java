@@ -100,8 +100,7 @@ public abstract class AbstractVfsMojo
 
         if ( server != null )
         {
-            StaticUserAuthenticator auth = new StaticUserAuthenticator( server.getUsername(), server.getPassword(),
-                                                                        null );
+            StaticUserAuthenticator auth = new StaticUserAuthenticator( null, server.getUsername(), server.getPassword() );
             opts = new FileSystemOptions();
 
             try

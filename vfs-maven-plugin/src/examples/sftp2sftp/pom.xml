@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.codehaus.mojo.vfs.examples</groupId>
+  <artifactId>sftp2sftp</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>ssh2ssh</name>
+  
+  <description>
+    Example to do ssh to ssh copy using vfs-maven-plugin
+  </description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>vfs-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>scp2scp</id>
+            <phase>test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <sourceId>rd10.anonymous</sourceId>
+              <destinationId>rd11.anonymous</destinationId>
+              <fileset>
+                <source>sftp://rd10</source>
+                <includes>
+                  <include>pom.xml</include>
+                </includes>
+                <destination>sftp://rd11</destination>
+              </fileset>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+	        <groupId>com.jcraft</groupId>
+	        <artifactId>jsch</artifactId>
+	        <version>0.1.48</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>

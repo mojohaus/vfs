@@ -64,14 +64,14 @@ public class CopyVfsMojo
         throws MojoExecutionException, MojoFailureException
     {
 
-        VfsFileSet vfsFileSet = new VfsFileSet();
-        vfsFileSet.copyBase( fileset );
-
         FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( this.sourceId );
         FileSystemOptions destAuthOptions = this.getAuthenticationOptions( this.destinationId );
 
         try
         {
+            VfsFileSet vfsFileSet = new VfsFileSet();
+            vfsFileSet.copyBase( fileset );
+
             FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
             vfsFileSet.setSource( sourceObj );
 
