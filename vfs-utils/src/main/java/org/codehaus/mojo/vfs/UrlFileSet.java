@@ -1,6 +1,5 @@
 package org.codehaus.mojo.vfs;
 
-import org.apache.commons.vfs2.FileObject;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
@@ -20,36 +19,37 @@ import org.apache.commons.vfs2.FileObject;
 /**
  * VFS configuration to scan for a set of remote files.
  */
-public class VfsFileSet
+public class UrlFileSet
     extends BaseFileSet
 {
     /**
-     * Path after the url, this is where the scan starts
+     * Base URL
      */
 
-    private FileObject directory;
+    private String directory;
 
     /**
-     * Relative of a remote URL when it used to copy files between 2 URLs.
+     * remote URL 
      */
-    private FileObject outputDirectory;
+    private String outputDirectory;
+    
 
-    public FileObject getOutputDirectory()
+    public String getOutputDirectory()
     {
         return outputDirectory;
     }
 
-    public void setOutputDirectory( FileObject outputDirectory )
+    public void setOutputDirectory( String outputDirectory )
     {
         this.outputDirectory = outputDirectory;
     }
 
-    public FileObject getDirectory()
+    public String getDirectory()
     {
         return directory;
     }
 
-    public void setDirectory( FileObject remotePath )
+    public void setDirectory( String remotePath )
     {
         this.directory = remotePath;
     }
