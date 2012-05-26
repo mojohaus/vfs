@@ -1,15 +1,17 @@
 package com.loglogic.mojo.vfs;
 
+import java.util.List;
+
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.VFS;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.codehaus.mojo.vfs.UrlFileSet;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
+import org.codehaus.plexus.util.StringUtils;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
@@ -35,38 +37,53 @@ import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 public class ListVfsMojo
     extends AbstractVfsMojo
 {
-
+    /**
+     * Source URL
+     *
+     * @parameter expression = "{vfs.source}"
+     * @required
+     * 
+     * @since 1.0
+     * 
+     */
+    private String source;
     
     /**
-     * A single FileSet to manipulate the archive.
-     *
-     * @parameter
-     * @since 1.0
-     */
-    private UrlFileSet fileset;
-
-    /**
-     * Maven Settings's server's id for FileSet's source credential
-     *
-     * @parameter
-     * @since 1.0
+     * Maven settings server's source authentication id
+     * @parameter expression = "{vfs.sourceId}"
      */
     private String sourceId;
-
+    
     /**
-     * Maven Settings's server's id for FileSet's destination credential
-     *
-     * @parameter
-     * @since 1.0
+     * Comma separated ANT include format
+     * @parameter expression = "{vfs.includes}"
      */
-    private String destinationId;
-
+    private String includes;
+    
+    /**
+     * Comma separated ANT include format
+     * @parameter expression = "{vfs.excludes}"
+     */
+    private String excludes;
+    
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
+        
+        MojoVfsFileSet fileset = new MojoVfsFileSet();
+        
+        fileset.setSource( source );
+        fileset.setSourceId( sourceId );
+        
+        if ( ! StringUtils.isBlank( includes ) ) {
+            fileset.setIncludes( StringUtils.split( includes, "," ) );
+        }
+       
+        if ( ! StringUtils.isBlank( excludes ) ) {
+            fileset.setExcludes( StringUtils.split( excludes, "," ) );
+        }
 
-        FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( this.sourceId );
-        FileSystemOptions destAuthOptions = this.getAuthenticationOptions( this.destinationId );
+        FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( fileset.getSourceId() );
 
         try
         {
@@ -75,12 +92,13 @@ public class ListVfsMojo
 
             FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
             vfsFileSet.setSource( sourceObj );
-
-            FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destAuthOptions );
-            vfsFileSet.setDestination( destObj );
             
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
-            fileSetManager.copy( vfsFileSet );
+            List<FileObject> list = fileSetManager.list( vfsFileSet );
+            
+            for ( FileObject fo: list ) {
+                this.getLog().info( fo.getName().getPath() );
+            }
         }
         catch ( FileSystemException e )
         {

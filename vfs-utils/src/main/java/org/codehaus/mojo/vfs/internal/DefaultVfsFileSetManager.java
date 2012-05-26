@@ -41,7 +41,7 @@ public class DefaultVfsFileSetManager
         List<FileObject> fos = scanner.scan();
 
         //better to use FileObject.move()??
-        copy( fileSet.getSource(), fileSet.getDestination(), fos );
+        copy( fileSet.getSource(), fileSet.getDestination(), fos, fileSet.isOverwrite() );
 
         for ( FileObject fo : fos )
         {
@@ -56,19 +56,24 @@ public class DefaultVfsFileSetManager
         VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
 
-        copy( fileSet.getSource(), fileSet.getDestination(), fos );
+        copy( fileSet.getSource(), fileSet.getDestination(), fos, fileSet.isOverwrite() );
     }
 
-    private void copy( FileObject fromDir, FileObject toDir, List<FileObject> fromFiles )
+    private void copy( FileObject fromDir, FileObject toDir, List<FileObject> fromFiles, boolean overwrite )
         throws FileSystemException
     {
-
         FileName baseName = fromDir.getName();
         for ( FileObject fromFile : fromFiles )
         {
             String relPath = baseName.getRelativeName( fromFile.getName() );
             FileObject toFile = toDir.resolveFile( relPath );
-            toFile.copyFrom( fromFile, new AllFileSelector() );
+
+            //if ( fromFile.getContent().getLastModifiedTime() > toFile.getContent().getLastModifiedTime() )
+            //until we understand more about this requirement
+            {
+                toFile.copyFrom( fromFile, new AllFileSelector() );
+            }
+
         }
 
     }

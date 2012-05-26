@@ -29,7 +29,7 @@ public abstract class BaseFileSet
     private String[] includes;
 
     /**
-     * 
+     * Handle file path sensitivity
      */
     private boolean caseSensitive;
 
@@ -38,6 +38,12 @@ public abstract class BaseFileSet
      */
     private boolean useDefaultExcludes = true;
 
+    /**
+     * For copy operations, overwrite existing files even if the destination files are newer.
+     * Heavily depending on clock sync
+     */
+    private boolean overwrite = true;
+    
     //////////////////////////////////////////////////////////////////////////////////////
 
     public String[] getExcludes()
@@ -79,6 +85,18 @@ public abstract class BaseFileSet
     {
         this.useDefaultExcludes = useDefaultExcludes;
     }
+    
+    public boolean isOverwrite()
+    {
+        return overwrite;
+    }
+
+    public void setOverwrite( boolean overwrite )
+    {
+        this.overwrite = overwrite;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     public void copyBase( BaseFileSet baseFileSet )
     {
