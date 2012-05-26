@@ -16,6 +16,7 @@ package org.codehaus.mojo.vfs;
  */
 
 import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -127,5 +128,6 @@ public class VfsFileSetManagerTest
         Assert.assertFalse( "Expected copied file found after delete. ", expectedFile.exists() );
 
     }
+
 
 }

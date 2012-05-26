@@ -180,6 +180,12 @@ public class DefaultVfsDirectoryScanner
         {
             throw new IllegalStateException( "Starting directory is not set" );
         }
+        
+        if ( startingDirectory == null )
+        {
+            throw new IllegalStateException( "Starting directory is not set" );
+        }
+        
 
         if ( includes == null )
         {

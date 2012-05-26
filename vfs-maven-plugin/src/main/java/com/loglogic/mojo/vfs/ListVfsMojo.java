@@ -39,30 +39,27 @@ public class ListVfsMojo
 {
     /**
      * Source URL
-     *
-     * @parameter expression = "{vfs.source}"
+     * @parameter expression = "${vfs.source}"
      * @required
-     * 
      * @since 1.0
-     * 
      */
     private String source;
     
     /**
      * Maven settings server's source authentication id
-     * @parameter expression = "{vfs.sourceId}"
+     * @parameter expression = "${vfs.sourceId}"
      */
     private String sourceId;
-    
+
     /**
      * Comma separated ANT include format
-     * @parameter expression = "{vfs.includes}"
+     * @parameter expression = "${vfs.includes}"
      */
     private String includes;
     
     /**
-     * Comma separated ANT include format
-     * @parameter expression = "{vfs.excludes}"
+     * Comma separated ANT exclude format
+     * @parameter expression = "${vfs.excludes}"
      */
     private String excludes;
     
@@ -91,6 +88,7 @@ public class ListVfsMojo
             vfsFileSet.copyBase( fileset );
 
             FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
+            
             vfsFileSet.setSource( sourceObj );
             
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
@@ -102,7 +100,7 @@ public class ListVfsMojo
         }
         catch ( FileSystemException e )
         {
-            throw new MojoFailureException( "Unable to perform copy", e );
+            throw new MojoFailureException( "Unable to perform a list operation", e );
         }
 
     }
