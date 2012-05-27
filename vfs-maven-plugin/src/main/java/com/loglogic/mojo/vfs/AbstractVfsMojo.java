@@ -17,11 +17,7 @@ package com.loglogic.mojo.vfs;
 
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
-import org.apache.commons.vfs2.auth.StaticUserAuthenticator;
-import org.apache.commons.vfs2.impl.DefaultFileSystemConfigBuilder;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
@@ -68,8 +64,18 @@ public abstract class AbstractVfsMojo
      */
     private SecDispatcher securityDispatcher;
 
-    protected Server getMavenSettingServer( String serverId )
-        throws MojoExecutionException, MojoFailureException
+    protected FileSystemOptionsFactory fileSystemOptionsFactory = new FileSystemOptionsFactory();
+
+    protected FileSystemOptions getFileSystemOptions( String serverId, String sourceUrl )
+        throws SecDispatcherException, FileSystemException
+    {
+        Server serverSettings = this.getServerSettings( serverId );
+        return fileSystemOptionsFactory.getFileSystemOptions( sourceUrl, serverSettings.getUsername(),
+                                                              serverSettings.getPassword() );
+    }
+
+    private Server getServerSettings( String serverId )
+        throws SecDispatcherException
     {
         Server server = this.settings.getServer( serverId );
 
@@ -77,45 +83,15 @@ public abstract class AbstractVfsMojo
         {
             if ( server.getPassword() != null )
             {
-                try
-                {
-                    server.setPassword( securityDispatcher.decrypt( server.getPassword() ) );
-                }
-                catch ( SecDispatcherException e )
-                {
-                    throw new MojoExecutionException( e.getMessage() );
-                }
+                server.setPassword( securityDispatcher.decrypt( server.getPassword() ) );
             }
+        }
+        else
+        {
+            server = new Server();
         }
 
         return server;
-    }
-
-    protected FileSystemOptions getAuthenticationOptions( String serverId )
-        throws MojoExecutionException, MojoFailureException
-    {
-        Server server = this.getMavenSettingServer( serverId );
-
-        FileSystemOptions opts = null;
-
-        if ( server != null )
-        {
-            StaticUserAuthenticator auth = new StaticUserAuthenticator( null, server.getUsername(), server.getPassword() );
-            opts = new FileSystemOptions();
-
-            try
-            {
-                DefaultFileSystemConfigBuilder.getInstance().setUserAuthenticator( opts, auth );
-            }
-            catch ( FileSystemException e )
-            {
-                throw new MojoFailureException(
-                                                "Unable to configure virtual file system authentication options using server id: "
-                                                    + serverId, e );
-            }
-        }
-
-        return opts;
     }
 
 }

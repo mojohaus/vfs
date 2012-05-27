@@ -6,7 +6,6 @@ import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.VFS;
-import org.apache.commons.vfs2.provider.ftp.FtpFileSystemConfigBuilder;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.mojo.vfs.VfsFileSet;
@@ -14,6 +13,7 @@ import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.VfsUtils;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 import org.codehaus.plexus.util.StringUtils;
+import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
@@ -84,16 +84,13 @@ public class ListVfsMojo
             fileset.setExcludes( StringUtils.split( excludes, "," ) );
         }
 
-        FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( fileset.getSourceId() );
-
-        FtpFileSystemConfigBuilder.getInstance().setPassiveMode( sourceAuthOptions, true );
-
         try
         {
+            FileSystemOptions serverOptions = this.getFileSystemOptions( sourceId, source );
             VfsFileSet vfsFileSet = new VfsFileSet();
             vfsFileSet.copyBase( fileset );
 
-            FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
+            FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), serverOptions );
 
             vfsFileSet.setSource( sourceObj );
 
@@ -102,13 +99,16 @@ public class ListVfsMojo
 
             for ( FileObject fo : list )
             {
-                this.getLog().info( VfsUtils.getRelativePath(  sourceObj, fo ) );
+                this.getLog().info( VfsUtils.getRelativePath( sourceObj, fo ) );
             }
         }
         catch ( FileSystemException e )
         {
             throw new MojoFailureException( "Unable to perform a list operation", e );
         }
-
+        catch ( SecDispatcherException e )
+        {
+            throw new MojoFailureException( "Unable to perform a list operation", e );
+        }
     }
 }

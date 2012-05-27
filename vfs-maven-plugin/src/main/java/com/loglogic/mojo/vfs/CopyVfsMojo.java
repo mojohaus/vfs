@@ -9,6 +9,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
+import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
@@ -49,18 +50,19 @@ public class CopyVfsMojo
 
         if ( fileset != null )
         {
-            FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( fileset.getSourceId() );
-            FileSystemOptions destAuthOptions = this.getAuthenticationOptions( fileset.getDestinationId() );
-
             try
             {
+                FileSystemOptions sourceOpts = this.getFileSystemOptions( fileset.getSourceId(), fileset.getSource() );
+                FileSystemOptions destOpts = this.getFileSystemOptions( fileset.getDestinationId(),
+                                                                        fileset.getDestination() );
+
                 VfsFileSet vfsFileSet = new VfsFileSet();
                 vfsFileSet.copyBase( fileset );
 
-                FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
+                FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceOpts );
                 vfsFileSet.setSource( sourceObj );
 
-                FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destAuthOptions );
+                FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destOpts );
                 vfsFileSet.setDestination( destObj );
 
                 VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
@@ -70,7 +72,11 @@ public class CopyVfsMojo
             {
                 throw new MojoFailureException( "Unable to perform copy", e );
             }
+            catch ( SecDispatcherException e )
+            {
+                throw new MojoFailureException( "Unable to perform a list operation", e );
+            }
         }
-
+        
     }
 }
