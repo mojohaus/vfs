@@ -43,7 +43,7 @@ public abstract class BaseFileSet
      * Heavily depending on clock sync
      */
     private boolean overwrite = true;
-    
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     public String[] getExcludes()
@@ -85,7 +85,7 @@ public abstract class BaseFileSet
     {
         this.useDefaultExcludes = useDefaultExcludes;
     }
-    
+
     public boolean isOverwrite()
     {
         return overwrite;

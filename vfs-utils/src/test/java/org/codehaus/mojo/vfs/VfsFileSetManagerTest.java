@@ -16,7 +16,6 @@ package org.codehaus.mojo.vfs;
  */
 
 import java.io.File;
-import java.net.URL;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -43,7 +42,7 @@ public class VfsFileSetManagerTest
     public void testLocalFileListWithIncludes()
         throws Exception
     {
-        String url = "file://" + basedir.getCanonicalPath();
+        String url = "file://" + basedir.getAbsolutePath();
 
         FileSystemManager fsManager = VFS.getManager();
         FileObject startDirectory = fsManager.resolveFile( url );
@@ -80,7 +79,7 @@ public class VfsFileSetManagerTest
     public void testLocalFileListWithExcludes()
         throws Exception
     {
-        String url = "file://" + basedir.getCanonicalPath();
+        String url = "file://" + basedir.getAbsolutePath();
 
         FileSystemManager fsManager = VFS.getManager();
         FileObject startDirectory = fsManager.resolveFile( url );
@@ -110,8 +109,8 @@ public class VfsFileSetManagerTest
 
         FileSystemManager fsManager = VFS.getManager();
 
-        FileObject fromDir = fsManager.resolveFile( "file://" + basedir.getCanonicalPath() );
-        FileObject toDir = fsManager.resolveFile( "file://" + builddir.getCanonicalPath() + "/test-copy-delete" );
+        FileObject fromDir = fsManager.resolveFile( "file://" + basedir.getAbsolutePath() );
+        FileObject toDir = fsManager.resolveFile( "file://" + builddir.getAbsolutePath() + "/test-copy-delete" );
 
         VfsFileSet fileSet = new VfsFileSet();
         fileSet.setSource( fromDir );
@@ -128,6 +127,5 @@ public class VfsFileSetManagerTest
         Assert.assertFalse( "Expected copied file found after delete. ", expectedFile.exists() );
 
     }
-
 
 }

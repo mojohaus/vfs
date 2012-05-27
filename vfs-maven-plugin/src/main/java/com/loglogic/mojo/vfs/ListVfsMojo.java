@@ -6,10 +6,12 @@ import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.VFS;
+import org.apache.commons.vfs2.provider.ftp.FtpFileSystemConfigBuilder;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
+import org.codehaus.mojo.vfs.VfsUtils;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 import org.codehaus.plexus.util.StringUtils;
 
@@ -44,7 +46,7 @@ public class ListVfsMojo
      * @since 1.0
      */
     private String source;
-    
+
     /**
      * Maven settings server's source authentication id
      * @parameter expression = "${vfs.sourceId}"
@@ -56,31 +58,35 @@ public class ListVfsMojo
      * @parameter expression = "${vfs.includes}"
      */
     private String includes;
-    
+
     /**
      * Comma separated ANT exclude format
      * @parameter expression = "${vfs.excludes}"
      */
     private String excludes;
-    
+
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        
+
         MojoVfsFileSet fileset = new MojoVfsFileSet();
-        
+
         fileset.setSource( source );
         fileset.setSourceId( sourceId );
-        
-        if ( ! StringUtils.isBlank( includes ) ) {
+
+        if ( !StringUtils.isBlank( includes ) )
+        {
             fileset.setIncludes( StringUtils.split( includes, "," ) );
         }
-       
-        if ( ! StringUtils.isBlank( excludes ) ) {
+
+        if ( !StringUtils.isBlank( excludes ) )
+        {
             fileset.setExcludes( StringUtils.split( excludes, "," ) );
         }
 
         FileSystemOptions sourceAuthOptions = this.getAuthenticationOptions( fileset.getSourceId() );
+
+        FtpFileSystemConfigBuilder.getInstance().setPassiveMode( sourceAuthOptions, true );
 
         try
         {
@@ -88,14 +94,15 @@ public class ListVfsMojo
             vfsFileSet.copyBase( fileset );
 
             FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceAuthOptions );
-            
+
             vfsFileSet.setSource( sourceObj );
-            
+
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
             List<FileObject> list = fileSetManager.list( vfsFileSet );
-            
-            for ( FileObject fo: list ) {
-                this.getLog().info( fo.getName().getPath() );
+
+            for ( FileObject fo : list )
+            {
+                this.getLog().info( VfsUtils.getRelativePath(  sourceObj, fo ) );
             }
         }
         catch ( FileSystemException e )

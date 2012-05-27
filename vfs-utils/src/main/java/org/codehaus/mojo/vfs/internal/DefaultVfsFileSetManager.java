@@ -9,6 +9,7 @@ import org.apache.commons.vfs2.FileSystemException;
 import org.codehaus.mojo.vfs.VfsDirectoryScanner;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
+import org.codehaus.mojo.vfs.VfsUtils;
 
 public class DefaultVfsFileSetManager
     implements VfsFileSetManager
@@ -62,10 +63,9 @@ public class DefaultVfsFileSetManager
     private void copy( FileObject fromDir, FileObject toDir, List<FileObject> fromFiles, boolean overwrite )
         throws FileSystemException
     {
-        FileName baseName = fromDir.getName();
         for ( FileObject fromFile : fromFiles )
         {
-            String relPath = baseName.getRelativeName( fromFile.getName() );
+            String relPath = VfsUtils.getRelativePath( fromDir, fromFile );
             FileObject toFile = toDir.resolveFile( relPath );
 
             //if ( fromFile.getContent().getLastModifiedTime() > toFile.getContent().getLastModifiedTime() )
