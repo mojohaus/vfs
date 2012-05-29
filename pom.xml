@@ -106,5 +106,10 @@
     <module>vfs-maven-plugin</module>
   </modules>
   
+  <build>
+    <defaultGoal>install</defaultGoal>
+  </build>
+  
+  
   
 </project>

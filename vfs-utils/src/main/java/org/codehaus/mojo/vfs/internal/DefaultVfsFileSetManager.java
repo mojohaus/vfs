@@ -3,7 +3,6 @@ package org.codehaus.mojo.vfs.internal;
 import java.util.List;
 
 import org.apache.commons.vfs2.AllFileSelector;
-import org.apache.commons.vfs2.FileName;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.codehaus.mojo.vfs.VfsDirectoryScanner;

@@ -91,7 +91,6 @@ public class ListVfsMojo
             vfsFileSet.copyBase( fileset );
 
             FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), serverOptions );
-
             vfsFileSet.setSource( sourceObj );
 
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();

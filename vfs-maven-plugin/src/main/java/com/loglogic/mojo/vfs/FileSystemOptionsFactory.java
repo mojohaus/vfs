@@ -11,41 +11,46 @@ import org.codehaus.plexus.util.StringUtils;
 
 public class FileSystemOptionsFactory
 {
-    public  FileSystemOptions getFileSystemOptions( String url, String username, String password )
+    public FileSystemOptions getFileSystemOptions( String url, String username, String password )
         throws FileSystemException
     {
-        
-        FileSystemOptions opts = new FileSystemOptions();     
-        
-        String [] tokens = StringUtils.split( url, ":" );
-        
+
+        FileSystemOptions opts = new FileSystemOptions();
+
+        String[] tokens = StringUtils.split( url, ":" );
+
         String protocol = tokens[0];
-        
-        if ( "ftp".equals( protocol ) ) {
+
+        if ( "ftp".equals( protocol ) )
+        {
             FtpFileSystemConfigBuilder builder = FtpFileSystemConfigBuilder.getInstance();
             builder.setPassiveMode( opts, true );
             builder.setUserDirIsRoot( opts, false );
         }
-        if ( "sftp".equals( protocol ) ) {
+        if ( "sftp".equals( protocol ) )
+        {
             SftpFileSystemConfigBuilder builder = SftpFileSystemConfigBuilder.getInstance();
             builder.setUserDirIsRoot( opts, false );
         }
-        if ( "webdav".equals( protocol ) ) {
-            WebdavFileSystemConfigBuilder builder = ( WebdavFileSystemConfigBuilder )WebdavFileSystemConfigBuilder.getInstance();
+        if ( "webdav".equals( protocol ) )
+        {
+            WebdavFileSystemConfigBuilder builder = (WebdavFileSystemConfigBuilder) WebdavFileSystemConfigBuilder
+                .getInstance();
         }
-        
 
         String domain = null;
         tokens = StringUtils.split( "\\" );
-        if ( tokens.length == 2 ) {
+        if ( tokens.length == 2 )
+        {
             domain = tokens[0];
             username = tokens[1];
         }
-        
+
         StaticUserAuthenticator auth = new StaticUserAuthenticator( domain, username, password );
 
         DefaultFileSystemConfigBuilder.getInstance().setUserAuthenticator( opts, auth );
-        
+
         return opts;
     }
+
 }

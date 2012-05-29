@@ -77,6 +77,6 @@ public class CopyVfsMojo
                 throw new MojoFailureException( "Unable to perform a list operation", e );
             }
         }
-        
+
     }
 }
