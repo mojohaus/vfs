@@ -31,7 +31,7 @@
          <item name="Goals" href="plugin-info.html"/>
       </menu>
       <menu name="Examples">
-         <item name="sftp2sftp" href="https://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-maven-plugin/src/examples/sftp2sftp"/>
+         <item name="ftp2file" href="https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples/ftp2file"/>
       </menu>
    </body>
 </project>
