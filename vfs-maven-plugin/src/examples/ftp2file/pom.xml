@@ -3,13 +3,13 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.mojo.vfs.examples</groupId>
-  <artifactId>sftp2sftp</artifactId>
+  <artifactId>ftp2file</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>ssh2ssh</name>
+  <name>ftp2file</name>
 
   <description>
-    Example to do ssh to ssh copy using vfs-maven-plugin
+    Example to do download file from ftp server to ${project.build.directory}/test
   </description>
 
   <build>
@@ -20,20 +20,19 @@
         <version>1.0-SNAPSHOT</version>
         <executions>
           <execution>
-            <id>scp2scp</id>
+            <id>ftp2file</id>
             <phase>test</phase>
             <goals>
               <goal>copy</goal>
             </goals>
             <configuration>
               <fileset>
-                <sourceId>rd10.anonymous</sourceId>
-                <destinationId>rd11.anonymous</destinationId>
-                <source>sftp://rd10</source>
+                <sourceId>ftp.anonymous</sourceId>
+                <source>ftp://ftp.osuosl.org/.1/centos</source>
                 <includes>
-                  <include>pom.xml</include>
+                  <include>*</include>
                 </includes>
-                <destination>sftp://rd11</destination>
+                <destination>file://${project.build.directory}/test</destination>
               </fileset>
             </configuration>
           </execution>

@@ -1,12 +1,190 @@
  ------
- Usage
+ Index
  ------
- Dan T. Tran
  ------
- 2008-09-15
- ------
+ May 30th, 2012
+
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+
+~~ NOTE: For help with the syntax of this file, see:
+~~ http://maven.apache.org/guides/mini/guide-apt-format.html
 
 
-VFS Maven Plugin
+Introduction
 
+  The Maven VFS Plugin is wrapper of Apache Common Virtual File System with extensive use of the popular ANT's 'FileSet'
+  to manipulate ( list, copy, move, remove, etc ) resources across virtual file systems.
   
+  
+* Authentication Settings
+
+  In order to access remote resource, very likely you will need to provide your authentication credential to Maven via your local settings.xml files.
+  Below contains a couple of examples. For password encryption, see {{{http://maven.apache.org/guides/mini/guide-encryption.html} Maven Password Encryption}} for details.
+  
+  The follow sections show you how to configure you credential and examples on various operation.  Functional examples also available at
+  {{{ https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples} https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples}}
+  
+  
+  
+-------------------------------------------
+    <server>
+      <id>some.server.id</id>
+      <username>username</username>
+      <password>clear-text-password</password>
+    </server>
+
+    <server>
+      <id>vfstest</id>
+      <username>vfstest</username>
+      <password>{rFKiZpcq1e0Hg79iA6LwZFSCG3fZIFCNiJLFTPf7CNM=}</password>
+    </server>
+
+    <!--add the below settings to your local settings.xml to perform ftp directory listing which allows anonymous authentication -->
+    <server>
+      <id>ftp.anonymous</id>
+      <username>anonymous</username>
+      <password>anonymous@anonymous.com</password>
+    </server>
+
+-------------------------------------------   
+
+* List Goal
+
+  You can use vfs:list goal from command line to verify the remote resource file list.
+  
+  The below example shows how to list a remote directory via FTP protocol at ftp://ftp.osuosl.org/pub/centos. Note you need configure 'anonymous' serve id in your settings.xml
+  
+-------------------------------------------
+
+	mvn vfs:list -Dvfs.sourceId=ftp.anonymous -Dvfs.source=ftp://ftp.osuosl.org/.1/centos -Dincludes="*"
+
+-------------------------------------------   
+
+* Copy Goal
+
+  The below example shows how to copy a directory content, non recursive, from a FTP server to a SFTP server
++-----
+<project>
+  [...]
+  <build>
+
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>vfs-maven-plugin</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <executions>
+        <execution>
+          <id>download-test-data</id>
+          <phase>pre-integration-test</phase>
+          <goals>
+            <goal>copy</goal>
+          </goals>
+          <configuration>
+            <fileset>
+              <sourceId>your.ftp.settings.server.id</sourceId>
+              <source>webdav://your.webdap.host/path/to/a/directory</source>
+              <includes>
+                <include>*</include>
+              </includes>
+              <destinationId>your.sftp.settings.server.id</destinationId>
+              <destination>sftp://sftp.host/path/to/a/directory</fromDir>
+            </fileset>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </build>
+  [...]
+</project>
++----- 
+
+* Move Goal
+
+  The below example shows how to move ( copy then remove ) a directory content, non recursive, from a FTP server to a SFTP server. 
++-----
+<project>
+  [...]
+  <build>
+
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>vfs-maven-plugin</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <executions>
+        <execution>
+          <id>download-test-data</id>
+          <phase>pre-integration-test</phase>
+          <goals>
+            <goal>move</goal>
+          </goals>
+          <configuration>
+            <fileset>
+              <sourceId>your.ftp.settings.server.id</sourceId>
+              <source>webdav://your.webdap.host/path/to/a/directory</source>
+              <includes>
+                <include>*</include>
+              </includes>
+              <destinationId>your.sftp.settings.server.id</destinationId>
+              <destination>sftp://sftp.host/path/to/a/directory</fromDir>
+            </fileset>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </build>
+  [...]
+</project>
++----- 
+
+* Move Goal
+
+  The below example shows how to remove a directory content, non recursive, from a FTP server. 
++-----
+<project>
+  [...]
+  <build>
+
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>vfs-maven-plugin</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <executions>
+        <execution>
+          <id>download-test-data</id>
+          <phase>pre-integration-test</phase>
+          <goals>
+            <goal>remove</goal>
+          </goals>
+          <configuration>
+            <fileset>
+              <sourceId>your.ftp.settings.server.id</sourceId>
+              <source>webdav://your.webdap.host/path/to/a/directory</source>
+              <includes>
+                <include>*</include>
+              </includes>
+            </fileset>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </build>
+  [...]
+</project>
++----- 
+
+
