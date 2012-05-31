@@ -41,7 +41,7 @@ public class ListVfsMojo
 {
     /**
      * Source URL
-     * @parameter expression = "${vfs.source}"
+     * @parameter expression = "${source}"
      * @required
      * @since 1.0
      */
@@ -49,19 +49,19 @@ public class ListVfsMojo
 
     /**
      * Maven settings server's source authentication id
-     * @parameter expression = "${vfs.sourceId}"
+     * @parameter expression = "${sourceId}"
      */
     private String sourceId;
 
     /**
      * Comma separated ANT include format
-     * @parameter expression = "${vfs.includes}"
+     * @parameter expression = "${includes}"
      */
     private String includes;
 
     /**
      * Comma separated ANT exclude format
-     * @parameter expression = "${vfs.excludes}"
+     * @parameter expression = "${excludes}"
      */
     private String excludes;
 

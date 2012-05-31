@@ -76,7 +76,7 @@ Introduction
   
 +---------------------
 
-	mvn vfs:list -Dvfs.sourceId=ftp.anonymous -Dvfs.source=ftp://ftp.osuosl.org/.1/centos -Dincludes="*"
+	mvn vfs:list -DsourceId=ftp.anonymous -Dsource=ftp://ftp.osuosl.org/.1/centos -Dincludes="*"
 
 +---------------------
 
