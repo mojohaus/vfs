@@ -30,18 +30,17 @@ Introduction
   The Maven VFS Plugin is wrapper of Apache Common Virtual File System with extensive use of the popular ANT's 'FileSet'
   to manipulate ( list, copy, move, remove, etc ) resources across virtual file systems.
   
+  The follow sections show you how to configure your VFS credential and examples on various operations.  Functional examples are also available at
+  {{{ https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples} https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples}}
+  
   
 * Authentication Settings
 
   In order to access remote resource, very likely you will need to provide your authentication credential to Maven via your local settings.xml files.
   Below contains a couple of examples. For password encryption, see {{{http://maven.apache.org/guides/mini/guide-encryption.html} Maven Password Encryption}} for details.
   
-  The follow sections show you how to configure you credential and examples on various operation.  Functional examples also available at
-  {{{ https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples} https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples}}
   
-  
-  
--------------------------------------------
++---------------------
     <server>
       <id>some.server.id</id>
       <username>username</username>
@@ -54,31 +53,38 @@ Introduction
       <password>{rFKiZpcq1e0Hg79iA6LwZFSCG3fZIFCNiJLFTPf7CNM=}</password>
     </server>
 
-    <!--add the below settings to your local settings.xml to perform ftp directory listing which allows anonymous authentication -->
++---------------------
+
+  There is one built-in convenient server settings with id 'ftp.anonymous' to allow anonymous access to ftp server.
+
++---------------------
+
+    <!--this is a built-in settings that allow anonymous ftp authentication -->
     <server>
       <id>ftp.anonymous</id>
       <username>anonymous</username>
       <password>anonymous@anonymous.com</password>
     </server>
 
--------------------------------------------   
++---------------------
 
 * List Goal
 
   You can use vfs:list goal from command line to verify the remote resource file list.
   
-  The below example shows how to list a remote directory via FTP protocol at ftp://ftp.osuosl.org/pub/centos. Note you need configure 'anonymous' serve id in your settings.xml
+  The below example shows how to list a remote directory using FTP protocol at ftp://ftp.osuosl.org/pub/centos. note ftp.anonymous is built-in with this plugin.
   
--------------------------------------------
++---------------------
 
 	mvn vfs:list -Dvfs.sourceId=ftp.anonymous -Dvfs.source=ftp://ftp.osuosl.org/.1/centos -Dincludes="*"
 
--------------------------------------------   
++---------------------
 
 * Copy Goal
 
   The below example shows how to copy a directory content, non recursive, from a FTP server to a SFTP server
-+-----
+  
++---------------
 <project>
   [...]
   <build>
@@ -111,12 +117,13 @@ Introduction
   </build>
   [...]
 </project>
-+----- 
++---------------------
 
 * Move Goal
 
-  The below example shows how to move ( copy then remove ) a directory content, non recursive, from a FTP server to a SFTP server. 
-+-----
+  The below example shows how to move ( copy then remove ) a directory content, non recursive, from a FTP server to a SFTP server.
+   
++---------------------
 <project>
   [...]
   <build>
@@ -149,12 +156,13 @@ Introduction
   </build>
   [...]
 </project>
-+----- 
++---------------------
 
 * Move Goal
 
-  The below example shows how to remove a directory content, non recursive, from a FTP server. 
-+-----
+  The below example shows how to remove a directory content, non recursive, from a FTP server.
+   
++---------------------
 <project>
   [...]
   <build>
@@ -185,6 +193,8 @@ Introduction
   </build>
   [...]
 </project>
-+----- 
+
++---------------------
+ 
 
 

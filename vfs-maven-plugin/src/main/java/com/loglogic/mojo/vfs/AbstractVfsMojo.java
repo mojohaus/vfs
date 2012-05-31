@@ -89,6 +89,13 @@ public abstract class AbstractVfsMojo
         else
         {
             server = new Server();
+            
+            //convenient built-in setting to allow ftp anonymous access
+            if ( "ftp.anonymous".equals(  "serverId" ) ) {
+                server.setId( "ftp.anonymous" );
+                server.setUsername( "anonymous" );
+                server.setPassword( "anonymous@anonymous.com" );
+            }
         }
 
         return server;
