@@ -27,12 +27,12 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
  */
 
 /**
- * Copy files from one VFS to another VFS
+ * Remove files from a virtual file system
  * 
- * @goal copy
+ * @goal remove
  * @requiresProject true
  */
-public class CopyVfsMojo
+public class RemoveVfsMojo
     extends AbstractVfsMojo
 {
 
@@ -66,15 +66,15 @@ public class CopyVfsMojo
                 vfsFileSet.setDestination( destObj );
 
                 VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
-                fileSetManager.copy( vfsFileSet );
+                fileSetManager.delete( vfsFileSet );
             }
             catch ( FileSystemException e )
             {
-                throw new MojoFailureException( "Unable to perform a copy operation", e );
+                throw new MojoFailureException( "Unable to perform a remove operation", e );
             }
             catch ( SecDispatcherException e )
             {
-                throw new MojoFailureException( "Unable to perform a copy operation", e );
+                throw new MojoFailureException( "Unable to perform a remove operation", e );
             }
         }
 

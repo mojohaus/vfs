@@ -36,9 +36,9 @@ VFS Maven Plugin
   
   * {{{./copy-mojo.html}vfs:copy}} Transfer a set of files from one virtual file system to another.
   
-  * {{{./move-mojo.html}vfs:copy}} Move a set of files from on virtual file system to another.
+  * {{{./move-mojo.html}vfs:move}} Move a set of files from on virtual file system to another.
   
-  * {{{./remove-mojo.html}vfs:copy}} Remove a set of files from a virtual file system.
+  * {{{./remove-mojo.html}vfs:remove}} Remove a set of files from a virtual file system.
   
   []
   
