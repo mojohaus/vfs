@@ -27,7 +27,7 @@
 
 VFS Maven Plugin
 
-  Use this plugin to list, copy, move, and delete virtual file system files using Apache Commons Virtual File System (VFS) 
+  Use this plugin to list, copy, move, and delete virtual file system files using {{{http://commons.apache.org/vfs/}Apache Commons Virtual File System (VFS)}}.
   
 
 * Goals Overview
