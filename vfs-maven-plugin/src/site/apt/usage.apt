@@ -30,13 +30,15 @@ Introduction
   The Maven VFS Plugin is wrapper of Apache Common Virtual File System with extensive use of the popular ANT's 'FileSet'
   to manipulate ( list, copy, move, remove, etc ) resources across virtual file systems.
   
-  The follow sections show you how to configure your VFS credential and examples on various operations.  Functional examples are also available at
+  The follow sections show you how to configure your VFS credential and examples on various operations.  
+  
+  Functional examples are also available at
   {{{ https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples} https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples}}
   
   
 * Authentication Settings
 
-  In order to access remote resource, very likely you will need to provide your authentication credential to Maven via your local settings.xml files.
+  In order to access remote resource, very likely you will need to provide your authentication credential to Maven via your local settings.xml file.
   Below contains a couple of examples. For password encryption, see {{{http://maven.apache.org/guides/mini/guide-encryption.html} Maven Password Encryption}} for details.
   
   
@@ -55,11 +57,11 @@ Introduction
 
 +---------------------
 
-  There is one built-in convenient server settings with id 'ftp.anonymous' to allow anonymous access to ftp server.
+  There is one built-in convenient server settings with id 'ftp.anonymous' to allow anonymous access to ftp servers.
 
 +---------------------
 
-    <!--this is a built-in settings that allow anonymous ftp authentication -->
+    <!--this is a built-in settings that allows anonymous ftp authentication -->
     <server>
       <id>ftp.anonymous</id>
       <username>anonymous</username>
@@ -84,7 +86,7 @@ Introduction
    
     * sourceId=ftp.anonymous is built-in with this plugin.
     
-    * use your <source,includes, and excludes> arguments wisely to reduce the number to recursive directory scanninging on remote resource
+    * use your <source,includes, and excludes> arguments wisely to reduce the number to recursive directory scanning on remote resource
       to reduce scanning time. For example the following command will take a very very long time.
   
     []
@@ -118,7 +120,7 @@ Introduction
           <configuration>
             <fileset>
               <sourceId>your.ftp.settings.server.id</sourceId>
-              <source>webdav://your.webdap.host/path/to/a/directory</source>
+              <source>ftp://your.ftp.host/path/to/a/directory</source>
               <includes>
                 <include>*</include>
               </includes>
@@ -136,7 +138,7 @@ Introduction
 
 * Move Goal
 
-  The below example shows how to move ( copy then remove ) a directory content, non recursive, from a FTP server to a SFTP server.
+  The below example shows how to move ( copy then remove ) a directory content, non recursive, from a WEBDav server to a SFTP server.
    
 +---------------------
 <project>
@@ -156,7 +158,7 @@ Introduction
           </goals>
           <configuration>
             <fileset>
-              <sourceId>your.ftp.settings.server.id</sourceId>
+              <sourceId>your.webdav.settings.server.id</sourceId>
               <source>webdav://your.webdap.host/path/to/a/directory</source>
               <includes>
                 <include>*</include>
@@ -173,7 +175,7 @@ Introduction
 </project>
 +---------------------
 
-* Move Goal
+* Remove Goal
 
   The below example shows how to remove a directory content, non recursive, from a FTP server.
    
@@ -196,7 +198,7 @@ Introduction
           <configuration>
             <fileset>
               <sourceId>your.ftp.settings.server.id</sourceId>
-              <source>webdav://your.webdap.host/path/to/a/directory</source>
+              <source>fap://your.ftp.host/path/to/a/directory</source>
               <includes>
                 <include>*</include>
               </includes>
