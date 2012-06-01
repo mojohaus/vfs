@@ -2,9 +2,9 @@ package org.codehaus.mojo.vfs.internal;
 
 import java.util.List;
 
-import org.apache.commons.vfs2.AllFileSelector;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
+import org.apache.commons.vfs2.Selectors;
 import org.codehaus.mojo.vfs.VfsDirectoryScanner;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
@@ -70,7 +70,7 @@ public class DefaultVfsFileSetManager
             //if ( fromFile.getContent().getLastModifiedTime() > toFile.getContent().getLastModifiedTime() )
             //until we understand more about this requirement
             {
-                toFile.copyFrom( fromFile, new AllFileSelector() );
+                toFile.copyFrom( fromFile, Selectors.SELECT_ALL );
             }
 
         }
