@@ -234,8 +234,8 @@ public class DefaultVfsDirectoryScanner
                 if ( !surelyExcluded( newRelativePath ) )
                 {
                     //FIXME we need one more check to see if we really need to scan the subdir
-                    // to solve the case where includes="{"*"}, scan subdirectory does not help
-                    // but slowdown the completion
+                    // to solve the case where includes="{'*'}", scanning sub-directory does not help
+                    // but only slow down the completion
                     scanSubDir( child, newRelativePath );
                 }
             }

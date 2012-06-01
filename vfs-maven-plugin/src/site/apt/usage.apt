@@ -72,14 +72,29 @@ Introduction
 
   You can use vfs:list goal from command line to verify the remote resource file list.
   
-  The below example shows how to list a remote directory using FTP protocol at ftp://ftp.osuosl.org/pub/centos. note ftp.anonymous is built-in with this plugin.
-  
+  The below example shows how to list a remote directory using FTP protocol at ftp://ftp.osuosl.org/pub/centos.
+   
 +---------------------
 
 	mvn vfs:list -DsourceId=ftp.anonymous -Dsource=ftp://ftp.osuosl.org/.1/centos/6.0/ -Dincludes="*"
 
 +---------------------
 
+  Note:
+   
+    * sourceId=ftp.anonymous is built-in with this plugin.
+    
+    * use your <source,includes, and excludes> arguments wisely to reduce the number to recursive directory scanninging on remote resource
+      to reduce scanning time. For example the following command will take a very very long time.
+  
+    []
+    
++---------------------
+
+	mvn vfs:list -DsourceId=ftp.anonymous -Dsource=ftp://ftp.osuosl.org/.1/centos -Dincludes="**"
+
++---------------------
+    
 * Copy Goal
 
   The below example shows how to copy a directory content, non recursive, from a FTP server to a SFTP server
