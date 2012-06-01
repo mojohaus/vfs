@@ -37,7 +37,7 @@ public class MoveVfsMojo
 {
 
     /**
-     * A single FileSet to manipulate the archive.
+     * Move configuration. Note: destination's configurations are ignored
      *
      * @parameter
      * @since 1.0
@@ -48,7 +48,7 @@ public class MoveVfsMojo
         throws MojoExecutionException, MojoFailureException
     {
 
-        if ( fileset != null )
+        if ( fileset != null && !this.skip )
         {
             try
             {
@@ -76,6 +76,10 @@ public class MoveVfsMojo
             {
                 throw new MojoFailureException( "Unable to perform a move operation", e );
             }
+        }
+        else
+        {
+            this.getLog().info( "Skip VFS move operation" );
         }
 
     }

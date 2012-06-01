@@ -37,7 +37,7 @@ public class CopyVfsMojo
 {
 
     /**
-     * A single FileSet to manipulate the archive.
+     * Copy configuration
      *
      * @parameter
      * @since 1.0
@@ -48,7 +48,7 @@ public class CopyVfsMojo
         throws MojoExecutionException, MojoFailureException
     {
 
-        if ( fileset != null )
+        if ( fileset != null && !this.skip )
         {
             try
             {
@@ -76,6 +76,10 @@ public class CopyVfsMojo
             {
                 throw new MojoFailureException( "Unable to perform a copy operation", e );
             }
+        }
+        else
+        {
+            this.getLog().info( "Skip VFS copy operation" );
         }
 
     }

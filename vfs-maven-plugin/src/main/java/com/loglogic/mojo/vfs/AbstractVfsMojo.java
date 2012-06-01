@@ -51,7 +51,7 @@ public abstract class AbstractVfsMojo
     /**
      * When <code>true</code>, skip the execution.
      * 
-     * @parameter expression="${vfs.skip}" default-value="false"
+     * @parameter expression="${skip}" default-value="false"
      */
     protected boolean skip = false;
 
@@ -89,9 +89,10 @@ public abstract class AbstractVfsMojo
         else
         {
             server = new Server();
-            
+
             //convenient built-in setting to allow ftp anonymous access
-            if ( "ftp.anonymous".equals(  "serverId" ) ) {
+            if ( "ftp.anonymous".equals( "serverId" ) )
+            {
                 server.setId( "ftp.anonymous" );
                 server.setUsername( "anonymous" );
                 server.setPassword( "anonymous@anonymous.com" );

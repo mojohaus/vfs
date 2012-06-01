@@ -37,7 +37,7 @@ public class RemoveVfsMojo
 {
 
     /**
-     * A single FileSet to manipulate the archive.
+     * Move configuration
      *
      * @parameter
      * @since 1.0
@@ -48,7 +48,7 @@ public class RemoveVfsMojo
         throws MojoExecutionException, MojoFailureException
     {
 
-        if ( fileset != null )
+        if ( fileset != null && !this.skip )
         {
             try
             {
@@ -76,6 +76,11 @@ public class RemoveVfsMojo
             {
                 throw new MojoFailureException( "Unable to perform a remove operation", e );
             }
+
+        }
+        else
+        {
+            this.getLog().info( "Skip VFS remove operation" );
         }
 
     }

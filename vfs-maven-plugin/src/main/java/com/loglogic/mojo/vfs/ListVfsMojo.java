@@ -31,7 +31,7 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
  */
 
 /**
- * List files on one or more VFS systems
+ * Display file list of a virtual file system.
  * 
  * @goal list
  * @requiresProject false
@@ -68,6 +68,12 @@ public class ListVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
+
+        if ( skip )
+        {
+            this.getLog().info( "Skip VFS list operation" );
+            return;
+        }
 
         MojoVfsFileSet fileset = new MojoVfsFileSet();
 
