@@ -229,9 +229,15 @@ public class DefaultVfsDirectoryScanner
                 newRelativePath = relativePath + "/" + child.getName().getBaseName();
             }
 
-            if ( !this.isDirectory( child ) )
+            if ( this.isDirectory( child ) )
             {
-
+                if ( !surelyExcluded( newRelativePath ) )
+                {
+                    scanSubDir( child, newRelativePath );
+                }
+            }
+            else
+            {
                 if ( isIncluded( newRelativePath ) )
                 {
                     if ( !isExcluded( newRelativePath ) )
@@ -239,31 +245,7 @@ public class DefaultVfsDirectoryScanner
                         includedFiles.add( child );
                     }
                 }
-                continue;
             }
-
-            if ( isIncluded( newRelativePath ) )
-            {
-                if ( !isExcluded( newRelativePath ) )
-                {
-                    scanSubDir( child, newRelativePath );
-                }
-                else
-                {
-                    if ( couldHoldIncluded( newRelativePath ) )
-                    {
-                        scanSubDir( child, newRelativePath );
-                    }
-                }
-            }
-            else
-            {
-                if ( couldHoldIncluded( newRelativePath ) )
-                {
-                    scanSubDir( child, newRelativePath );
-                }
-            }
-
         }
     }
 
@@ -384,6 +366,36 @@ public class DefaultVfsDirectoryScanner
     private static boolean matchPath( String pattern, String str, boolean isCaseSensitive )
     {
         return SelectorUtils.matchPath( pattern, str, isCaseSensitive );
+    }
+
+    private boolean surelyExcluded( String newRelativePath )
+    {
+
+        boolean maybeIncluded = false;
+
+        if ( isIncluded( newRelativePath ) )
+        {
+            if ( !isExcluded( newRelativePath ) )
+            {
+                maybeIncluded = true;
+            }
+            else
+            {
+                if ( couldHoldIncluded( newRelativePath ) )
+                {
+                    maybeIncluded = true;
+                }
+            }
+        }
+        else
+        {
+            if ( couldHoldIncluded( newRelativePath ) )
+            {
+                maybeIncluded = true;
+            }
+        }
+
+        return !maybeIncluded;
     }
 
 }

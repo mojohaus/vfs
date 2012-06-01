@@ -23,7 +23,9 @@ import org.apache.commons.vfs2.FileSystemException;
 public interface VfsFileSetManager
 {
     /**
-     * Retrieve a list of virtual files base on criteria set by fileSet
+     * Retrieve a list of virtual files base on criteria set by fileSet.
+     * This operation is expansive due to the native to remote scanning.
+     * So use includes/excludes wisely
      * @param fileSet
      * @return List of remote file objects
      */
