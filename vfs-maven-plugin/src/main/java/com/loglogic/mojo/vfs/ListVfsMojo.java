@@ -102,9 +102,10 @@ public class ListVfsMojo
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
             List<FileObject> list = fileSetManager.list( vfsFileSet );
 
+            System.out.println( "Directory list: " );
             for ( FileObject fo : list )
             {
-                this.getLog().info( VfsUtils.getRelativePath( sourceObj, fo ) );
+                System.out.println( VfsUtils.getRelativePath( sourceObj, fo ) );
             }
         }
         catch ( FileSystemException e )
