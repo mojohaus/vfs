@@ -2,6 +2,8 @@ package org.codehaus.mojo.vfs;
 
 import java.io.File;
 
+import junit.framework.Assert;
+
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.VFS;
 import org.codehaus.mojo.vfs.internal.DefaultMergeVfsMavenRepositories;
@@ -57,7 +59,21 @@ public class MavenReposMergeTest
         
         File stagingDir = new File( builddir, "test-repos/staging" );
         
-        repoMerger.merge( testSourceRepo, testTargetRepo, stagingDir, true );
+        repoMerger.merge( testSourceRepo, testTargetRepo, stagingDir, false );
 
+        File targetDir = new File( builddir, "test-repos/target" );
+        
+        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/3.0/artifact1-3.0.pom" ).exists() );
+        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/maven-metadata.xml" ).exists() );
+        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/maven-metadata.xml.md5" ).exists() );
+        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/maven-metadata.xml.sha1" ).exists() );
+
+        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact3/1.0/artifact3-1.0.pom" ).exists() );
+        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml" ).exists() );
+        
+        //should not see hashfile since it is a brand new artifacts
+        Assert.assertFalse(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.md5" ).exists() );
+        Assert.assertFalse(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.sha1" ).exists() );
+        
     }
 }

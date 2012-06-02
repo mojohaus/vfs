@@ -21,12 +21,15 @@ public class DefaultMergeVfsMavenRepositories
     private static final String MAVEN_METADATA = "maven-metadata.xml";
 
     private static final String IN_PROCESS_MARKER = ".rip";
+    
+    private static final String[] ALL_FILES = { "**" };
 
     public void merge( FileObject sourceRepo, FileObject targetRepo )
         throws FileSystemException, IOException
     {
         merge( sourceRepo, targetRepo, null, false );
     }
+
     public void merge( FileObject sourceRepo, FileObject targetRepo, File stagingDirectory, boolean dryRun )
         throws FileSystemException, IOException
     {
@@ -86,6 +89,8 @@ public class DefaultMergeVfsMavenRepositories
         VfsFileSet fileset = new VfsFileSet();
         fileset.setSource( source );
         fileset.setDestination( stagingRepo );
+        fileset.setIncludes( ALL_FILES );
+        
         String[] excludes = { ".*/**" }; //exclude repositories runtime file like .nexus .index
         fileset.setExcludes( excludes );
 
@@ -143,18 +148,19 @@ public class DefaultMergeVfsMavenRepositories
         }
 
     }
-    
+
     private void pushStagingToTargetRepo( FileObject stagingRepo, FileObject targetRepo )
-        throws FileSystemException {
+        throws FileSystemException
+    {
 
         VfsFileSet fileset = new VfsFileSet();
         fileset.setSource( stagingRepo );
-        fileset.setIncludes( null );
+        fileset.setIncludes( ALL_FILES );
         fileset.setDestination( targetRepo );
 
         VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
         fileSetManager.copy( fileset );
-        
+
     }
 
 }
