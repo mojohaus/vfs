@@ -28,8 +28,8 @@ import org.codehaus.mojo.vfs.internal.DefaultMergeVfsMavenRepositories;
 /**
  * Copy files from one VFS to another VFS
  * 
- * @goal copy
- * @requiresProject true
+ * @goal merge-maven-repositories
+ * @requiresProject false
  */
 public class MergeMavenReposVfsMojo
     extends AbstractVfsMojo
