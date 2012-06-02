@@ -25,42 +25,56 @@ public class DefaultMergeVfsMavenRepositories
     public void merge( FileObject sourceRepo, FileObject targetRepo )
         throws FileSystemException, IOException
     {
+        merge( sourceRepo, targetRepo, null, false );
+    }
+    public void merge( FileObject sourceRepo, FileObject targetRepo, File stagingDirectory, boolean dryRun )
+        throws FileSystemException, IOException
+    {
         FileObject stagingRepo = null;
         try
         {
-
-            stagingRepo = this.createStagingRepo();
+            stagingRepo = this.createStagingRepo( stagingDirectory );
 
             this.stageSource( sourceRepo, stagingRepo );
 
             this.mergeTargetMetadataToStageMetaData( targetRepo, stagingRepo );
 
-            //this.mergeBackToMainRepo( fromRepe, toRepo, stagingDir );
+            if ( !dryRun )
+            {
+                this.pushStagingToTargetRepo( stagingRepo, targetRepo );
+            }
 
         }
         catch ( Exception e )
         {
-            //throw new MavenRepositoryMergerException( "Unable to merge repositories.", e );
+            throw new RuntimeException( "Unable to merge repositories.", e );
         }
         finally
         {
 
-            if ( stagingRepo != null )
+            if ( !dryRun )
             {
-                FileUtils.deleteDirectory( stagingRepo.getName().getPath() );
+                if ( stagingRepo != null )
+                {
+                    FileUtils.deleteDirectory( stagingRepo.getName().getPath() );
+                }
             }
         }
     }
 
-    private FileObject createStagingRepo()
+    private FileObject createStagingRepo( File stagingDir )
         throws IOException
     {
+        if ( stagingDir == null )
+        {
+            stagingDir = File.createTempFile( "vfs-merge-", null );
+        }
 
-        File stagingDir = File.createTempFile( "vfs-merge-", null );
         if ( stagingDir.exists() )
         {
             stagingDir.delete();
         }
+
         stagingDir.mkdirs();
 
         return VFS.getManager().resolveFile( stagingDir.getAbsolutePath() );
@@ -129,6 +143,18 @@ public class DefaultMergeVfsMavenRepositories
         }
 
     }
+    
+    private void pushStagingToTargetRepo( FileObject stagingRepo, FileObject targetRepo )
+        throws FileSystemException {
 
+        VfsFileSet fileset = new VfsFileSet();
+        fileset.setSource( stagingRepo );
+        fileset.setIncludes( null );
+        fileset.setDestination( targetRepo );
+
+        VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
+        fileSetManager.copy( fileset );
+        
+    }
 
 }
