@@ -148,7 +148,7 @@ public class MavenMetadataUtils
         if ( binaryData.length != 16 && binaryData.length != 20 )
         {
             int bitLength = binaryData.length * 8;
-            throw new IllegalArgumentException( "Unrecognised length for binary data: " + bitLength + " bits" );
+            throw new IllegalArgumentException( "Unrecognized length for binary data: " + bitLength + " bits" );
         }
 
         String retValue = "";
