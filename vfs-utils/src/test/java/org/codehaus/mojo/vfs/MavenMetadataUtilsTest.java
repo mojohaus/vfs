@@ -46,13 +46,13 @@ public class MavenMetadataUtilsTest
     public void testMergeNewArtifact()
         throws Exception
     {
-        File srcFile = new File( basedir, "src/test/data/maven-metadata-1.xml" );
+        File srcFile = new File( basedir, "src/test/data/metadata/maven-metadata-1.xml" );
         File finalFile = new File( workingDir, "maven-metadata.xml" );
         finalFile.delete();
 
         mavenMetadata.merge( srcFile, finalFile );
 
-        Metadata expectedMetadata = readMetadata( new File( basedir, "src/test/data/maven-metadata-1.xml" ) );
+        Metadata expectedMetadata = readMetadata( new File( basedir, "src/test/data/metadata/maven-metadata-1.xml" ) );
         Metadata resultMetadata = readMetadata( finalFile );
         Assert.assertEquals( expectedMetadata.getVersioning().getVersions(), resultMetadata.getVersioning()
             .getVersions() );
@@ -68,20 +68,20 @@ public class MavenMetadataUtilsTest
     {
         File finalFile = new File( workingDir, "maven-metadata.xml" );
         finalFile.delete();
-        FileUtils.copyFile( new File( basedir, "src/test/data/maven-metadata-3.xml" ), finalFile );
+        FileUtils.copyFile( new File( basedir, "src/test/data/metadata/maven-metadata-3.xml" ), finalFile );
 
-        mavenMetadata.merge( new File( basedir, "src/test/data/maven-metadata-1-2.xml" ), finalFile );
+        mavenMetadata.merge( new File( basedir, "src/test/data/metadata/maven-metadata-1-2.xml" ), finalFile );
 
-        Metadata expectedMetadata = readMetadata( new File( basedir, "src/test/data/maven-metadata-1-2-3.xml" ) );
+        Metadata expectedMetadata = readMetadata( new File( basedir, "src/test/data/metadata/maven-metadata-1-2-3.xml" ) );
         Metadata resultMetadata = readMetadata( finalFile );
         Assert.assertEquals( expectedMetadata.getVersioning().getVersions(), resultMetadata.getVersioning()
             .getVersions() );
 
-        FileUtils.copyFile( new File( basedir, "src/test/data/maven-metadata-1-2.xml" ), finalFile );
+        FileUtils.copyFile( new File( basedir, "src/test/data/metadata/maven-metadata-1-2.xml" ), finalFile );
 
-        mavenMetadata.merge( new File( basedir, "src/test/data/maven-metadata-3.xml" ), finalFile );
+        mavenMetadata.merge( new File( basedir, "src/test/data/metadata/maven-metadata-3.xml" ), finalFile );
 
-        expectedMetadata = readMetadata( new File( basedir, "src/test/data/maven-metadata-1-2-3.xml" ) );
+        expectedMetadata = readMetadata( new File( basedir, "src/test/data/metadata/maven-metadata-1-2-3.xml" ) );
         resultMetadata = readMetadata( finalFile );
         // order matter
         Assert.assertFalse( expectedMetadata.getVersioning().getVersions()

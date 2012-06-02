@@ -62,21 +62,18 @@ public class MergeMavenReposVfsMojo
      * @parameter expression = "${destinationId}"
      */
     private String destinationId;
-    
-    
+
     /**
      * Staging directory when the merge content happens
      * @parameter expression = "${stagingDirectory}" default-value="${project.build.directory}/merge-staging"
      */
     private File stagingDirectory;
-    
+
     /**
      * Option not to push merged content to destination repository so that you can review the merge content under ${stagingDirectory}
      * @parameter expression = "${dryRun}" default-value="false"
      */
     private boolean dryRun = false;
-    
-    
 
     public void execute()
         throws MojoExecutionException, MojoFailureException
@@ -92,15 +89,15 @@ public class MergeMavenReposVfsMojo
                 FileObject sourceRepo = VFS.getManager().resolveFile( source, sourceOpts );
 
                 FileObject destRepo = VFS.getManager().resolveFile( destination, destOpts );
-                
+
                 MergeVfsMavenRepositories repoMerger = new DefaultMergeVfsMavenRepositories();
-                
-                repoMerger.merge( sourceRepo,  destRepo, stagingDirectory, dryRun );
+
+                repoMerger.merge( sourceRepo, destRepo, stagingDirectory, dryRun );
 
             }
             catch ( Exception e )
             {
-                throw new MojoFailureException( "Unable to perform a copy operation", e );
+                throw new MojoFailureException( "Unable to perform a Repositories merge operation", e );
             }
         }
         else
