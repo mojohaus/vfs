@@ -18,8 +18,7 @@ public class MavenReposMergeTest
 
     private MergeVfsMavenRepositories repoMerger = new DefaultMergeVfsMavenRepositories();
     
-    @Test
-    public void testMavenReposMerge()
+    public void runTestMavenReposMerge( boolean dryRun )
         throws Exception
     {
 
@@ -59,8 +58,17 @@ public class MavenReposMergeTest
         
         File stagingDir = new File( builddir, "test-repos/staging" );
         
-        repoMerger.merge( testSourceRepo, testTargetRepo, stagingDir, false );
+        repoMerger.merge( testSourceRepo, testTargetRepo, stagingDir, dryRun );
 
+        
+    }
+    
+    @Test
+    public void testMavenReposMerge()
+        throws Exception
+    {
+        this.runTestMavenReposMerge( false );
+        
         File targetDir = new File( builddir, "test-repos/target" );
         
         Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/3.0/artifact1-3.0.pom" ).exists() );
@@ -75,5 +83,20 @@ public class MavenReposMergeTest
         Assert.assertFalse(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.md5" ).exists() );
         Assert.assertFalse(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.sha1" ).exists() );
         
+        File stagingDir = new File( builddir, "test-repos/staging" );
+        Assert.assertFalse(  stagingDir.exists() );
+        
     }
+    
+    @Test
+    public void testMavenReposMergeWithDryrun()
+        throws Exception
+    {
+        this.runTestMavenReposMerge( true );
+        
+        File stagingDir = new File( builddir, "test-repos/staging" );
+        Assert.assertTrue(  stagingDir.exists() );
+        
+    }    
+    
 }
