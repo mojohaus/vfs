@@ -22,7 +22,6 @@ import org.apache.commons.vfs2.FileNotFolderException;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileType;
-import org.codehaus.mojo.vfs.VfsDirectoryScanner;
 
 public class DefaultVfsDirectoryScanner
     implements VfsDirectoryScanner
@@ -43,34 +42,6 @@ public class DefaultVfsDirectoryScanner
     public void setStartingDirectory( FileObject directory )
     {
         this.startingDirectory = directory;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Patterns which should be excluded by default.
-     * 
-     * @see #addDefaultExcludes()
-     */
-    private String[] DEFAULTEXCLUDES = {};
-
-    /* (non-Javadoc)
-     * @see org.codehaus.mojo.vfs.DirectoryScanner#addDefaultExcludes()
-     */
-    public void addDefaultExcludes()
-    {
-        int excludesLength = excludes == null ? 0 : excludes.length;
-        String[] newExcludes;
-        newExcludes = new String[excludesLength + DEFAULTEXCLUDES.length];
-        if ( excludesLength > 0 )
-        {
-            System.arraycopy( excludes, 0, newExcludes, 0, excludesLength );
-        }
-        for ( int i = 0; i < DEFAULTEXCLUDES.length; i++ )
-        {
-            newExcludes[i + excludesLength] = DEFAULTEXCLUDES[i];
-        }
-        excludes = newExcludes;
     }
 
     /////////////////////////////////////////////////////////////////////////////
@@ -157,14 +128,6 @@ public class DefaultVfsDirectoryScanner
      * directory
      */
     private List<FileObject> includedFiles = new ArrayList<FileObject>();
-
-    /* (non-Javadoc)
-     * @see org.codehaus.mojo.vfs.DirectoryScanner#getFilesIncluded()
-     */
-    public List<FileObject> getFilesIncluded()
-    {
-        return includedFiles;
-    }
 
     /////////////////////////////////////////////////////////////////////////////
     //  public interface

@@ -1,4 +1,4 @@
-package org.codehaus.mojo.vfs;
+package org.codehaus.mojo.vfs.internal;
 
 import java.util.List;
 
@@ -9,11 +9,6 @@ public interface VfsDirectoryScanner
 {
 
     void setStartingDirectory( FileObject directory );
-
-    /**
-     * Adds default exclusions to the current exclusions set.
-     */
-    void addDefaultExcludes();
 
     /**
      * Sets the list of include patterns to use. All '/' and '\' characters are replaced by
@@ -39,10 +34,17 @@ public interface VfsDirectoryScanner
      */
     void setExcludes( String[] excludes );
 
+    /**
+     * 
+     * @param isCaseSensitive
+     */
     void setCaseSensitive( boolean isCaseSensitive );
 
-    List<FileObject> getFilesIncluded();
-
+    /**
+     * Start the scan
+     * @return
+     * @throws FileSystemException
+     */
     List<FileObject> scan()
         throws FileSystemException;
 
