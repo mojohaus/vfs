@@ -64,7 +64,7 @@ public class MergeMavenReposVfsMojo
     private String destinationId;
 
     /**
-     * Staging directory when the merge content happens
+     * Staging directory to do the merging works.  If not given, and random directory is used
      * @parameter expression = "${stagingDirectory}" default-value="${project.build.directory}/merge-staging"
      */
     private File stagingDirectory;

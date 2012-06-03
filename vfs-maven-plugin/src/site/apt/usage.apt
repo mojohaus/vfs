@@ -213,5 +213,23 @@ Introduction
 
 +---------------------
  
+* Merge Maven Repositories Goal
 
+  If your Maven repository manager (MRM) does not provide a repositories merging feature ( ex Nexus Open Source Edition), 
+  this goal is a alternative solution where you can configure your Maven deploy plugin to deploy released artifacts to 
+  a temporary/staged ( rather then the main one ) released repository at your MRM. Once your staging repository contents 
+  are blessed/validated, use this plugin to merge the staged content to the main release repository.
+  
+  Here is an example how to merge a staging repository to main repository through local file system at your MRM.
+  
++---------------------
+  mvn vfs:merge-maven-repositories -Dsource=file:///path/to/your/staging/directory -Ddestination=file:///path/to/your/main/release/directory -DstagingDirectory=/tmp/staging -DdryRun=false
+  
++---------------------
 
+  You can disable <dryRun> flag to review merged contents before it is pushed into destination directory
+  
+  You can also merge the repositories using other protocols supported by VFS ( ie sftp, ftp, webdav, etc ) except http/https
+  since it does support directory file scanning required during merge.
+  
+  
