@@ -34,11 +34,12 @@ public class MavenMetadataUtilsTest
     extends AbstractVfsTestCase
 {
     private MavenMetadataUtils mavenMetadata = new MavenMetadataUtils();
-    
+
     private File workingDir = new File( builddir, "test-metadata" );
 
     @Before
-    public void beforeTest() {
+    public void beforeTest()
+    {
         workingDir.mkdirs();
     }
 
@@ -57,7 +58,7 @@ public class MavenMetadataUtilsTest
         Assert.assertEquals( expectedMetadata.getVersioning().getVersions(), resultMetadata.getVersioning()
             .getVersions() );
         Assert.assertEquals( expectedMetadata.getArtifactId(), resultMetadata.getArtifactId() );
-        
+
         Assert.assertTrue( new File( finalFile.getAbsolutePath() + ".md5" ).exists() );
         Assert.assertTrue( new File( finalFile.getAbsolutePath() + ".sha1" ).exists() );
     }
@@ -86,10 +87,10 @@ public class MavenMetadataUtilsTest
         // order matter
         Assert.assertFalse( expectedMetadata.getVersioning().getVersions()
             .equals( resultMetadata.getVersioning().getVersions() ) );
-        
+
         Assert.assertTrue( new File( finalFile.getAbsolutePath() + ".md5" ).exists() );
         Assert.assertTrue( new File( finalFile.getAbsolutePath() + ".sha1" ).exists() );
-        
+
     }
 
     private Metadata readMetadata( File metadataFile )

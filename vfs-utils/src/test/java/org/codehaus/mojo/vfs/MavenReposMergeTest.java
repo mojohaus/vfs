@@ -17,7 +17,7 @@ public class MavenReposMergeTest
     private VfsFileSetManager filesetManager = new DefaultVfsFileSetManager();
 
     private MergeVfsMavenRepositories repoMerger = new DefaultMergeVfsMavenRepositories();
-    
+
     public void runTestMavenReposMerge( boolean dryRun )
         throws Exception
     {
@@ -55,48 +55,47 @@ public class MavenReposMergeTest
         fileset.setSource( scmTargetRepo );
         fileset.setDestination( testTargetRepo );
         filesetManager.copy( fileset );
-        
+
         File stagingDir = new File( builddir, "test-repos/staging" );
-        
+
         repoMerger.merge( testSourceRepo, testTargetRepo, stagingDir, dryRun );
 
-        
     }
-    
+
     @Test
     public void testMavenReposMerge()
         throws Exception
     {
         this.runTestMavenReposMerge( false );
-        
-        File targetDir = new File( builddir, "test-repos/target" );
-        
-        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/3.0/artifact1-3.0.pom" ).exists() );
-        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/maven-metadata.xml" ).exists() );
-        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/maven-metadata.xml.md5" ).exists() );
-        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact1/maven-metadata.xml.sha1" ).exists() );
 
-        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact3/1.0/artifact3-1.0.pom" ).exists() );
-        Assert.assertTrue(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml" ).exists() );
-        
+        File targetDir = new File( builddir, "test-repos/target" );
+
+        Assert.assertTrue( new File( targetDir, "com/company/package/artifact1/3.0/artifact1-3.0.pom" ).exists() );
+        Assert.assertTrue( new File( targetDir, "com/company/package/artifact1/maven-metadata.xml" ).exists() );
+        Assert.assertTrue( new File( targetDir, "com/company/package/artifact1/maven-metadata.xml.md5" ).exists() );
+        Assert.assertTrue( new File( targetDir, "com/company/package/artifact1/maven-metadata.xml.sha1" ).exists() );
+
+        Assert.assertTrue( new File( targetDir, "com/company/package/artifact3/1.0/artifact3-1.0.pom" ).exists() );
+        Assert.assertTrue( new File( targetDir, "com/company/package/artifact3/maven-metadata.xml" ).exists() );
+
         //should not see hashfile since it is a brand new artifacts
-        Assert.assertFalse(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.md5" ).exists() );
-        Assert.assertFalse(  new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.sha1" ).exists() );
-        
+        Assert.assertFalse( new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.md5" ).exists() );
+        Assert.assertFalse( new File( targetDir, "com/company/package/artifact3/maven-metadata.xml.sha1" ).exists() );
+
         File stagingDir = new File( builddir, "test-repos/staging" );
-        Assert.assertFalse(  stagingDir.exists() );
-        
+        Assert.assertFalse( stagingDir.exists() );
+
     }
-    
+
     @Test
     public void testMavenReposMergeWithDryrun()
         throws Exception
     {
         this.runTestMavenReposMerge( true );
-        
+
         File stagingDir = new File( builddir, "test-repos/staging" );
-        Assert.assertTrue(  stagingDir.exists() );
-        
-    }    
-    
+        Assert.assertTrue( stagingDir.exists() );
+
+    }
+
 }

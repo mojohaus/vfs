@@ -27,7 +27,7 @@ public abstract class BaseFileSet
      * Ant's includes path expression
      * By default we dont want the expansive recursive scanner
      */
-    private String[] includes = {"*"};
+    private String[] includes = { "*" };
 
     /**
      * Handle file path sensitivity

@@ -107,7 +107,7 @@ public class DefaultVfsFileSetManager
             {
                 FileObject fo = fileset.getDestination().resolveFile( include );
                 FileObject fromFile = fileset.getSource().resolveFile( include );
-                
+
                 copyFile( fromFile, fo, fileset.isOverwrite() );
             }
         }

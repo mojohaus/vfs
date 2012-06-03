@@ -21,7 +21,7 @@ public class DefaultMergeVfsMavenRepositories
     private static final String MAVEN_METADATA = "maven-metadata.xml";
 
     private static final String IN_PROCESS_MARKER = ".rip";
-    
+
     private static final String[] ALL_FILES = { "**" };
 
     public void merge( FileObject sourceRepo, FileObject targetRepo )
@@ -90,7 +90,7 @@ public class DefaultMergeVfsMavenRepositories
         fileset.setSource( source );
         fileset.setDestination( stagingRepo );
         fileset.setIncludes( ALL_FILES );
-        
+
         String[] excludes = { ".*/**" }; //exclude repositories runtime file like .nexus .index
         fileset.setExcludes( excludes );
 

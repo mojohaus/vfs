@@ -8,17 +8,16 @@ import org.apache.commons.vfs2.FileSystemException;
 
 public interface MergeVfsMavenRepositories
 {
-    
+
     /**
      * Merge Maven repositories
      * @param fromRepo
      * @param toRepo
      * @throws FileSystemException
      */
-    void merge( FileObject fromRepo, FileObject toRepo  )
+    void merge( FileObject fromRepo, FileObject toRepo )
         throws FileSystemException, IOException;
 
-    
     /**
      * Merge Maven repositories with option to do dryRun by not push the merge to target repo
      * @param fromRepo

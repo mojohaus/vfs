@@ -93,9 +93,11 @@ public class MergeMavenReposVfsMojo
                 MergeVfsMavenRepositories repoMerger = new DefaultMergeVfsMavenRepositories();
 
                 repoMerger.merge( sourceRepo, destRepo, stagingDirectory, dryRun );
-                
-                if ( dryRun ) {
-                    this.getLog().info( "Merging operetion stopped before pushing the final contents at " + this.stagingDirectory + destination );
+
+                if ( dryRun )
+                {
+                    this.getLog().info( "Merging operetion stopped before pushing the final contents at "
+                                            + this.stagingDirectory + destination );
                 }
 
             }

@@ -15,15 +15,15 @@ package org.codehaus.mojo.vfs;
  * the License.
  */
 
-
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 
 public class VfsUtils
 {
     public static String getRelativePath( FileObject parent, FileObject child )
-        throws FileSystemException {
-        
+        throws FileSystemException
+    {
+
         return parent.getName().getRelativeName( child.getName() );
     }
 

@@ -17,7 +17,6 @@ package org.codehaus.mojo.vfs;
 
 import org.apache.commons.vfs2.FileObject;
 
-
 /**
  * VFS configuration to scan for a set of remote files.
  */
