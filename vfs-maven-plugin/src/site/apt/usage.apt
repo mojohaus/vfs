@@ -224,8 +224,10 @@ Introduction
   Here is an example how to merge a staging repository to main repository through local file system at your MRM.
   
 +---------------------
-  mvn vfs:merge-maven-repositories -Dsource=file:///path/to/your/staging/directory -Ddestination=file:///path/to/your/main/release/directory -DstagingDirectory=/tmp/staging -DdryRun=false
-  
+
+  mvn vfs:merge-maven-repositories -Dsource=file:///path/to/your/staging/directory \
+      -Ddestination=file:///path/to/your/main/release/directory \
+      -DstagingDirectory=/tmp/staging -DdryRun=false
 +---------------------
 
   You can disable <dryRun> flag to review merged contents before it is pushed into destination directory
