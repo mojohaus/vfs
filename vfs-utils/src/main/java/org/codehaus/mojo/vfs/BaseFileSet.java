@@ -32,12 +32,7 @@ public abstract class BaseFileSet
     /**
      * Handle file path sensitivity
      */
-    private boolean caseSensitive;
-
-    /**
-     * User default exclude sets
-     */
-    private boolean useDefaultExcludes = true;
+    private boolean caseSensitive = true;
 
     /**
      * For copy operations, overwrite existing files even if the destination files are newer.
@@ -77,16 +72,6 @@ public abstract class BaseFileSet
         this.caseSensitive = caseSensitive;
     }
 
-    public boolean isUseDefaultExcludes()
-    {
-        return useDefaultExcludes;
-    }
-
-    public void setUseDefaultExcludes( boolean useDefaultExcludes )
-    {
-        this.useDefaultExcludes = useDefaultExcludes;
-    }
-
     public boolean isOverwrite()
     {
         return overwrite;
@@ -104,6 +89,5 @@ public abstract class BaseFileSet
         this.includes = baseFileSet.includes;
         this.excludes = baseFileSet.excludes;
         this.caseSensitive = baseFileSet.caseSensitive;
-        this.useDefaultExcludes = baseFileSet.useDefaultExcludes;
     }
 }

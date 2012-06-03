@@ -29,7 +29,7 @@ Introduction
 
   The Maven VFS Plugin is wrapper of Apache Common Virtual File System with extensive use of the popular ANT's 'FileSet'
   to manipulate ( list, copy, move, remove, etc ) resources across virtual file systems that support directory listing 
-  such as ftp, ftps, sftp, file, webdav. Note http/https are not supported. 
+  such as ftp, ftps, sftp, file, webdav. 
   
   The follow sections show you how to configure your VFS credential and examples on various operations.  
   
@@ -40,8 +40,8 @@ Introduction
 * Authentication Settings
 
   In order to access remote resource, very likely you will need to provide your authentication credential to Maven via your local settings.xml file.
-  Below contains a couple of examples. For password encryption, see {{{http://maven.apache.org/guides/mini/guide-encryption.html} Maven Password Encryption}} for details.
-  
+  Below contains a couple of examples. For password encryption, see {{{http://maven.apache.org/guides/mini/guide-encryption.html} 
+  Maven Password Encryption}} for details.
   
 +---------------------
     <server>
@@ -136,6 +136,43 @@ Introduction
   [...]
 </project>
 +---------------------
+
+  Since http/https are not supported, only single file copy is allowed. 
+  
++---------------
+<project>
+  [...]
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>vfs-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>http2file</id>
+            <phase>test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <fileset>
+                <source>http://repo1.maven.org/maven2/org/apache/maven/plugins</source>
+                <includes>
+                  <include>maven-metadata.xml</include>
+                  <include>maven-metadata.xml.md5</include>
+                </includes>
+                <destination>file://${project.build.directory}/test</destination>
+              </fileset>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  [...]
+</project>
++---------------------  
 
 * Move Goal
 

@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.codehaus.mojo.vfs.examples</groupId>
+  <artifactId>http2file</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>http2file</name>
+
+  <description>
+    Example to do download single file from http server to ${project.build.directory}/test.
+    Note: http/https does not support ANT wildcard copy
+  </description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>vfs-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>http2file</id>
+            <phase>test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <fileset>
+                <source>http://repo1.maven.org/maven2/org/apache/maven/plugins</source>
+                <includes>
+                  <include>maven-metadata.xml</include>
+                  <include>maven-metadata.xml.md5</include>
+                </includes>
+                <destination>file://${project.build.directory}/test</destination>
+              </fileset>
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
