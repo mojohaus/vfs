@@ -93,16 +93,20 @@ public class MergeMavenReposVfsMojo
                 MergeVfsMavenRepositories repoMerger = new DefaultMergeVfsMavenRepositories();
 
                 repoMerger.merge( sourceRepo, destRepo, stagingDirectory, dryRun );
+                
+                if ( dryRun ) {
+                    this.getLog().info( "Merging operetion stopped before pushing the final contents at " + this.stagingDirectory + destination );
+                }
 
             }
             catch ( Exception e )
             {
-                throw new MojoFailureException( "Unable to perform a Repositories merge operation", e );
+                throw new MojoFailureException( "Unable to perform a repositories merge operation", e );
             }
         }
         else
         {
-            this.getLog().info( "Skip VFS Maven Repositories merge operation" );
+            this.getLog().info( "Skip VFS Maven repositories merge operation" );
         }
 
     }

@@ -30,7 +30,7 @@ Introduction
   The Maven VFS Plugin is wrapper of Apache Common Virtual File System with extensive use of the popular ANT's 'FileSet'
   to manipulate ( list, copy, move, remove, etc ) resources across virtual file systems that support directory listing 
   such as ftp, ftps, sftp, file, webdav. 
-  
+       
   The follow sections show you how to configure your VFS credential and examples on various operations.  
   
   Functional examples are also available at
@@ -236,7 +236,7 @@ Introduction
           <configuration>
             <fileset>
               <sourceId>your.ftp.settings.server.id</sourceId>
-              <source>fap://your.ftp.host/path/to/a/directory</source>
+              <source>ftp://your.ftp.host/path/to/a/directory</source>
               <includes>
                 <include>*</include>
               </includes>
@@ -253,10 +253,10 @@ Introduction
  
 * Merge Maven Repositories Goal
 
-  If your Maven repository manager (MRM) does not provide a repositories merging feature ( ex Nexus Open Source Edition), 
-  this goal is a alternative solution where you can configure your Maven deploy plugin to deploy released artifacts to 
-  a temporary/staged ( rather then the main one ) released repository at your MRM. Once your staging repository contents 
-  are blessed/validated, use this plugin to merge the staged content to the main release repository.
+  If your Maven repository manager (MRM) does not provide a repositories merging feature (ex Nexus Open Source Edition), 
+  this goal is an alternative solution where you can configure your Maven deploy plugin to deploy released artifacts to 
+  a temporary/staged  released repository at your MRM. Once your staging repository contents 
+  are blessed/validated, use this plugin to merge the staged content to the actual release repository.
   
   Here is an example how to merge a staging repository to main repository through local file system at your MRM.
   
@@ -267,7 +267,7 @@ Introduction
       -DstagingDirectory=/tmp/staging -DdryRun=false
 +---------------------
 
-  You can disable <dryRun> flag to review merged contents before it is pushed into destination directory
+  You can enable <dryRun> flag to review merged contents under <stagingDirectory> before it is pushed into <destination> directory
   
   You can also merge the repositories using other protocols supported by VFS ( ie sftp, ftp, webdav, etc ) except http/https
   since it does support directory file scanning required during merge.
