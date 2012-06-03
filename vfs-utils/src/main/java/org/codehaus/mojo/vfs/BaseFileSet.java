@@ -38,7 +38,7 @@ public abstract class BaseFileSet
      * For copy operations, overwrite existing files even if the destination files are newer.
      * Heavily depending on clock sync
      */
-    private boolean overwrite = true;
+    private boolean overwrite = false;
 
     //////////////////////////////////////////////////////////////////////////////////////
 

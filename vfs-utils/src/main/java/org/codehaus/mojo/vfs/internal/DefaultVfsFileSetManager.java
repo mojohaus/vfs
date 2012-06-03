@@ -67,43 +67,51 @@ public class DefaultVfsFileSetManager
     public void copy( VfsFileSet fileSet )
         throws FileSystemException
     {
-        if ( copySingle ( fileSet ) ) {
+        if ( copySingle( fileSet ) )
+        {
             return;
         }
-        
+
         VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
 
         copy( fileSet.getSource(), fileSet.getDestination(), fos, fileSet.isOverwrite() );
     }
-    
+
     /**
      * Workaround to support single copy for those vfs protocol not support directory listing
      * @param fileset
      * @return
      * @throws FileSystemException
      */
-    private boolean copySingle( VfsFileSet fileset ) 
-        throws FileSystemException {
+    private boolean copySingle( VfsFileSet fileset )
+        throws FileSystemException
+    {
 
-        if ( fileset.getExcludes() != null && fileset.getExcludes().length != 0 ) {
+        if ( fileset.getExcludes() != null && fileset.getExcludes().length != 0 )
+        {
             return false;
         }
 
-        for ( String include: fileset.getIncludes() ) {
-            if ( include.contains( "*" ) ) {
+        for ( String include : fileset.getIncludes() )
+        {
+            if ( include.contains( "*" ) )
+            {
                 return false;
             }
         }
-        
-        for ( String include: fileset.getIncludes() ) {
-            if ( !include.contains( "*" ) ) {
+
+        for ( String include : fileset.getIncludes() )
+        {
+            if ( !include.contains( "*" ) )
+            {
                 FileObject fo = fileset.getDestination().resolveFile( include );
                 FileObject fromFile = fileset.getSource().resolveFile( include );
-                fo.copyFrom( fromFile, Selectors.SELECT_ALL );
+                
+                copyFile( fromFile, fo, fileset.isOverwrite() );
             }
         }
-        
+
         return true;
     }
 
@@ -115,14 +123,18 @@ public class DefaultVfsFileSetManager
             String relPath = VfsUtils.getRelativePath( fromDir, fromFile );
             FileObject toFile = toDir.resolveFile( relPath );
 
-            //if ( fromFile.getContent().getLastModifiedTime() > toFile.getContent().getLastModifiedTime() )
-            //until we understand more about this requirement
-            {
-                toFile.copyFrom( fromFile, Selectors.SELECT_ALL );
-            }
-
+            copyFile( fromFile, toFile, overwrite );
         }
+    }
 
+    private void copyFile( FileObject fromFile, FileObject toFile, boolean overwrite )
+        throws FileSystemException
+    {
+        if ( overwrite || !toFile.exists()
+            || fromFile.getContent().getLastModifiedTime() > toFile.getContent().getLastModifiedTime() )
+        {
+            toFile.copyFrom( fromFile, Selectors.SELECT_ALL );
+        }
     }
 
     private static VfsDirectoryScanner createScanner( VfsFileSet fileSet )
