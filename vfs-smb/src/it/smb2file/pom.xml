@@ -1,0 +1,53 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.codehaus.mojo.vfs.examples</groupId>
+  <artifactId>ftp2file</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>ftp2file</name>
+
+  <description>
+    Example to do download file from ftp server to ${project.build.directory}/test
+  </description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>vfs-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <dependencies>
+          <depedency>
+            <groupId>com.loglogic.uc</groupId>
+            <artifactId>vfs-smb</artifactId>
+            <version>2.0-SNAPSHOT</version>
+          </depedency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>ftp2file</id>
+            <phase>test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <fileset>
+                <sourceId>ftp.anonymous</sourceId>
+                <source>ftp://ftp.osuosl.org/.1/centos</source>
+                <includes>
+                  <include>*</include>
+                </includes>
+                <destination>file://${project.build.directory}/test</destination>
+              </fileset>
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
