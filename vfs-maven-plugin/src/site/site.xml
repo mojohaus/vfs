@@ -31,6 +31,7 @@
       <menu name="Examples">
          <item name="ftp2file" href="https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples/ftp2file"/>
          <item name="http2file" href="https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples/http2file"/>
+         <item name="smb2file" href="https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples/smb2file"/>
       </menu>
    </body>
 </project>

@@ -13,10 +13,10 @@
     Example to do download file from SMB server to ${project.build.directory}/test
   </description>
 
-  <!-- ensure to have the following block in your settings.xml -->
+  <!-- ensure to have the following block in your settings.xml, fill in domain/username/password accordingly -->
   <!-- <server> -->
   <!--   <id>local.smb</id> -->
-  <!--   <username>yourdoman\your.user.id</username> -->
+  <!--   <username>yourdomain\username</username> -->
   <!--   <password>{HZmWnelBg0sHPt8yJ7qgdeyl9OTB8Lu7vBPV3u8bN9s=}</password> -->
   <!-- </server> -->
 
