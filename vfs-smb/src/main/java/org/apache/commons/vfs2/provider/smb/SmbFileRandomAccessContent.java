@@ -1,18 +1,16 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ * agreements. See the NOTICE file distributed with this work for additional information regarding
+ * copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.apache.commons.vfs2.provider.smb;
 
@@ -32,25 +30,29 @@ import org.apache.commons.vfs2.util.RandomAccessMode;
 /**
  * RandomAccess for smb files
  */
-class SmbFileRandomAccessContent extends AbstractRandomAccessContent
+class SmbFileRandomAccessContent
+    extends AbstractRandomAccessContent
 {
     private final SmbRandomAccessFile raf;
+
     private final InputStream rafis;
 
-    SmbFileRandomAccessContent(final SmbFile smbFile, final RandomAccessMode mode) throws FileSystemException
+    SmbFileRandomAccessContent( final SmbFile smbFile, final RandomAccessMode mode )
+        throws FileSystemException
     {
-        super(mode);
+        super( mode );
 
         try
         {
-            raf = new SmbRandomAccessFile(smbFile, mode.getModeString());
+            raf = new SmbRandomAccessFile( smbFile, mode.getModeString() );
             rafis = new InputStream()
             {
                 @Override
-                public int available() throws IOException
+                public int available()
+                    throws IOException
                 {
                     long available = raf.length() - raf.getFilePointer();
-                    if (available > Integer.MAX_VALUE)
+                    if ( available > Integer.MAX_VALUE )
                     {
                         return Integer.MAX_VALUE;
                     }
@@ -59,232 +61,272 @@ class SmbFileRandomAccessContent extends AbstractRandomAccessContent
                 }
 
                 @Override
-                public void close() throws IOException
+                public void close()
+                    throws IOException
                 {
                     raf.close();
                 }
 
                 @Override
-                public int read() throws IOException
+                public int read()
+                    throws IOException
                 {
                     return raf.readByte();
                 }
 
                 @Override
-                public int read(byte b[]) throws IOException
+                public int read( byte b[] )
+                    throws IOException
                 {
-                    return raf.read(b);
+                    return raf.read( b );
                 }
 
                 @Override
-                public int read(byte b[], int off, int len) throws IOException
+                public int read( byte b[], int off, int len )
+                    throws IOException
                 {
-                    return raf.read(b, off, len);
+                    return raf.read( b, off, len );
                 }
 
                 @Override
-                public long skip(long n) throws IOException
+                public long skip( long n )
+                    throws IOException
                 {
-                    raf.seek(raf.getFilePointer() + n);
+                    raf.seek( raf.getFilePointer() + n );
                     return n;
                 }
             };
         }
-        catch (MalformedURLException e)
+        catch ( MalformedURLException e )
         {
-            throw new FileSystemException("vfs.provider/random-access-open-failed.error", smbFile, e);
+            throw new FileSystemException( "vfs.provider/random-access-open-failed.error", smbFile, e );
         }
-        catch (SmbException e)
+        catch ( SmbException e )
         {
-            throw new FileSystemException("vfs.provider/random-access-open-failed.error", smbFile, e);
+            throw new FileSystemException( "vfs.provider/random-access-open-failed.error", smbFile, e );
         }
-        catch (UnknownHostException e)
+        catch ( UnknownHostException e )
         {
-            throw new FileSystemException("vfs.provider/random-access-open-failed.error", smbFile, e);
+            throw new FileSystemException( "vfs.provider/random-access-open-failed.error", smbFile, e );
         }
     }
 
-    public void close() throws IOException
+    public void close()
+        throws IOException
     {
         raf.close();
     }
 
-    public long getFilePointer() throws IOException
+    public long getFilePointer()
+        throws IOException
     {
         return raf.getFilePointer();
     }
 
-    public InputStream getInputStream() throws IOException
+    public InputStream getInputStream()
+        throws IOException
     {
         return rafis;
     }
 
-    public long length() throws IOException
+    public long length()
+        throws IOException
     {
         return raf.length();
     }
 
-    public boolean readBoolean() throws IOException
+    public boolean readBoolean()
+        throws IOException
     {
         return raf.readBoolean();
     }
 
-    public byte readByte() throws IOException
+    public byte readByte()
+        throws IOException
     {
         return raf.readByte();
     }
 
-    public char readChar() throws IOException
+    public char readChar()
+        throws IOException
     {
         return raf.readChar();
     }
 
-    public double readDouble() throws IOException
+    public double readDouble()
+        throws IOException
     {
         return raf.readDouble();
     }
 
-    public float readFloat() throws IOException
+    public float readFloat()
+        throws IOException
     {
         return raf.readFloat();
     }
 
-    public void readFully(byte b[]) throws IOException
+    public void readFully( byte b[] )
+        throws IOException
     {
-        raf.readFully(b);
+        raf.readFully( b );
     }
 
-    public void readFully(byte b[], int off, int len) throws IOException
+    public void readFully( byte b[], int off, int len )
+        throws IOException
     {
-        raf.readFully(b, off, len);
+        raf.readFully( b, off, len );
     }
 
-    public int readInt() throws IOException
+    public int readInt()
+        throws IOException
     {
         return raf.readInt();
     }
 
-    public long readLong() throws IOException
+    public long readLong()
+        throws IOException
     {
         return raf.readLong();
     }
 
-    public short readShort() throws IOException
+    public short readShort()
+        throws IOException
     {
         return raf.readShort();
     }
 
-    public int readUnsignedByte() throws IOException
+    public int readUnsignedByte()
+        throws IOException
     {
         return raf.readUnsignedByte();
     }
 
-    public int readUnsignedShort() throws IOException
+    public int readUnsignedShort()
+        throws IOException
     {
         return raf.readUnsignedShort();
     }
 
-    public String readUTF() throws IOException
+    public String readUTF()
+        throws IOException
     {
         return raf.readUTF();
     }
 
-    public void seek(long pos) throws IOException
+    public void seek( long pos )
+        throws IOException
     {
-        raf.seek(pos);
+        raf.seek( pos );
     }
 
-    public void setLength(long newLength) throws IOException {
-        raf.setLength(newLength);
+    public void setLength( long newLength )
+        throws IOException
+    {
+        raf.setLength( newLength );
     }
 
-    public int skipBytes(int n) throws IOException
+    public int skipBytes( int n )
+        throws IOException
     {
-        return raf.skipBytes(n);
-    }
-
-    @Override
-    public void write(byte b[]) throws IOException
-    {
-        raf.write(b);
-    }
-
-    @Override
-    public void write(byte b[], int off, int len) throws IOException
-    {
-        raf.write(b, off, len);
+        return raf.skipBytes( n );
     }
 
     @Override
-    public void write(int b) throws IOException
+    public void write( byte b[] )
+        throws IOException
     {
-        raf.write(b);
+        raf.write( b );
     }
 
     @Override
-    public void writeBoolean(boolean v) throws IOException
+    public void write( byte b[], int off, int len )
+        throws IOException
     {
-        raf.writeBoolean(v);
+        raf.write( b, off, len );
     }
 
     @Override
-    public void writeByte(int v) throws IOException
+    public void write( int b )
+        throws IOException
     {
-        raf.writeByte(v);
+        raf.write( b );
     }
 
     @Override
-    public void writeBytes(String s) throws IOException
+    public void writeBoolean( boolean v )
+        throws IOException
     {
-        raf.writeBytes(s);
+        raf.writeBoolean( v );
     }
 
     @Override
-    public void writeChar(int v) throws IOException
+    public void writeByte( int v )
+        throws IOException
     {
-        raf.writeChar(v);
+        raf.writeByte( v );
     }
 
     @Override
-    public void writeChars(String s) throws IOException
+    public void writeBytes( String s )
+        throws IOException
     {
-        raf.writeChars(s);
+        raf.writeBytes( s );
     }
 
     @Override
-    public void writeDouble(double v) throws IOException
+    public void writeChar( int v )
+        throws IOException
     {
-        raf.writeDouble(v);
+        raf.writeChar( v );
     }
 
     @Override
-    public void writeFloat(float v) throws IOException
+    public void writeChars( String s )
+        throws IOException
     {
-        raf.writeFloat(v);
+        raf.writeChars( s );
     }
 
     @Override
-    public void writeInt(int v) throws IOException
+    public void writeDouble( double v )
+        throws IOException
     {
-        raf.writeInt(v);
+        raf.writeDouble( v );
     }
 
     @Override
-    public void writeLong(long v) throws IOException
+    public void writeFloat( float v )
+        throws IOException
     {
-        raf.writeLong(v);
+        raf.writeFloat( v );
     }
 
     @Override
-    public void writeShort(int v) throws IOException
+    public void writeInt( int v )
+        throws IOException
     {
-        raf.writeShort(v);
+        raf.writeInt( v );
     }
 
     @Override
-    public void writeUTF(String str) throws IOException
+    public void writeLong( long v )
+        throws IOException
     {
-        raf.writeUTF(str);
+        raf.writeLong( v );
+    }
+
+    @Override
+    public void writeShort( int v )
+        throws IOException
+    {
+        raf.writeShort( v );
+    }
+
+    @Override
+    public void writeUTF( String str )
+        throws IOException
+    {
+        raf.writeUTF( str );
     }
 
 }

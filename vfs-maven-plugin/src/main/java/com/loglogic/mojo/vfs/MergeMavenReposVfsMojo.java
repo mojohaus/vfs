@@ -26,7 +26,7 @@ import org.codehaus.mojo.vfs.internal.DefaultMergeVfsMavenRepositories;
  */
 
 /**
- * Copy files from one VFS to another VFS
+ * Merge Maven repository from one VFS to another VFS
  * 
  * @goal merge-maven-repositories
  * @requiresProject false
