@@ -1,0 +1,50 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.codehaus.mojo.vfs.examples</groupId>
+  <artifactId>smb2file</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>ftp2file</name>
+
+  <description>
+    Example to do download file from SMB server to ${project.build.directory}/test
+  </description>
+
+  <!-- ensure to have the following block in your settings.xml -->
+  <!-- <server> -->
+  <!--   <id>local.smb</id> -->
+  <!--   <username>yourdoman\your.user.id</username> -->
+  <!--   <password>{HZmWnelBg0sHPt8yJ7qgdeyl9OTB8Lu7vBPV3u8bN9s=}</password> -->
+  <!-- </server> -->
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>vfs-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>smb2file</id>
+            <phase>test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <fileset>
+                <sourceId>local.smb</sourceId>
+                <source>smb://localhost/tmp</source>
+                <destination>file://${project.build.directory}/test</destination>
+              </fileset>
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
