@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemOptions;
-import org.apache.commons.vfs2.VFS;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.mojo.vfs.MergeVfsMavenRepositories;
@@ -86,9 +85,9 @@ public class MergeMavenReposVfsMojo
                 FileSystemOptions sourceOpts = this.getFileSystemOptions( sourceId, source );
                 FileSystemOptions destOpts = this.getFileSystemOptions( destinationId, destination );
 
-                FileObject sourceRepo = VFS.getManager().resolveFile( source, sourceOpts );
+                FileObject sourceRepo = getFileSystemManager().resolveFile( source, sourceOpts );
 
-                FileObject destRepo = VFS.getManager().resolveFile( destination, destOpts );
+                FileObject destRepo = getFileSystemManager().resolveFile( destination, destOpts );
 
                 MergeVfsMavenRepositories repoMerger = new DefaultMergeVfsMavenRepositories();
 

@@ -59,10 +59,10 @@ public class CopyVfsMojo
                 VfsFileSet vfsFileSet = new VfsFileSet();
                 vfsFileSet.copyBase( fileset );
 
-                FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceOpts );
+                FileObject sourceObj = getFileSystemManager().resolveFile( fileset.getSource(), sourceOpts );
                 vfsFileSet.setSource( sourceObj );
 
-                FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destOpts );
+                FileObject destObj = getFileSystemManager().resolveFile( fileset.getDestination(), destOpts );
                 vfsFileSet.setDestination( destObj );
 
                 VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();

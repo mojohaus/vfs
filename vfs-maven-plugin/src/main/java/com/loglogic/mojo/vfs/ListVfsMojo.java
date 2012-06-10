@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
-import org.apache.commons.vfs2.VFS;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.mojo.vfs.VfsFileSet;
@@ -96,7 +95,7 @@ public class ListVfsMojo
             VfsFileSet vfsFileSet = new VfsFileSet();
             vfsFileSet.copyBase( fileset );
 
-            FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), serverOptions );
+            FileObject sourceObj = getFileSystemManager().resolveFile( fileset.getSource(), serverOptions );
             vfsFileSet.setSource( sourceObj );
 
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();

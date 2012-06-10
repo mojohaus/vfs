@@ -16,7 +16,10 @@ package com.loglogic.mojo.vfs;
  */
 
 import org.apache.commons.vfs2.FileSystemException;
+import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.FileSystemOptions;
+import org.apache.commons.vfs2.impl.StandardFileSystemManager;
+import org.apache.commons.vfs2.provider.smb.SmbFileProvider;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Server;
@@ -100,6 +103,24 @@ public abstract class AbstractVfsMojo
         }
 
         return server;
+    }
+
+    private StandardFileSystemManager fileSystemManager;
+
+    protected synchronized FileSystemManager getFileSystemManager()
+        throws FileSystemException
+    {
+
+        if ( fileSystemManager != null )
+        {
+            return fileSystemManager;
+        }
+
+        fileSystemManager = new StandardFileSystemManager();
+        fileSystemManager.addProvider( "smb", new SmbFileProvider() );
+        fileSystemManager.init();
+
+        return fileSystemManager;
     }
 
 }

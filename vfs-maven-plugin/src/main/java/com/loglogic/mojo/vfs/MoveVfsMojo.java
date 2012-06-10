@@ -3,7 +3,6 @@ package com.loglogic.mojo.vfs;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
-import org.apache.commons.vfs2.VFS;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.mojo.vfs.VfsFileSet;
@@ -59,10 +58,10 @@ public class MoveVfsMojo
                 VfsFileSet vfsFileSet = new VfsFileSet();
                 vfsFileSet.copyBase( fileset );
 
-                FileObject sourceObj = VFS.getManager().resolveFile( fileset.getSource(), sourceOpts );
+                FileObject sourceObj = getFileSystemManager().resolveFile( fileset.getSource(), sourceOpts );
                 vfsFileSet.setSource( sourceObj );
 
-                FileObject destObj = VFS.getManager().resolveFile( fileset.getDestination(), destOpts );
+                FileObject destObj = getFileSystemManager().resolveFile( fileset.getDestination(), destOpts );
                 vfsFileSet.setDestination( destObj );
 
                 VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
