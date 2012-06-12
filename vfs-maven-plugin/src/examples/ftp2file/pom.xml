@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.mojo.vfs.examples</groupId>
   <artifactId>ftp2file</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0-beta-1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>ftp2file</name>
 
@@ -18,7 +18,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>vfs-maven-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0-beta-1-SNAPSHOT</version>
         <executions>
           <execution>
             <id>ftp2file</id>
