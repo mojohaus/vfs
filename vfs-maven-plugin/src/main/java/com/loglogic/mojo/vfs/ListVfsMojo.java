@@ -67,6 +67,7 @@ public class ListVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
+        super.execute();
 
         if ( skip )
         {

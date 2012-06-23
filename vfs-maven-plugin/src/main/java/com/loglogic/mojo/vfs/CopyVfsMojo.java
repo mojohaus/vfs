@@ -46,7 +46,8 @@ public class CopyVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-
+        super.execute();
+        
         if ( fileset != null && !this.skip )
         {
             try
