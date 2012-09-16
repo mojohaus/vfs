@@ -60,7 +60,6 @@ public class RemoveVfsMojo
                 FileObject sourceObj = getFileSystemManager().resolveFile( fileset.getSource(), sourceOpts );
                 vfsFileSet.setSource( sourceObj );
 
-
                 VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
                 fileSetManager.delete( vfsFileSet );
             }

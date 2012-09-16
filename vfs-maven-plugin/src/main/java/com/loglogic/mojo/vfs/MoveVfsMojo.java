@@ -46,8 +46,8 @@ public class MoveVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        
-        super.execute();        
+
+        super.execute();
 
         if ( fileset != null && !this.skip )
         {
