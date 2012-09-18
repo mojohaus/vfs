@@ -95,7 +95,7 @@ public class DefaultVfsFileSetManager
 
         for ( String include : fileset.getIncludes() )
         {
-            if ( include.contains( "*" ) )
+            if ( include.contains( "*" ) || include.contains( "?" ) )
             {
                 return false;
             }
@@ -103,7 +103,7 @@ public class DefaultVfsFileSetManager
 
         for ( String include : fileset.getIncludes() )
         {
-            if ( !include.contains( "*" ) )
+            if ( !include.contains( "*" ) && !include.contains( "?" ) )
             {
                 FileObject fo = fileset.getDestination().resolveFile( include );
                 FileObject fromFile = fileset.getSource().resolveFile( include );
