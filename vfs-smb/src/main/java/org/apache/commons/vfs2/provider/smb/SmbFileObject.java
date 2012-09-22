@@ -88,20 +88,21 @@ public class SmbFileObject
         NtlmPasswordAuthentication auth;
         try
         {
-            authData = UserAuthenticatorUtils.authenticate( getFileSystem().getFileSystemOptions(),
-                                                            SmbFileProvider.AUTHENTICATOR_TYPES );
+            authData =
+                UserAuthenticatorUtils.authenticate( getFileSystem().getFileSystemOptions(),
+                                                     SmbFileProvider.AUTHENTICATOR_TYPES );
 
-            auth = new NtlmPasswordAuthentication( UserAuthenticatorUtils.toString( UserAuthenticatorUtils
-                .getData( authData, UserAuthenticationData.DOMAIN,
-                          UserAuthenticatorUtils.toChar( smbFileName.getDomain() ) ) ),
-                                                   UserAuthenticatorUtils.toString( UserAuthenticatorUtils
-                                                       .getData( authData, UserAuthenticationData.USERNAME,
-                                                                 UserAuthenticatorUtils.toChar( smbFileName
-                                                                     .getUserName() ) ) ),
-                                                   UserAuthenticatorUtils.toString( UserAuthenticatorUtils
-                                                       .getData( authData, UserAuthenticationData.PASSWORD,
-                                                                 UserAuthenticatorUtils.toChar( smbFileName
-                                                                     .getPassword() ) ) ) );
+            auth =
+                new NtlmPasswordAuthentication(
+                                                UserAuthenticatorUtils.toString( UserAuthenticatorUtils.getData( authData,
+                                                                                                                 UserAuthenticationData.DOMAIN,
+                                                                                                                 UserAuthenticatorUtils.toChar( smbFileName.getDomain() ) ) ),
+                                                UserAuthenticatorUtils.toString( UserAuthenticatorUtils.getData( authData,
+                                                                                                                 UserAuthenticationData.USERNAME,
+                                                                                                                 UserAuthenticatorUtils.toChar( smbFileName.getUserName() ) ) ),
+                                                UserAuthenticatorUtils.toString( UserAuthenticatorUtils.getData( authData,
+                                                                                                                 UserAuthenticationData.PASSWORD,
+                                                                                                                 UserAuthenticatorUtils.toChar( smbFileName.getPassword() ) ) ) );
 
             file = new SmbFile( path, auth );
         }
@@ -119,8 +120,7 @@ public class SmbFileObject
     }
 
     /**
-     * Determines the type of the file, returns null if the file does not
-     * exist.
+     * Determines the type of the file, returns null if the file does not exist.
      */
     @Override
     protected FileType doGetType()
@@ -143,8 +143,7 @@ public class SmbFileObject
     }
 
     /**
-     * Lists the children of the file.  Is only called if {@link #doGetType}
-     * returns {@link FileType#FOLDER}.
+     * Lists the children of the file. Is only called if {@link #doGetType} returns {@link FileType#FOLDER}.
      */
     @Override
     protected String[] doListChildren()

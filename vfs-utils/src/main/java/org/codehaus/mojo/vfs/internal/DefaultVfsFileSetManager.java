@@ -1,18 +1,22 @@
 package org.codehaus.mojo.vfs.internal;
 
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
- * agreements. See the NOTICE file distributed with this work for additional information regarding
- * copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance with the License. You may obtain a
- * copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 import java.util.List;
@@ -42,7 +46,7 @@ public class DefaultVfsFileSetManager
         List<FileObject> fos = scanner.scan();
         for ( FileObject fo : fos )
         {
-            //TODO check for return error
+            // TODO check for return error
             fo.delete();
         }
 
@@ -54,7 +58,7 @@ public class DefaultVfsFileSetManager
         VfsDirectoryScanner scanner = createScanner( fileSet );
         List<FileObject> fos = scanner.scan();
 
-        //better to use FileObject.move()??
+        // better to use FileObject.move()??
         copy( fileSet.getSource(), fileSet.getDestination(), fos, fileSet.isOverwrite() );
 
         for ( FileObject fo : fos )
@@ -80,6 +84,7 @@ public class DefaultVfsFileSetManager
 
     /**
      * Workaround to support single copy for those vfs protocol not support directory listing
+     * 
      * @param fileset
      * @return
      * @throws FileSystemException

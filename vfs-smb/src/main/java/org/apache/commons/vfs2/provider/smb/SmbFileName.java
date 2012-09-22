@@ -20,7 +20,7 @@ import org.apache.commons.vfs2.FileType;
 import org.apache.commons.vfs2.provider.GenericFileName;
 
 /**
- * An SMB URI.  Adds a share name to the generic URI.
+ * An SMB URI. Adds a share name to the generic URI.
  */
 public class SmbFileName
     extends GenericFileName

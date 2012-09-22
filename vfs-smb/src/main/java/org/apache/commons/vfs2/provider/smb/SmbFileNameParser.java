@@ -68,7 +68,7 @@ public class SmbFileNameParser
             throw new FileSystemException( "vfs.provider.smb/missing-share-name.error", filename );
         }
 
-        // Normalise the path.  Do this after extracting the share name,
+        // Normalise the path. Do this after extracting the share name,
         // to deal with things like smb://hostname/share/..
         FileType fileType = UriParser.normalisePath( name );
         final String path = name.toString();

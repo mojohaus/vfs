@@ -1,18 +1,22 @@
 package org.codehaus.mojo.vfs.internal;
 
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
- * agreements. See the NOTICE file distributed with this work for additional information regarding
- * copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance with the License. You may obtain a
- * copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 import java.util.ArrayList;
@@ -27,16 +31,17 @@ public class DefaultVfsDirectoryScanner
     implements VfsDirectoryScanner
 {
 
-    /////////////////////////////////////////////////////////////////////////////
-    //  Configurations
-    /////////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////////
+    // Configurations
+    // ///////////////////////////////////////////////////////////////////////////
 
     /**
      * The starting directory under VFS
      */
     private FileObject startingDirectory;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see org.codehaus.mojo.vfs.DirectoryScanner#setStartingDirectory(org.apache.commons.vfs2.FileObject)
      */
     public void setStartingDirectory( FileObject directory )
@@ -44,12 +49,13 @@ public class DefaultVfsDirectoryScanner
         this.startingDirectory = directory;
     }
 
-    /////////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////////
 
     /** The patterns for the remote files to be included. */
     private String[] includes;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see org.codehaus.mojo.vfs.DirectoryScanner#setIncludes(java.lang.String[])
      */
     public void setIncludes( String[] includes )
@@ -74,12 +80,13 @@ public class DefaultVfsDirectoryScanner
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////////
 
     /** The patterns for the remote files to be excluded. */
     private String[] excludes;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see org.codehaus.mojo.vfs.DirectoryScanner#setExcludes(java.lang.String[])
      */
     public void setExcludes( String[] excludes )
@@ -104,14 +111,15 @@ public class DefaultVfsDirectoryScanner
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////////
 
     /**
      * Whether or not the file system should be treated as a case sensitive one.
      */
     private boolean isCaseSensitive = true;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see org.codehaus.mojo.vfs.DirectoryScanner#setCaseSensitive(boolean)
      */
     public void setCaseSensitive( boolean isCaseSensitive )
@@ -119,21 +127,21 @@ public class DefaultVfsDirectoryScanner
         this.isCaseSensitive = isCaseSensitive;
     }
 
-    /////////////////////////////////////////////////////////////////////////////
-    //  Outputs
-    /////////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////////
+    // Outputs
+    // ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * The files which matched at least one include and at least one exclude and relative to
-     * directory
+     * The files which matched at least one include and at least one exclude and relative to directory
      */
     private List<FileObject> includedFiles = new ArrayList<FileObject>();
 
-    /////////////////////////////////////////////////////////////////////////////
-    //  public interface
-    /////////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////////
+    // public interface
+    // ///////////////////////////////////////////////////////////////////////////
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see org.codehaus.mojo.vfs.DirectoryScanner#scan()
      */
     public List<FileObject> scan()
@@ -165,12 +173,10 @@ public class DefaultVfsDirectoryScanner
     }
 
     /**
-     * Scans the given directory for files and directories. Found files are placed in a collection,
-     * based on the matching of includes, excludes, and the selectors. When a directory is found, it
-     * is scanned recursively.
+     * Scans the given directory for files and directories. Found files are placed in a collection, based on the
+     * matching of includes, excludes, and the selectors. When a directory is found, it is scanned recursively.
      * 
      * @throws FileSystemException
-     * 
      * @see #includedFiles
      */
     private void scanSubDir( FileObject dir, String relativePath )
@@ -191,7 +197,7 @@ public class DefaultVfsDirectoryScanner
             {
                 if ( !surelyExcluded( newRelativePath ) )
                 {
-                    //FIXME we need one more check to see if we really need to scan the subdir
+                    // FIXME we need one more check to see if we really need to scan the subdir
                     // to solve the case where includes="{'*'}", scanning sub-directory does not help
                     // but only slow down the completion
                     scanSubDir( child, newRelativePath );
@@ -235,15 +241,15 @@ public class DefaultVfsDirectoryScanner
         return false;
     }
 
-    /////////////////////////////////////////////////////////////////////////////
-    //  Helpers
-    /////////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////////
+    // Helpers
+    // ///////////////////////////////////////////////////////////////////////////
     /**
      * Tests whether or not a name matches against at least one include pattern.
      * 
      * @param name The name to match. Must not be <code>null</code>.
-     * @return <code>true</code> when the name matches against at least one include pattern, or
-     *         <code>false</code> otherwise.
+     * @return <code>true</code> when the name matches against at least one include pattern, or <code>false</code>
+     *         otherwise.
      */
     private boolean isIncluded( String name )
     {
@@ -261,8 +267,8 @@ public class DefaultVfsDirectoryScanner
      * Tests whether or not a name matches against at least one exclude pattern.
      * 
      * @param name The name to match. Must not be <code>null</code>.
-     * @return <code>true</code> when the name matches against at least one exclude pattern, or
-     *         <code>false</code> otherwise.
+     * @return <code>true</code> when the name matches against at least one exclude pattern, or <code>false</code>
+     *         otherwise.
      */
     private boolean isExcluded( String name )
     {
@@ -280,8 +286,8 @@ public class DefaultVfsDirectoryScanner
      * Tests whether or not a name matches the start of at least one include pattern.
      * 
      * @param name The name to match. Must not be <code>null</code>.
-     * @return <code>true</code> when the name matches against the start of at least one include
-     *         pattern, or <code>false</code> otherwise.
+     * @return <code>true</code> when the name matches against the start of at least one include pattern, or
+     *         <code>false</code> otherwise.
      */
     private boolean couldHoldIncluded( String name )
     {
@@ -298,16 +304,13 @@ public class DefaultVfsDirectoryScanner
     /**
      * Tests whether or not a given path matches the start of a given pattern up to the first "**".
      * <p>
-     * This is not a general purpose test and should only be used if you can live with false
-     * positives. For example, <code>pattern=**\a</code> and <code>str=b</code> will yield
-     * <code>true</code>.
+     * This is not a general purpose test and should only be used if you can live with false positives. For example,
+     * <code>pattern=**\a</code> and <code>str=b</code> will yield <code>true</code>.
      * 
      * @param pattern The pattern to match against. Must not be <code>null</code>.
      * @param str The path to match, as a String. Must not be <code>null</code>.
      * @param isCaseSensitive Whether or not matching should be performed case sensitively.
-     * 
-     * @return whether or not a given path matches the start of a given pattern up to the first
-     *         "**".
+     * @return whether or not a given path matches the start of a given pattern up to the first "**".
      */
     private static boolean matchPatternStart( String pattern, String str, boolean isCaseSensitive )
     {
@@ -320,9 +323,7 @@ public class DefaultVfsDirectoryScanner
      * @param pattern The pattern to match against. Must not be <code>null</code>.
      * @param str The path to match, as a String. Must not be <code>null</code>.
      * @param isCaseSensitive Whether or not matching should be performed case sensitively.
-     * 
-     * @return <code>true</code> if the pattern matches against the string, or <code>false</code>
-     *         otherwise.
+     * @return <code>true</code> if the pattern matches against the string, or <code>false</code> otherwise.
      */
     private static boolean matchPath( String pattern, String str, boolean isCaseSensitive )
     {
