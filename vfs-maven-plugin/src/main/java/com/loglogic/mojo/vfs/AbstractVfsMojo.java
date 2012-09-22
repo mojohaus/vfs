@@ -129,16 +129,7 @@ public abstract class AbstractVfsMojo
         try
         {
             Class<?> smbProviderClass = Class.forName( "org.apache.commons.vfs2.provider.smb.SmbFileProvider" );
-            Constructor<?>[] ctors = smbProviderClass.getDeclaredConstructors();
-            Constructor<?> ctor = null;
-            for ( int i = 0; i < ctors.length; i++ )
-            {
-                ctor = ctors[i];
-                if ( ctor.getGenericParameterTypes().length == 0 )
-                    break;
-            }
-            
-            fileSystemManager.addProvider( "smb", (FileProvider) ctor.newInstance() );
+            fileSystemManager.addProvider( "smb", (FileProvider) smbProviderClass.newInstance() );
         }
         catch ( Exception e )
         {
