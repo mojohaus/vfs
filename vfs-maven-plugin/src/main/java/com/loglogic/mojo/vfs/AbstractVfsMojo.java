@@ -19,8 +19,6 @@ package com.loglogic.mojo.vfs;
  * under the License.
  */
 
-import java.lang.reflect.Constructor;
-
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.FileSystemOptions;
