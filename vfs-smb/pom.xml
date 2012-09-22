@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -10,11 +11,11 @@
   </parent>
 
   <artifactId>vfs-smb</artifactId>
-  
+
   <name>VFS2 SMB/JCIFS Provider</name>
-  
+
   <description>VFS2 SMB/JCIFS Provider. This component was from VFS2 sandbox, and should be merged back to Commons VFS once stable </description>
-  
+
 
   <dependencies>
     <dependency>
