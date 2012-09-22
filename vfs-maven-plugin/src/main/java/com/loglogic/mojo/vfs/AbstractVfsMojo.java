@@ -19,11 +19,13 @@ package com.loglogic.mojo.vfs;
  * under the License.
  */
 
+import java.lang.reflect.Constructor;
+
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.impl.StandardFileSystemManager;
-import org.apache.commons.vfs2.provider.smb.SmbFileProvider;
+import org.apache.commons.vfs2.provider.FileProvider;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -123,7 +125,26 @@ public abstract class AbstractVfsMojo
         }
 
         fileSystemManager = new StandardFileSystemManager();
-        fileSystemManager.addProvider( "smb", new SmbFileProvider() );
+
+        try
+        {
+            Class<?> smbProviderClass = Class.forName( "org.apache.commons.vfs2.provider.smb.SmbFileProvider" );
+            Constructor<?>[] ctors = smbProviderClass.getDeclaredConstructors();
+            Constructor<?> ctor = null;
+            for ( int i = 0; i < ctors.length; i++ )
+            {
+                ctor = ctors[i];
+                if ( ctor.getGenericParameterTypes().length == 0 )
+                    break;
+            }
+            
+            fileSystemManager.addProvider( "smb", (FileProvider) ctor.newInstance() );
+        }
+        catch ( Exception e )
+        {
+            this.getLog().info( "VFS smb/cifs provider not available" );
+        }
+
         fileSystemManager.init();
 
         return fileSystemManager;

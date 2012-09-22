@@ -25,7 +25,6 @@ import org.apache.commons.vfs2.auth.StaticUserAuthenticator;
 import org.apache.commons.vfs2.impl.DefaultFileSystemConfigBuilder;
 import org.apache.commons.vfs2.provider.ftp.FtpFileSystemConfigBuilder;
 import org.apache.commons.vfs2.provider.sftp.SftpFileSystemConfigBuilder;
-import org.apache.commons.vfs2.provider.webdav.WebdavFileSystemConfigBuilder;
 import org.codehaus.plexus.util.StringUtils;
 
 public class FileSystemOptionsFactory
@@ -50,11 +49,6 @@ public class FileSystemOptionsFactory
         {
             SftpFileSystemConfigBuilder builder = SftpFileSystemConfigBuilder.getInstance();
             builder.setUserDirIsRoot( opts, false );
-        }
-        if ( "webdav".equals( protocol ) )
-        {
-            WebdavFileSystemConfigBuilder builder =
-                (WebdavFileSystemConfigBuilder) WebdavFileSystemConfigBuilder.getInstance();
         }
 
         String domain = null;
