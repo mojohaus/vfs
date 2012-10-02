@@ -46,6 +46,9 @@
               <goal>copy</goal>
             </goals>
             <configuration>
+              <ftpSettings>
+                <userDirIsRoot>false</userDirIsRoot>
+              </ftpSettings>
               <fileset>
                 <sourceId>ftp.anonymous</sourceId>
                 <source>ftp://ftp.osuosl.org/.1/centos</source>

@@ -40,6 +40,21 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 public abstract class AbstractVfsMojo
     extends AbstractMojo
 {
+    
+    /**
+     * The ftp connection specific settings
+     * 
+     * @parameter
+     */
+    protected FtpSettings  ftpSettings = new FtpSettings();
+
+    /**
+     * The ftp connection specific settings
+     * 
+     * @parameter
+     */
+    protected SftpSettings  sftpSettings = new SftpSettings();
+    
 
     /**
      * The current user system settings for use in Maven.

@@ -29,6 +29,22 @@ import org.codehaus.plexus.util.StringUtils;
 
 public class FileSystemOptionsFactory
 {
+    
+    private FtpSettings ftpSettings = new FtpSettings();
+    
+    public void setFtpSettings( FtpSettings ftpSettings )
+    {
+        this.ftpSettings = ftpSettings;
+    }
+    
+    private SftpSettings sftpSettings = new SftpSettings();
+    
+    public void setSftpSettings( SftpSettings sftpSettings )
+    {
+        this.sftpSettings = sftpSettings;
+    }
+    
+
     public FileSystemOptions getFileSystemOptions( String url, String username, String password )
         throws FileSystemException
     {
@@ -42,13 +58,13 @@ public class FileSystemOptionsFactory
         if ( "ftp".equals( protocol ) )
         {
             FtpFileSystemConfigBuilder builder = FtpFileSystemConfigBuilder.getInstance();
-            builder.setPassiveMode( opts, true );
-            builder.setUserDirIsRoot( opts, false );
+            builder.setPassiveMode( opts, ftpSettings.isPassiveMode() );
+            builder.setUserDirIsRoot( opts, ftpSettings.isUserDirIsRoot() );
         }
         if ( "sftp".equals( protocol ) )
         {
             SftpFileSystemConfigBuilder builder = SftpFileSystemConfigBuilder.getInstance();
-            builder.setUserDirIsRoot( opts, false );
+            builder.setUserDirIsRoot( opts, sftpSettings.isUserDirIsRoot() );
         }
 
         String domain = null;
