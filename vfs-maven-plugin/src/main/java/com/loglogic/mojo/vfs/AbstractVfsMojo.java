@@ -94,6 +94,9 @@ public abstract class AbstractVfsMojo
         throws SecDispatcherException, FileSystemException
     {
         Server serverSettings = this.getServerSettings( serverId );
+        
+        this.fileSystemOptionsFactory.setFtpSettings( ftpSettings );
+        this.fileSystemOptionsFactory.setSftpSettings( sftpSettings );
         return fileSystemOptionsFactory.getFileSystemOptions( sourceUrl, serverSettings.getUsername(),
                                                               serverSettings.getPassword() );
     }
