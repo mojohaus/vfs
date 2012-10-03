@@ -30,7 +30,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
-import org.slf4j.impl.StaticLoggerBinder;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
@@ -160,8 +159,7 @@ public abstract class AbstractVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        StaticLoggerBinder.getSingleton().setMavenLog( this.getLog() );
-
+ 
     }
 
 }

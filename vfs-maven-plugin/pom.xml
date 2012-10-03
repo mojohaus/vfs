@@ -92,11 +92,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>vfs-smb</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>com.jcraft</groupId>
       <artifactId>jsch</artifactId>
       <version>0.1.48</version>
@@ -112,12 +107,6 @@
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>jackrabbit-webdav</artifactId>
       <version>2.4.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.jcabi</groupId>
-      <artifactId>jcabi-maven-slf4j</artifactId>
-      <version>0.1.9</version>
     </dependency>
     
   </dependencies>
