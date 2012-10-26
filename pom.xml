@@ -16,9 +16,9 @@
   </description>
   
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/mojo/trunk/mojo/vfs</connection>
+    <connection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/vfs</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/vfs</developerConnection>
-    <url>http://svn.codehaus.org/mojo/trunk/mojo/vfs</url>
+    <url>https://svn.codehaus.org/mojo/trunk/mojo/vfs</url>
   </scm>
   
   
