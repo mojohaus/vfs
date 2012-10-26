@@ -28,7 +28,7 @@
   </parent>
   
   <artifactId>vfs</artifactId>
-  <version>1.0-beta-1</version>
+  <version>1.0-beta-2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>VFS</name>
   
@@ -37,9 +37,9 @@
   </description>
   
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/mojo/tags/vfs-1.0-beta-1</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/tags/vfs-1.0-beta-1</developerConnection>
-    <url>https://svn.codehaus.org/mojo/tags/vfs-1.0-beta-1</url>
+    <connection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/vfs</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/vfs</developerConnection>
+    <url>https://svn.codehaus.org/mojo/trunk/mojo/vfs</url>
   </scm>
   
   
