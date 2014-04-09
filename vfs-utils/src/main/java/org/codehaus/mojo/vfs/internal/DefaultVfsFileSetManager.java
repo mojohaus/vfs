@@ -84,7 +84,7 @@ public class DefaultVfsFileSetManager
 
     /**
      * Workaround to support single copy for those vfs protocol not support directory listing
-     * 
+     *
      * @param fileset
      * @return
      * @throws FileSystemException

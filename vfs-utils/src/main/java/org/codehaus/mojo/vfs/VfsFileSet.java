@@ -62,7 +62,7 @@ public class VfsFileSet
      * Retrieves the included and excluded files from this file-set's directory. Specifically,
      * <code>"file-set: <I>[directory]</I> (included:
      * <I>[included files]</I>, excluded: <I>[excluded files]</I>)"</code>
-     * 
+     *
      * @return The included and excluded files from this file-set's directory. Specifically,
      *         <code>"file-set: <I>[directory]</I> (included:
      * <I>[included files]</I>, excluded: <I>[excluded files]</I>)"</code>

@@ -21,13 +21,12 @@ package org.codehaus.mojo.vfs;
 
 import java.io.File;
 
-import junit.framework.Assert;
-
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.VFS;
 import org.codehaus.mojo.vfs.internal.DefaultMergeVfsMavenRepositories;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 import org.codehaus.plexus.util.FileUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MavenReposMergeTest

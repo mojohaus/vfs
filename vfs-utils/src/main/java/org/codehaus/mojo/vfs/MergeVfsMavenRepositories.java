@@ -30,7 +30,7 @@ public interface MergeVfsMavenRepositories
 
     /**
      * Merge Maven repositories
-     * 
+     *
      * @param fromRepo
      * @param toRepo
      * @throws FileSystemException
@@ -40,7 +40,7 @@ public interface MergeVfsMavenRepositories
 
     /**
      * Merge Maven repositories with option to do dryRun by not push the merge to target repo
-     * 
+     *
      * @param fromRepo
      * @param toRepo
      * @param stagingDirectory if not given( null ) a temporary one will be created

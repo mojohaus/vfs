@@ -175,7 +175,7 @@ public class DefaultVfsDirectoryScanner
     /**
      * Scans the given directory for files and directories. Found files are placed in a collection, based on the
      * matching of includes, excludes, and the selectors. When a directory is found, it is scanned recursively.
-     * 
+     *
      * @throws FileSystemException
      * @see #includedFiles
      */
@@ -246,7 +246,7 @@ public class DefaultVfsDirectoryScanner
     // ///////////////////////////////////////////////////////////////////////////
     /**
      * Tests whether or not a name matches against at least one include pattern.
-     * 
+     *
      * @param name The name to match. Must not be <code>null</code>.
      * @return <code>true</code> when the name matches against at least one include pattern, or <code>false</code>
      *         otherwise.
@@ -265,7 +265,7 @@ public class DefaultVfsDirectoryScanner
 
     /**
      * Tests whether or not a name matches against at least one exclude pattern.
-     * 
+     *
      * @param name The name to match. Must not be <code>null</code>.
      * @return <code>true</code> when the name matches against at least one exclude pattern, or <code>false</code>
      *         otherwise.
@@ -284,7 +284,7 @@ public class DefaultVfsDirectoryScanner
 
     /**
      * Tests whether or not a name matches the start of at least one include pattern.
-     * 
+     *
      * @param name The name to match. Must not be <code>null</code>.
      * @return <code>true</code> when the name matches against the start of at least one include pattern, or
      *         <code>false</code> otherwise.
@@ -306,7 +306,7 @@ public class DefaultVfsDirectoryScanner
      * <p>
      * This is not a general purpose test and should only be used if you can live with false positives. For example,
      * <code>pattern=**\a</code> and <code>str=b</code> will yield <code>true</code>.
-     * 
+     *
      * @param pattern The pattern to match against. Must not be <code>null</code>.
      * @param str The path to match, as a String. Must not be <code>null</code>.
      * @param isCaseSensitive Whether or not matching should be performed case sensitively.
@@ -319,7 +319,7 @@ public class DefaultVfsDirectoryScanner
 
     /**
      * Tests whether or not a given path matches a given pattern.
-     * 
+     *
      * @param pattern The pattern to match against. Must not be <code>null</code>.
      * @param str The path to match, as a String. Must not be <code>null</code>.
      * @param isCaseSensitive Whether or not matching should be performed case sensitively.

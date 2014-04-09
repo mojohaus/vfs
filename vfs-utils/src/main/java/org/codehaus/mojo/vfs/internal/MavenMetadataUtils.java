@@ -46,7 +46,7 @@ public class MavenMetadataUtils
 
     /**
      * Merge toFile into fromeFile and write back to toFile
-     * 
+     *
      * @param fromFile
      * @param toFile
      * @throws IOException
