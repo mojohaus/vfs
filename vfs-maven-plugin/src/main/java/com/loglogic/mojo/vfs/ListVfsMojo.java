@@ -26,6 +26,8 @@ import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.VfsUtils;
@@ -35,41 +37,40 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
  * Display file list of a virtual file system.
- * 
- * @goal list
- * @requiresProject false
+ *
  */
+@Mojo( name = "list", requiresProject = false, threadSafe = true )
 public class ListVfsMojo
     extends AbstractVfsMojo
 {
     /**
      * Source URL
-     * 
-     * @parameter expression = "${source}"
-     * @required
+     *
      * @since 1.0
      */
+    @Parameter( property="source", required = true )
     private String source;
 
     /**
      * Maven settings server's source authentication id
-     * 
-     * @parameter expression = "${sourceId}"
+     *
      */
+    @Parameter( property="sourceId", required = false )
     private String sourceId;
 
     /**
      * Comma separated ANT include format
-     * 
-     * @parameter expression = "${includes}"
+     *
      */
+    @Parameter( property="includes", required = false )
     private String includes;
 
     /**
      * Comma separated ANT exclude format
-     * 
+     *
      * @parameter expression = "${excludes}"
      */
+    @Parameter( property="excludes", required = false )
     private String excludes;
 
     public void execute()

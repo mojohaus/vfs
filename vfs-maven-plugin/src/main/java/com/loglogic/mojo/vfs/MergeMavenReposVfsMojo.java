@@ -25,64 +25,59 @@ import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.vfs.MergeVfsMavenRepositories;
 import org.codehaus.mojo.vfs.internal.DefaultMergeVfsMavenRepositories;
 
 /**
  * Merge Maven repository from one VFS to another VFS
- * 
- * @goal merge-maven-repositories
- * @requiresProject false
  */
+@Mojo( name = "merge-maven-repositories", requiresProject = false, threadSafe = true )
 public class MergeMavenReposVfsMojo
     extends AbstractVfsMojo
 {
 
     /**
      * Source URL
-     * 
-     * @parameter expression = "${source}"
-     * @required
+     *
      * @since 1.0
      */
+    @Parameter( property="source", required = true )
     private String source;
 
     /**
      * Maven settings server's source authentication id
-     * 
-     * @parameter expression = "${sourceId}"
+     *
      */
+    @Parameter( property="sourceId", required = false )
     private String sourceId;
 
     /**
      * Destination URL
-     * 
-     * @parameter expression = "${destination}"
-     * @required
+     *
      * @since 1.0
      */
+    @Parameter( property="destination", required = true )
     private String destination;
 
     /**
      * Maven settings server's source authentication id
-     * 
-     * @parameter expression = "${destinationId}"
      */
+    @Parameter( property="destinationId", required = false )
     private String destinationId;
 
     /**
      * Staging directory to do the merging works. If not given, and random directory is used
-     * 
-     * @parameter expression = "${stagingDirectory}" default-value="${project.build.directory}/merge-staging"
      */
+    @Parameter( property="stagingDirectory", required = false, defaultValue="${project.build.directory}/merge-staging" )
     private File stagingDirectory;
 
     /**
      * Option not to push merged content to destination repository so that you can review the merge content under
      * ${stagingDirectory}
-     * 
-     * @parameter expression = "${dryRun}" default-value="false"
      */
+    @Parameter( property="dryRun", required = false, defaultValue="false" )
     private boolean dryRun = false;
 
     public void execute()

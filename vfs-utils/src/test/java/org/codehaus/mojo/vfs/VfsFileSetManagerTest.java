@@ -22,12 +22,11 @@ package org.codehaus.mojo.vfs;
 import java.io.File;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.VFS;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,11 +57,11 @@ public class VfsFileSetManagerTest
 
         fileSetManager = new DefaultVfsFileSetManager();
         List<FileObject> fos = fileSetManager.list( fileSet );
-        Assert.assertTrue( fos.size() == 1 );
+        Assert.assertEquals( 2, fos.size() ); //root and one under target classes
 
         fileSet.setExcludes( includes );
         fos = fileSetManager.list( fileSet );
-        Assert.assertTrue( fos.size() == 0 );
+        Assert.assertEquals( 0, fos.size() );
         fileSet.setExcludes( null );
 
         includes[0] = "pom.xml";
@@ -75,7 +74,7 @@ public class VfsFileSetManagerTest
 
         includes[0] = "V*UtilsTest.j*va";
         fos = fileSetManager.list( fileSet );
-        Assert.assertTrue( fos.size() == 0 );
+        Assert.assertEquals( 0, fos.size() );
 
     }
 

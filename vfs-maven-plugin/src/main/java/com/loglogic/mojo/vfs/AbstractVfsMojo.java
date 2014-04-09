@@ -27,6 +27,7 @@ import org.apache.commons.vfs2.provider.FileProvider;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
@@ -39,48 +40,42 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 public abstract class AbstractVfsMojo
     extends AbstractMojo
 {
-    
+
     /**
      * ftp connection specific settings
-     * 
-     * @parameter
      */
+    @Parameter( required = false )
     protected FtpSettings  ftpSettings = new FtpSettings();
 
     /**
      * sftp connection specific settings
-     * 
-     * @parameter
      */
+    @Parameter( required = false )
     protected SftpSettings  sftpSettings = new SftpSettings();
-    
+
 
     /**
      * Current user system settings for use in Maven.
-     * 
-     * @parameter expression="${settings}"
-     * @readonly
      */
+    @Parameter( defaultValue = "${settings}", readonly = true )
     protected Settings settings;
 
     /**
      * Internal Maven's project
-     * 
-     * @parameter expression="${project}"
-     * @readonly
      */
+    @Parameter( defaultValue = "${project}", readonly = true )
     protected MavenProject project;
 
     /**
      * When <code>true</code>, skip the execution.
-     * 
-     * @parameter expression="${skip}" default-value="false"
+     *
      */
+    @Parameter( property = "skip", defaultValue="false")
     protected boolean skip = false;
 
     /**
      * MNG-4384
-     * 
+     *
      * @component role="hidden.org.sonatype.plexus.components.sec.dispatcher.SecDispatcher"
      * @required
      * @since 1.0
@@ -93,7 +88,7 @@ public abstract class AbstractVfsMojo
         throws SecDispatcherException, FileSystemException
     {
         Server serverSettings = this.getServerSettings( serverId );
-        
+
         this.fileSystemOptionsFactory.setFtpSettings( ftpSettings );
         this.fileSystemOptionsFactory.setSftpSettings( sftpSettings );
         return fileSystemOptionsFactory.getFileSystemOptions( sourceUrl, serverSettings.getUsername(),
@@ -159,7 +154,7 @@ public abstract class AbstractVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
- 
+
     }
 
 }

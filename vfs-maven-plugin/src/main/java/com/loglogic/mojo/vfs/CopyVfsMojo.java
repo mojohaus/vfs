@@ -24,6 +24,8 @@ import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
@@ -31,20 +33,19 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
  * Copy files from one VFS to another VFS
- * 
- * @goal copy
- * @requiresProject true
+ *
  */
+@Mojo( name = "copy", requiresProject = true, threadSafe = true )
 public class CopyVfsMojo
     extends AbstractVfsMojo
 {
 
     /**
      * Copy configuration
-     * 
-     * @parameter
-     * @since 1.0
+     *
+     * @since 1.0 beta 1
      */
+    @Parameter( required = false )
     private MojoVfsFileSet fileset;
 
     public void execute()
