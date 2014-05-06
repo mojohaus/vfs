@@ -1,4 +1,4 @@
-package com.loglogic.mojo.vfs;
+package com.codehaus.mojo.vfs;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one

@@ -1,26 +1,7 @@
-package com.loglogic.mojo.vfs;
+package com.codehaus.mojo.vfs;
 
-public class FtpSettings
+public class SftpSettings
 {
-    /**
-     * enter into passive mode.
-     *
-     * @param opts The FileSystemOptions.
-     * @param passiveMode true if passive mode should be used.
-     */
-    private boolean passiveMode = true;
-    
- 
-    public boolean isPassiveMode()
-    {
-        return passiveMode;
-    }
-
-    public void setPassiveMode( boolean passiveMode )
-    {
-        this.passiveMode = passiveMode;
-    }
-    
     /**
      * use user directory as root (do not change to fs root).
      *

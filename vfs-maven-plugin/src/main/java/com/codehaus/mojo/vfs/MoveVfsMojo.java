@@ -1,4 +1,4 @@
-package com.loglogic.mojo.vfs;
+package com.codehaus.mojo.vfs;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -32,15 +32,15 @@ import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
- * Remove files from a virtual file system
+ * Move files from a virtual file system to another
  */
-@Mojo( name = "remove", requiresProject = true, threadSafe = true )
-public class RemoveVfsMojo
+@Mojo( name = "move", requiresProject = true, threadSafe = true )
+public class MoveVfsMojo
     extends AbstractVfsMojo
 {
 
     /**
-     * Move configuration
+     * Move configuration. Note: destination's configurations are ignored
      *
      * @since 1.0
      */
@@ -50,6 +50,7 @@ public class RemoveVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
+
         super.execute();
 
         if ( fileset != null && !this.skip )
@@ -57,6 +58,8 @@ public class RemoveVfsMojo
             try
             {
                 FileSystemOptions sourceOpts = this.getFileSystemOptions( fileset.getSourceId(), fileset.getSource() );
+                FileSystemOptions destOpts =
+                    this.getFileSystemOptions( fileset.getDestinationId(), fileset.getDestination() );
 
                 VfsFileSet vfsFileSet = new VfsFileSet();
                 vfsFileSet.copyBase( fileset );
@@ -64,22 +67,24 @@ public class RemoveVfsMojo
                 FileObject sourceObj = getFileSystemManager().resolveFile( fileset.getSource(), sourceOpts );
                 vfsFileSet.setSource( sourceObj );
 
+                FileObject destObj = getFileSystemManager().resolveFile( fileset.getDestination(), destOpts );
+                vfsFileSet.setDestination( destObj );
+
                 VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
-                fileSetManager.delete( vfsFileSet );
+                fileSetManager.move( vfsFileSet );
             }
             catch ( FileSystemException e )
             {
-                throw new MojoFailureException( "Unable to perform a remove operation", e );
+                throw new MojoFailureException( "Unable to perform a move operation", e );
             }
             catch ( SecDispatcherException e )
             {
-                throw new MojoFailureException( "Unable to perform a remove operation", e );
+                throw new MojoFailureException( "Unable to perform a move operation", e );
             }
-
         }
         else
         {
-            this.getLog().info( "Skip VFS remove operation" );
+            this.getLog().info( "Skip VFS move operation" );
         }
 
     }

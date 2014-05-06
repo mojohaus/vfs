@@ -1,4 +1,4 @@
-package com.loglogic.mojo.vfs;
+package com.codehaus.mojo.vfs;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -32,17 +32,18 @@ import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
- * Move files from a virtual file system to another
+ * Copy files from one VFS to another VFS
+ *
  */
-@Mojo( name = "move", requiresProject = true, threadSafe = true )
-public class MoveVfsMojo
+@Mojo( name = "copy", requiresProject = true, threadSafe = true )
+public class CopyVfsMojo
     extends AbstractVfsMojo
 {
 
     /**
-     * Move configuration. Note: destination's configurations are ignored
+     * Copy configuration
      *
-     * @since 1.0
+     * @since 1.0 beta 1
      */
     @Parameter( required = false )
     private MojoVfsFileSet fileset;
@@ -50,7 +51,6 @@ public class MoveVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-
         super.execute();
 
         if ( fileset != null && !this.skip )
@@ -71,20 +71,20 @@ public class MoveVfsMojo
                 vfsFileSet.setDestination( destObj );
 
                 VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
-                fileSetManager.move( vfsFileSet );
+                fileSetManager.copy( vfsFileSet );
             }
             catch ( FileSystemException e )
             {
-                throw new MojoFailureException( "Unable to perform a move operation", e );
+                throw new MojoFailureException( "Unable to perform a copy operation", e );
             }
             catch ( SecDispatcherException e )
             {
-                throw new MojoFailureException( "Unable to perform a move operation", e );
+                throw new MojoFailureException( "Unable to perform a copy operation", e );
             }
         }
         else
         {
-            this.getLog().info( "Skip VFS move operation" );
+            this.getLog().info( "Skip VFS copy operation" );
         }
 
     }
