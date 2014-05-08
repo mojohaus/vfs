@@ -84,8 +84,6 @@ public class MergeMavenReposVfsMojo
         throws MojoExecutionException, MojoFailureException
     {
 
-        super.execute();
-
         if ( !this.skip )
         {
             try

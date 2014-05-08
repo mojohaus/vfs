@@ -36,7 +36,7 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
  */
 @Mojo( name = "move", requiresProject = true, threadSafe = true )
 public class MoveVfsMojo
-    extends AbstractVfsMojo
+    extends AbstractVfsActionMojo
 {
 
     /**
@@ -51,9 +51,7 @@ public class MoveVfsMojo
         throws MojoExecutionException, MojoFailureException
     {
 
-        super.execute();
-
-        if ( fileset != null && !this.skip )
+        for ( MojoVfsFileSet fileset : filesets )
         {
             try
             {
@@ -82,10 +80,5 @@ public class MoveVfsMojo
                 throw new MojoFailureException( "Unable to perform a move operation", e );
             }
         }
-        else
-        {
-            this.getLog().info( "Skip VFS move operation" );
-        }
-
     }
 }

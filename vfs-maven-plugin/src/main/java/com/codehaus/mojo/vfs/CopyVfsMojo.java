@@ -19,16 +19,12 @@ package com.codehaus.mojo.vfs;
  * under the License.
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
@@ -39,55 +35,19 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
  */
 @Mojo( name = "copy", requiresProject = true, threadSafe = true )
 public class CopyVfsMojo
-    extends AbstractVfsMojo
+    extends AbstractVfsActionMojo
 {
-
-    /**
-     * Copy configuration using single fileset
-     *
-     * @since 1.0 beta 1
-     */
-    @Parameter( required = false )
-    private MojoVfsFileSet fileset;
-
-    /**
-     * Copy configuration using mutiple filesets
-     *
-     * @since 1.0 beta 1
-     */
-    @Parameter( required = false )
-    private List<MojoVfsFileSet> filesets;
-
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        super.execute();
-
-        if ( this.skip )
+        if ( ! this.initialize() )
         {
-            this.getLog().info( "Skip VFS copy" );
-            return;
-        }
-
-        if ( filesets == null )
-        {
-            filesets = new ArrayList<MojoVfsFileSet>();
-        }
-
-        if ( fileset != null )
-        {
-            filesets.add( fileset );
-        }
-
-        if ( filesets.isEmpty() )
-        {
-            this.getLog().info( "Skip VFS copy due to empty configuration." );
             return;
         }
 
         for ( MojoVfsFileSet fileset : filesets )
         {
-            try
+           try
             {
                 FileSystemOptions sourceOpts = this.getFileSystemOptions( fileset.getSourceId(), fileset.getSource() );
                 FileSystemOptions destOpts =

@@ -25,8 +25,6 @@ import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.impl.StandardFileSystemManager;
 import org.apache.commons.vfs2.provider.FileProvider;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Server;
@@ -149,12 +147,6 @@ public abstract class AbstractVfsMojo
         fileSystemManager.init();
 
         return fileSystemManager;
-    }
-
-    public void execute()
-        throws MojoExecutionException, MojoFailureException
-    {
-
     }
 
 }

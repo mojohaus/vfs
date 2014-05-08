@@ -37,7 +37,6 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
 /**
  * Display file list of a virtual file system.
- *
  */
 @Mojo( name = "list", requiresProject = false, threadSafe = true )
 public class ListVfsMojo
@@ -48,21 +47,19 @@ public class ListVfsMojo
      *
      * @since 1.0
      */
-    @Parameter( property="source", required = true )
+    @Parameter( property = "source", required = true )
     private String source;
 
     /**
      * Maven settings server's source authentication id
-     *
      */
-    @Parameter( property="sourceId", required = false )
+    @Parameter( property = "sourceId", required = false )
     private String sourceId;
 
     /**
      * Comma separated ANT include format
-     *
      */
-    @Parameter( property="includes", required = false )
+    @Parameter( property = "includes", required = false )
     private String includes;
 
     /**
@@ -70,14 +67,12 @@ public class ListVfsMojo
      *
      * @parameter expression = "${excludes}"
      */
-    @Parameter( property="excludes", required = false )
+    @Parameter( property = "excludes", required = false )
     private String excludes;
 
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        super.execute();
-
         if ( skip )
         {
             this.getLog().info( "Skip VFS list operation" );
@@ -111,10 +106,10 @@ public class ListVfsMojo
             VfsFileSetManager fileSetManager = new DefaultVfsFileSetManager();
             List<FileObject> list = fileSetManager.list( vfsFileSet );
 
-            System.out.println( "Directory list: " );
+            this.getLog().info( "Directory list: " );
             for ( FileObject fo : list )
             {
-                System.out.println( VfsUtils.getRelativePath( sourceObj, fo ) );
+                this.getLog().info( VfsUtils.getRelativePath( sourceObj, fo ) );
             }
         }
         catch ( FileSystemException e )

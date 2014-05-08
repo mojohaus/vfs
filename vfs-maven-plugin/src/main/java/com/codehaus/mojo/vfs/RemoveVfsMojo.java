@@ -36,7 +36,7 @@ import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
  */
 @Mojo( name = "remove", requiresProject = true, threadSafe = true )
 public class RemoveVfsMojo
-    extends AbstractVfsMojo
+    extends AbstractVfsActionMojo
 {
 
     /**
@@ -50,9 +50,7 @@ public class RemoveVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        super.execute();
-
-        if ( fileset != null && !this.skip )
+        for ( MojoVfsFileSet fileset : filesets )
         {
             try
             {
@@ -76,10 +74,6 @@ public class RemoveVfsMojo
                 throw new MojoFailureException( "Unable to perform a remove operation", e );
             }
 
-        }
-        else
-        {
-            this.getLog().info( "Skip VFS remove operation" );
         }
 
     }
