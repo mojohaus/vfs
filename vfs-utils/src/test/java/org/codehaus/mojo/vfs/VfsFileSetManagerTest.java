@@ -52,12 +52,12 @@ public class VfsFileSetManagerTest
 
         VfsFileSet fileSet = new VfsFileSet();
         fileSet.setSource( startDirectory );
-        String[] includes = { "**/pom.xml" };
+        String[] includes = { "**/*.java" };
         fileSet.setIncludes( includes );
 
         fileSetManager = new DefaultVfsFileSetManager();
         List<FileObject> fos = fileSetManager.list( fileSet );
-        Assert.assertEquals( 2, fos.size() ); //root and one under target classes
+        Assert.assertEquals( 15, fos.size() ); //very sensitive to number of available sources
 
         fileSet.setExcludes( includes );
         fos = fileSetManager.list( fileSet );
