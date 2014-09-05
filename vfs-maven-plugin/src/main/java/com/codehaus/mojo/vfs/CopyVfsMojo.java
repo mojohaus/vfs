@@ -40,14 +40,14 @@ public class CopyVfsMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        if ( ! this.initialize() )
+        if ( !this.initialize() )
         {
             return;
         }
 
         for ( MojoVfsFileSet fileset : filesets )
         {
-           try
+            try
             {
                 FileSystemOptions sourceOpts = this.getFileSystemOptions( fileset.getSourceId(), fileset.getSource() );
                 FileSystemOptions destOpts =

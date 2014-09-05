@@ -57,7 +57,7 @@ public class VfsFileSetManagerTest
 
         fileSetManager = new DefaultVfsFileSetManager();
         List<FileObject> fos = fileSetManager.list( fileSet );
-        Assert.assertEquals( 15, fos.size() ); //very sensitive to number of available sources
+        Assert.assertEquals( 15, fos.size() ); // very sensitive to number of available sources
 
         fileSet.setExcludes( includes );
         fos = fileSetManager.list( fileSet );

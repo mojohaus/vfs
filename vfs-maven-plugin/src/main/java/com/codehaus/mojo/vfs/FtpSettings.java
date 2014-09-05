@@ -9,8 +9,7 @@ public class FtpSettings
      * @param passiveMode true if passive mode should be used.
      */
     private boolean passiveMode = true;
-    
- 
+
     public boolean isPassiveMode()
     {
         return passiveMode;
@@ -20,13 +19,13 @@ public class FtpSettings
     {
         this.passiveMode = passiveMode;
     }
-    
+
     /**
      * use user directory as root (do not change to fs root).
      *
      * @param opts The FileSystemOptions.
      * @param userDirIsRoot true if the user directory should be treated as the root.
-     */    
+     */
     private boolean userDirIsRoot = true;
 
     public boolean isUserDirIsRoot()
@@ -39,5 +38,4 @@ public class FtpSettings
         this.userDirIsRoot = userDirIsRoot;
     }
 
-    
 }

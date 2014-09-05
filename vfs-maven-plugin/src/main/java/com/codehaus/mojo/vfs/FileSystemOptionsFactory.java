@@ -29,21 +29,20 @@ import org.codehaus.plexus.util.StringUtils;
 
 public class FileSystemOptionsFactory
 {
-    
+
     private FtpSettings ftpSettings = new FtpSettings();
-    
+
     public void setFtpSettings( FtpSettings ftpSettings )
     {
         this.ftpSettings = ftpSettings;
     }
-    
+
     private SftpSettings sftpSettings = new SftpSettings();
-    
+
     public void setSftpSettings( SftpSettings sftpSettings )
     {
         this.sftpSettings = sftpSettings;
     }
-    
 
     public FileSystemOptions getFileSystemOptions( String url, String username, String password )
         throws FileSystemException

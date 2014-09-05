@@ -7,7 +7,7 @@ public class SftpSettings
      *
      * @param opts The FileSystemOptions.
      * @param userDirIsRoot true if the user directory should be treated as the root.
-     */    
+     */
     private boolean userDirIsRoot = true;
 
     public boolean isUserDirIsRoot()
@@ -20,5 +20,4 @@ public class SftpSettings
         this.userDirIsRoot = userDirIsRoot;
     }
 
-    
 }

@@ -43,14 +43,13 @@ public abstract class AbstractVfsMojo
      * ftp connection specific settings
      */
     @Parameter( required = false )
-    protected FtpSettings  ftpSettings = new FtpSettings();
+    protected FtpSettings ftpSettings = new FtpSettings();
 
     /**
      * sftp connection specific settings
      */
     @Parameter( required = false )
-    protected SftpSettings  sftpSettings = new SftpSettings();
-
+    protected SftpSettings sftpSettings = new SftpSettings();
 
     /**
      * Current user system settings for use in Maven.
@@ -66,9 +65,8 @@ public abstract class AbstractVfsMojo
 
     /**
      * When <code>true</code>, skip the execution.
-     *
      */
-    @Parameter( property = "skip", defaultValue="false")
+    @Parameter( property = "skip", defaultValue = "false" )
     protected boolean skip = false;
 
     /**
