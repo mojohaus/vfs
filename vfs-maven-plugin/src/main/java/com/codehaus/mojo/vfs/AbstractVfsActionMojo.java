@@ -39,7 +39,7 @@ public abstract class AbstractVfsActionMojo
     /**
      * VFS configuration using multiple filesets
      *
-     * @since 1.0 beta 2
+     * @since 1.0
      */
     @Parameter( required = false )
     protected List<MojoVfsFileSet> filesets;
