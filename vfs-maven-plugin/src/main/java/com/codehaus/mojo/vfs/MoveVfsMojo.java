@@ -25,7 +25,6 @@ import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.vfs.VfsFileSet;
 import org.codehaus.mojo.vfs.VfsFileSetManager;
 import org.codehaus.mojo.vfs.internal.DefaultVfsFileSetManager;
@@ -39,17 +38,14 @@ public class MoveVfsMojo
     extends AbstractVfsActionMojo
 {
 
-    /**
-     * Move configuration. Note: destination's configurations are ignored
-     *
-     * @since 1.0
-     */
-    @Parameter( required = false )
-    private MojoVfsFileSet fileset;
-
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
+
+        if ( !this.initialize() )
+        {
+            return;
+        }
 
         for ( MojoVfsFileSet fileset : filesets )
         {

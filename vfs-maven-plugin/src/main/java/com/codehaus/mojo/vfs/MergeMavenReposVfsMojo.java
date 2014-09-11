@@ -40,34 +40,35 @@ public class MergeMavenReposVfsMojo
 
     /**
      * Source URL
-     *
-     * @since 1.0
+     * @since 1.0 beta 1
      */
     @Parameter( property = "source", required = true )
     private String source;
 
     /**
      * Maven settings server's source authentication id
+     * @since 1.0 beta 1
      */
     @Parameter( property = "sourceId", required = false )
     private String sourceId;
 
     /**
      * Destination URL
-     *
-     * @since 1.0
+     * @since 1.0 beta 1
      */
     @Parameter( property = "destination", required = true )
     private String destination;
 
     /**
      * Maven settings server's source authentication id
+     * @since 1.0 beta 1
      */
     @Parameter( property = "destinationId", required = false )
     private String destinationId;
 
     /**
      * Staging directory to do the merging works. If not given, and random directory is used
+     * @since 1.0 beta 1
      */
     @Parameter( property = "stagingDirectory", required = false, defaultValue = "${project.build.directory}/merge-staging" )
     private File stagingDirectory;
@@ -75,6 +76,7 @@ public class MergeMavenReposVfsMojo
     /**
      * Option not to push merged content to destination repository so that you can review the merge content under
      * ${stagingDirectory}
+     * @since 1.0 beta 1
      */
     @Parameter( property = "dryRun", required = false, defaultValue = "false" )
     private boolean dryRun = false;
