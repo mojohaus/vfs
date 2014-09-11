@@ -96,7 +96,9 @@ public class VfsFileSetManagerTest
         Assert.assertTrue( fos.size() > 0 );
         for ( FileObject fo : fos )
         {
-            Assert.assertFalse( fo.getName().getPath().contains( "/target/" ) );
+            //next assert will fail during release:perform since the source is checked out under target/checkout
+            //Assert.assertFalse( fo.getName().getPath().contains( "/target/" ) );
+            
             Assert.assertFalse( fo.getName().getPath().contains( "/src/" ) );
         }
 
