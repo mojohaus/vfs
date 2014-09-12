@@ -28,20 +28,20 @@
 VFS Maven Plugin
 
   Use this plugin to list, copy, move, and delete virtual file system files using {{{http://commons.apache.org/vfs/}Apache Commons Virtual File System (VFS)}}.
-  
+
 
 * Goals Overview
 
   * {{{./list-mojo.html}vfs:list}} Perform a file list
-  
+
   * {{{./copy-mojo.html}vfs:copy}} Transfer a set of files from one virtual file system to another.
-  
+
   * {{{./move-mojo.html}vfs:move}} Move a set of files from on virtual file system to another.
-  
+
   * {{{./remove-mojo.html}vfs:remove}} Remove a set of files from a virtual file system.
-  
+
   []
-  
+
 * Usage
 
   Instructions on how to use the VFS Maven Plugin can be found on the {{{./usage.html}usage page}}.
@@ -49,5 +49,5 @@ VFS Maven Plugin
 
 * Examples
 
-    Live {{{https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples}examples }} are at https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples ) 
+    Live {{{https://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-maven-plugin/src/examples}examples }} are at https://svn.codehaus.org/mojo/trunk/sandbox/vfs/vfs-maven-plugin/src/examples )
 

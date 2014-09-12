@@ -41,30 +41,35 @@ public abstract class AbstractVfsMojo
 
     /**
      * ftp connection specific settings
+     * @since 1.0 beta 1
      */
     @Parameter( required = false )
     protected FtpSettings ftpSettings = new FtpSettings();
 
     /**
      * sftp connection specific settings
+     * @since 1.0 beta 1
      */
     @Parameter( required = false )
     protected SftpSettings sftpSettings = new SftpSettings();
 
     /**
      * Current user system settings for use in Maven.
+     * @since 1.0 beta 1
      */
     @Parameter( defaultValue = "${settings}", readonly = true )
     protected Settings settings;
 
     /**
      * Internal Maven's project
+     * @since 1.0 beta 1
      */
     @Parameter( defaultValue = "${project}", readonly = true )
     protected MavenProject project;
 
     /**
      * When <code>true</code>, skip the execution.
+     * @since 1.0 beta 1
      */
     @Parameter( property = "skip", defaultValue = "false" )
     protected boolean skip = false;

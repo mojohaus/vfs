@@ -44,28 +44,28 @@ public class ListVfsMojo
 {
     /**
      * Source URL
-     *
-     * @since 1.0
+     * @since 1.0 beta 1
      */
     @Parameter( property = "source", required = true )
     private String source;
 
     /**
      * Maven settings server's source authentication id
+     * @since 1.0 beta 1
      */
     @Parameter( property = "sourceId", required = false )
     private String sourceId;
 
     /**
      * Comma separated ANT include format
+     * @since 1.0 beta 1
      */
     @Parameter( property = "includes", required = false )
     private String includes;
 
     /**
      * Comma separated ANT exclude format
-     *
-     * @parameter expression = "${excludes}"
+     * @since 1.0 beta 1
      */
     @Parameter( property = "excludes", required = false )
     private String excludes;
