@@ -26,7 +26,6 @@ import org.apache.commons.vfs2.impl.StandardFileSystemManager;
 import org.apache.commons.vfs2.provider.FileProvider;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
@@ -60,12 +59,6 @@ public abstract class AbstractVfsMojo
     @Parameter( defaultValue = "${settings}", readonly = true )
     protected Settings settings;
 
-    /**
-     * Internal Maven's project
-     * @since 1.0 beta 1
-     */
-    @Parameter( defaultValue = "${project}", readonly = true )
-    protected MavenProject project;
 
     /**
      * When <code>true</code>, skip the execution.
