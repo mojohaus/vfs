@@ -46,6 +46,14 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>vfs-maven-plugin</artifactId>
         <version>1.0</version>
+        <dependencies>
+          <!-- please checkout http://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-smb and build locally -->
+          <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>vfs-smb</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>smb2file</id>
