@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>vfs-smb</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
   <name>VFS2 SMB/JCIFS Provider</name>
 
