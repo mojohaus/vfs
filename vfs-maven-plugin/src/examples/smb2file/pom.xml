@@ -25,7 +25,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <!--  this give access to already deployed 1.0-SNAPSHOT of vfs-smb provider -->
+    <!--  this gives access to already deployed 1.0-SNAPSHOT of vfs-smb provider -->
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
     <version>34</version>
@@ -35,7 +35,7 @@
   <artifactId>smb2file</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>ftp2file</name>
+  <name>smb2file</name>
 
   <description>
     Example to do download file from SMB server to ${project.build.directory}/test
