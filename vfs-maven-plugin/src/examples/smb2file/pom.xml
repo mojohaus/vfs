@@ -28,7 +28,7 @@
     <!--  this give access to already deployed 1.0-SNAPSHOT of vfs-smb provider -->
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>35</version>
+    <version>34</version>
   </parent>
 
   <groupId>org.codehaus.mojo.vfs.examples</groupId>
