@@ -23,6 +23,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <!--  this give access to already deployed 1.0-SNAPSHOT of vfs-smb provider -->
+    <artifactId>mojo-parent</artifactId>
+    <groupId>org.codehaus.mojo</groupId>
+    <version>35</version>
+  </parent>
+
   <groupId>org.codehaus.mojo.vfs.examples</groupId>
   <artifactId>smb2file</artifactId>
   <version>1.0-SNAPSHOT</version>
@@ -47,7 +55,6 @@
         <artifactId>vfs-maven-plugin</artifactId>
         <version>1.0</version>
         <dependencies>
-          <!-- please checkout http://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-smb and build locally -->
           <dependency>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>vfs-smb</artifactId>
@@ -64,7 +71,7 @@
             <configuration>
               <fileset>
                 <sourceId>local.smb</sourceId>
-                <source>smb://localhost/tmp</source>
+                <source>smb://localhost/tmp</source> <!-- make sure to create a 'tmp'shared folder -->
                 <destination>file://${project.build.directory}/test</destination>
               </fileset>
             </configuration>
