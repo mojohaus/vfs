@@ -25,6 +25,7 @@ import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.impl.StandardFileSystemManager;
 import org.apache.commons.vfs2.provider.FileProvider;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
@@ -68,12 +69,10 @@ public abstract class AbstractVfsMojo
     protected boolean skip = false;
 
     /**
-     * MNG-4384
-     *
-     * @component role="hidden.org.sonatype.plexus.components.sec.dispatcher.SecDispatcher"
      * @required
      * @since 1.0
      */
+    @Component( hint = "mng-4384" )
     private SecDispatcher securityDispatcher;
 
     protected FileSystemOptionsFactory fileSystemOptionsFactory = new FileSystemOptionsFactory();

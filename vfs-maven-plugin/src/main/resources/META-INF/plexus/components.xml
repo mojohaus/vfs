@@ -20,18 +20,14 @@
 <component-set>
   <components>
     <component>
-      <role>hidden.org.sonatype.plexus.components.sec.dispatcher.SecDispatcher</role>
-      <role-hint>default</role-hint>
-      <implementation>hidden.org.sonatype.plexus.components.sec.dispatcher.DefaultSecDispatcher</implementation>
-      <description></description>
+      <role>org.sonatype.plexus.components.sec.dispatcher.SecDispatcher</role>
+      <role-hint>mng-4384</role-hint>
+      <implementation>org.sonatype.plexus.components.sec.dispatcher.DefaultSecDispatcher</implementation>
       <requirements>
         <requirement>
-          <role>hidden.org.sonatype.plexus.components.cipher.PlexusCipher</role>
+          <role>org.sonatype.plexus.components.cipher.PlexusCipher</role>
+          <role-hint>mng-4384</role-hint>
           <field-name>_cipher</field-name>
-        </requirement>
-        <requirement>
-          <role>hidden.org.sonatype.plexus.components.sec.dispatcher.PasswordDecryptor</role>
-          <field-name>_decryptors</field-name>
         </requirement>
       </requirements>
       <configuration>
@@ -39,10 +35,9 @@
       </configuration>
     </component>
     <component>
-      <role>hidden.org.sonatype.plexus.components.cipher.PlexusCipher</role>
-      <role-hint>default</role-hint>
-      <implementation>hidden.org.sonatype.plexus.components.cipher.DefaultPlexusCipher</implementation>
-      <description></description>
+      <role>org.sonatype.plexus.components.cipher.PlexusCipher</role>
+      <role-hint>mng-4384</role-hint>
+      <implementation>org.sonatype.plexus.components.cipher.DefaultPlexusCipher</implementation>
     </component>
   </components>
 </component-set>
