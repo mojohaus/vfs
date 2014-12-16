@@ -110,7 +110,7 @@ Introduction
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>vfs-maven-plugin</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
       <executions>
         <execution>
           <id>download-test-data</id>
@@ -147,7 +147,7 @@ Introduction
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>vfs-maven-plugin</artifactId>
-        <version>1.0</version>
+        <version>1.0.1</version>
         <executions>
           <execution>
             <id>http2file</id>
@@ -186,7 +186,7 @@ Introduction
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>vfs-maven-plugin</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
       <executions>
         <execution>
           <id>download-test-data</id>
@@ -225,7 +225,7 @@ Introduction
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>vfs-maven-plugin</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
       <executions>
         <execution>
           <id>download-test-data</id>
