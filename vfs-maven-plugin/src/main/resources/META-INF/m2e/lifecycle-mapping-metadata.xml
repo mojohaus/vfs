@@ -1,0 +1,18 @@
+<lifecycleMappingMetadata>
+  <pluginExecutions>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <goals>
+          <goal>copy</goal>
+          <goal>list</goal>
+          <goal>move</goal>
+          <goal>remove</goal>
+          <goal>merge-maven-repositories</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <ignore />
+      </action>
+    </pluginExecution>
+  </pluginExecutions>
+</lifecycleMappingMetadata>
