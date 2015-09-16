@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150915" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>VFS &#x2013; About</title>
+    <title>Maven VFS plugin &#x2013; Index</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.4.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -38,8 +38,8 @@
         <div class="container-fluid">
           <div id="banner">
         <div class="pull-left">
-                                                  <a href="../../" id="bannerLeft">
-                                                                                                <img src="../../images/mojo_logo.png"  alt="MojoHaus"/>
+                                                  <a href="../../../" id="bannerLeft">
+                                                                                                <img src="../../../images/mojo_logo.png"  alt="MojoHaus"/>
                 </a>
                       </div>
         <div class="pull-right">  </div>
@@ -51,21 +51,26 @@
                 
                     
                               <li class="">
-                    <a href="../../" title="MojoHaus">
+                    <a href="../../../" title="MojoHaus">
         MojoHaus</a>
                     <span class="divider">/</span>
       </li>
             <li class="">
-                    <a href="../../mojo-parent" title="MojoHaus Parent">
+                    <a href="../../../mojo-parent" title="MojoHaus Parent">
         MojoHaus Parent</a>
                     <span class="divider">/</span>
       </li>
-                <li class="">
-                    <a href="./" title="VFS">
+            <li class="">
+                    <a href="../" title="VFS">
         VFS</a>
                     <span class="divider">/</span>
       </li>
-        <li class="active ">About</li>
+                <li class="">
+                    <a href="./" title="Maven VFS plugin">
+        Maven VFS plugin</a>
+                    <span class="divider">/</span>
+      </li>
+        <li class="active ">Index</li>
         
                 
                     
@@ -76,6 +81,20 @@
         </li>
             
                                     
+    <li class="pull-right">
+        <span class="divider">|</span>
+                      <a href="../vfs-utils" title="VFS Utils">
+        VFS Utils</a>
+      </li>
+
+  
+    <li class="pull-right">
+        <span class="divider">|</span>
+                      <a href="http://commons.apache.org/vfs" class="externalLink" title="Commons VFS">
+        Commons VFS</a>
+      </li>
+
+  
     <li class="pull-right">
                       <a href="http://maven.apache.org/" class="externalLink" title="Maven">
         Maven</a>
@@ -91,23 +110,50 @@
                 
                     
                 <ul class="nav nav-list">
-                    <li class="nav-header">Modules</li>
+                    <li class="nav-header">Overview</li>
                               
+      <li class="active">
+  
+            <a href="#"><span class="none"></span>Introduction</a>
+          </li>
+                
       <li>
   
-                          <a href="vfs-utils/index.html" title="Commons VFS Shared Component">
+                          <a href="usage.html" title="Usage">
           <span class="none"></span>
-        Commons VFS Shared Component</a>
+        Usage</a>
             </li>
                 
       <li>
   
-                          <a href="vfs-maven-plugin/index.html" title="Maven VFS plugin">
+                          <a href="plugin-info.html" title="Goals">
           <span class="none"></span>
-        Maven VFS plugin</a>
+        Goals</a>
             </li>
-                                        <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                
+                              <li class="nav-header">Examples</li>
+                              
+      <li>
+  
+                          <a href="https://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-maven-plugin/src/examples/ftp2file" class="externalLink" title="ftp2file">
+          <span class="none"></span>
+        ftp2file</a>
+            </li>
+                
+      <li>
+  
+                          <a href="https://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-maven-plugin/src/examples/http2file" class="externalLink" title="http2file">
+          <span class="none"></span>
+        http2file</a>
+            </li>
+                
+      <li>
+  
+                          <a href="https://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-maven-plugin/src/examples/smb2file" class="externalLink" title="smb2file">
+          <span class="none"></span>
+        smb2file</a>
+            </li>
+                              <li class="nav-header">Project Documentation</li>
+                                                                                                                                                                                                                                                                                                                  
       <li>
   
                           <a href="project-info.html" title="Project Information">
@@ -171,6 +217,13 @@
                     
       <li>
   
+                          <a href="dependencies.html" title="Dependencies">
+          <span class="none"></span>
+        Dependencies</a>
+            </li>
+                    
+      <li>
+  
                           <a href="dependency-convergence.html" title="Dependency Convergence">
           <span class="none"></span>
         Dependency Convergence</a>
@@ -198,7 +251,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                        
+                                                                                                                                                                                                
       <li>
   
                           <a href="project-reports.html" title="Project Reports">
@@ -232,22 +285,22 @@
                 
         <div id="bodyColumn"  class="span10" >
                                   
-            <div class="section">
-<h2><a name="About_VFS"></a>About VFS</h2><a name="About_VFS"></a>
-<p>Project to create new or manipulate existing files supported by commons-vfs</p>
+            <!-- Licensed to the Apache Software Foundation (ASF) under one --><!-- or more contributor license agreements.  See the NOTICE file --><!-- distributed with this work for additional information --><!-- regarding copyright ownership.  The ASF licenses this file --><!-- to you under the Apache License, Version 2.0 (the --><!-- "License"); you may not use this file except in compliance --><!-- with the License.  You may obtain a copy of the License at --><!--  --><!-- http://www.apache.org/licenses/LICENSE-2.0 --><!--  --><!-- Unless required by applicable law or agreed to in writing, --><!-- software distributed under the License is distributed on an --><!-- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY --><!-- KIND, either express or implied.  See the License for the --><!-- specific language governing permissions and limitations --><!-- under the License. --><!-- NOTE: For help with the syntax of this file, see: --><!-- http://maven.apache.org/guides/mini/guide-apt-format.html --><div class="section">
+<h2><a name="VFS_Maven_Plugin"></a>VFS Maven Plugin</h2>
+<p>Use this plugin to list, copy, move, and delete virtual file system files using <a class="externalLink" href="http://commons.apache.org/vfs/">Apache Commons Virtual File System (VFS)</a>.</p>
 <div class="section">
-<h3><a name="Project_Modules"></a>Project Modules</h3><a name="Project_Modules"></a>
-<p>This project has declared the following modules:</p>
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Name</th>
-<th>Description</th></tr>
-<tr class="b">
-<td><a href="vfs-utils/index.html">Commons VFS Shared Component</a></td>
-<td>Shared component usable outside of Maven to manipulate commons-vfs files. See javadoc and unit test for detailed usage.</td></tr>
-<tr class="a">
-<td><a href="vfs-maven-plugin/index.html">Maven VFS plugin</a></td>
-<td>Provide CRUDS operations using commons-vfs</td></tr></table></div></div>
+<h3><a name="Goals_Overview"></a>Goals Overview</h3>
+<ul>
+<li><a href="./list-mojo.html">vfs:list</a> Perform a file list</li>
+<li><a href="./copy-mojo.html">vfs:copy</a> Transfer a set of files from one virtual file system to another.</li>
+<li><a href="./move-mojo.html">vfs:move</a> Move a set of files from on virtual file system to another.</li>
+<li><a href="./remove-mojo.html">vfs:remove</a> Remove a set of files from a virtual file system.</li></ul></div>
+<div class="section">
+<h3><a name="Usage"></a>Usage</h3>
+<p>Instructions on how to use the VFS Maven Plugin can be found on the <a href="./usage.html">usage page</a>.</p></div>
+<div class="section">
+<h3><a name="Examples"></a>Examples</h3>
+<p>Live <a class="externalLink" href="https://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-maven-plugin/src/examples">examples </a> are at https://svn.codehaus.org/mojo/trunk/mojo/vfs/vfs-maven-plugin/src/examples )</p></div></div>
                   </div>
             </div>
           </div>
