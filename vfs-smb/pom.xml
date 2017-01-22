@@ -6,29 +6,27 @@
   <parent>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>vfs</artifactId>
-    <version>1.0</version>
+    <version>1.0.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>vfs-smb</artifactId>
-  <version>1.0-SNAPSHOT</version>
+
 
   <name>VFS2 SMB/JCIFS Provider</name>
 
-  <description>VFS2 SMB/JCIFS Provider. This component was from VFS2 sandbox, and should be merged back to Commons VFS once stable </description>
-
+  <description>VFS2 SMB/JCIFS Provider original from VFS2 sandbox</description>
 
   <dependencies>
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-vfs2</artifactId>
-      <version>2.0</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>jcifs</groupId>
       <artifactId>jcifs</artifactId>
-      <version>1.3.17</version>
     </dependency>
 
   </dependencies>
